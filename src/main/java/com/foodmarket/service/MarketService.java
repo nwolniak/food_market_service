@@ -1,10 +1,13 @@
 package com.foodmarket.service;
 
 import com.foodmarket.exceptions.EntityNotFoundException;
+import com.foodmarket.model.dto.OrderDTO;
 import com.foodmarket.model.dto.ProductDTO;
+import com.foodmarket.model.entity.OrderEntity;
 import com.foodmarket.model.entity.ProductCountEntity;
 import com.foodmarket.model.entity.ProductEntity;
 import com.foodmarket.model.mapping.ServiceMapper;
+import com.foodmarket.repository.OrderRepository;
 import com.foodmarket.repository.ProductRepository;
 import com.foodmarket.repository.StockRepository;
 import jakarta.transaction.Transactional;
@@ -20,8 +23,14 @@ public class MarketService {
 
     private final ProductRepository productRepository;
     private final StockRepository stockRepository;
+    private final OrderRepository orderRepository;
     private final ServiceMapper serviceMapper;
 
+    public OrderDTO addOrder(OrderDTO orderDTO) {
+        OrderEntity orderEntity = serviceMapper.orderDtoToOrderEntity(orderDTO);
+        orderRepository.save(orderEntity);
+        return serviceMapper.orderEntityToOrderDto(orderEntity);
+    }
 
     public ProductDTO addProduct(ProductDTO productDTO) {
         ProductEntity productEntity = productRepository.findByName(productDTO.name())
@@ -43,6 +52,13 @@ public class MarketService {
         return productRepository.findByName(name)
                 .map(serviceMapper::productEntityToProductDto)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Product with %s name not found", name)));
+    }
+
+    public List<OrderDTO> getAllOrders() {
+        return orderRepository.findAll()
+                .stream()
+                .map(serviceMapper::orderEntityToOrderDto)
+                .toList();
     }
 
     public List<ProductDTO> getAllProducts() {

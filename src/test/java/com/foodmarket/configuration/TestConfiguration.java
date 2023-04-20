@@ -1,6 +1,7 @@
 package com.foodmarket.configuration;
 
 import com.foodmarket.model.mapping.ServiceMapper;
+import com.foodmarket.repository.OrderRepository;
 import com.foodmarket.repository.ProductRepository;
 import com.foodmarket.repository.StockRepository;
 import com.foodmarket.service.MarketService;
@@ -22,8 +23,8 @@ public class TestConfiguration {
     }
 
     @Bean
-    public MarketService marketService(ProductRepository productRepository, StockRepository stockRepository, ServiceMapper serviceMapper) {
-        return new MarketService(productRepository, stockRepository, serviceMapper);
+    public MarketService marketService(ProductRepository productRepository, StockRepository stockRepository, OrderRepository orderRepository, ServiceMapper serviceMapper) {
+        return new MarketService(productRepository, stockRepository, orderRepository, serviceMapper);
     }
 
 }

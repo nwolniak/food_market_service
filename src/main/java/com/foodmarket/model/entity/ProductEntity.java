@@ -10,6 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -48,6 +49,9 @@ public class ProductEntity {
 
     @OneToOne(mappedBy = "productEntity")
     private ProductCountEntity productCountEntity;
+
+    @ManyToMany(mappedBy = "orderedProducts")
+    private Set<OrderEntity> orders;
 
     protected ProductEntity() {}
 

@@ -2,6 +2,7 @@ package com.foodmarket.service;
 
 import com.foodmarket.configuration.TestConfiguration;
 import com.foodmarket.exceptions.EntityNotFoundException;
+import com.foodmarket.model.dto.OrderDTO;
 import com.foodmarket.model.dto.ProductDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,6 +26,48 @@ public class MarketServiceIT {
     private final ProductDTO productDTO1 = new ProductDTO("Bananas", "Fruit", "Bunch", 2.99, "Fresh, ripe bananas");
     private final ProductDTO productDTO2 = new ProductDTO("Apples", "Fruit", "Bag", 4.99, "Juicy, crunchy apples");
     private final ProductDTO productDTO3 = new ProductDTO("Oranges", "Fruit", "Bag", 3.99, "Sweet and tangy oranges");
+
+    private final Set<ProductDTO> productDTOList1 = Set.of(productDTO1);
+    private final Set<ProductDTO> productDTOList2 = Set.of(productDTO1, productDTO2);
+    private final Set<ProductDTO> productDTOList3 = Set.of(productDTO1, productDTO2, productDTO3);
+
+    private final OrderDTO orderDTO1 = new OrderDTO(productDTOList1);
+    private final OrderDTO orderDTO2 = new OrderDTO(productDTOList2);
+    private final OrderDTO orderDTO3 = new OrderDTO(productDTOList3);
+
+    @Test
+    public void addOrderTest() {
+        // when
+        OrderDTO saved = marketService.addOrder(orderDTO1);
+        // then
+        assertNotNull(saved);
+        assertEquals(orderDTO1, saved);
+    }
+
+    @Test
+    public void addMultipleOrdersTest() {
+        // when
+        marketService.addOrder(orderDTO1);
+        marketService.addOrder(orderDTO2);
+        marketService.addOrder(orderDTO3);
+        List<OrderDTO> allOrders = marketService.getAllOrders();
+        // then
+        List<OrderDTO> expectedOrdersList = List.of(orderDTO1, orderDTO2, orderDTO3);
+        assertFalse(allOrders.isEmpty());
+        assertEquals(expectedOrdersList, allOrders);
+    }
+
+    @Test
+    public void addOrderMultipleTimesTest() {
+        // when
+        marketService.addOrder(orderDTO1);
+        marketService.addOrder(orderDTO1);
+        List<OrderDTO> allOrders = marketService.getAllOrders();
+        // then
+        List<OrderDTO> expectedOrdersList = List.of(orderDTO1, orderDTO1);
+        assertFalse(allOrders.isEmpty());
+        assertEquals(expectedOrdersList, allOrders);
+    }
 
     @Test
     public void addProductTest() {
