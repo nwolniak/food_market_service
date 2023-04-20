@@ -38,6 +38,31 @@ public class StockRepositoryTest {
     }
 
     @Test
+    public void saveMultipleProductCountsTest() {
+        // when
+        stockRepository.save(product1CountEntity);
+        stockRepository.save(product2CountEntity);
+        stockRepository.save(product3CountEntity);
+        List<ProductCountEntity> allProductCountEntityList = stockRepository.findAll();
+        // then
+        List<ProductCountEntity> expectedProductCountEntityList = List.of(product1CountEntity, product2CountEntity, product3CountEntity);
+        assertFalse(allProductCountEntityList.isEmpty());
+        assertEquals(expectedProductCountEntityList, allProductCountEntityList);
+    }
+
+    @Test
+    public void saveProductCountMultipleTimesTest() {
+        // when
+        stockRepository.save(product1CountEntity);
+        stockRepository.save(product1CountEntity);
+        List<ProductCountEntity> allProductCountEntityList = stockRepository.findAll();
+        // then
+        List<ProductCountEntity> expectedProductCountEntityList = List.of(product1CountEntity);
+        assertFalse(allProductCountEntityList.isEmpty());
+        assertEquals(expectedProductCountEntityList, allProductCountEntityList);
+    }
+
+    @Test
     public void findByIdTest() {
         // when
         stockRepository.save(product1CountEntity);
@@ -47,33 +72,6 @@ public class StockRepositoryTest {
         assertTrue(fromDatabaseOptional.isPresent());
         ProductCountEntity fromDatabase = fromDatabaseOptional.get();
         assertEquals(product1CountEntity, fromDatabase);
-    }
-
-    @Test
-    public void findAllTest() {
-        // given
-        List<ProductCountEntity> expectedProductCountEntityList = List.of(product1CountEntity, product2CountEntity, product3CountEntity);
-        // when
-        stockRepository.save(product1CountEntity);
-        stockRepository.save(product2CountEntity);
-        stockRepository.save(product3CountEntity);
-        List<ProductCountEntity> allProductCountEntityList = stockRepository.findAll();
-        // then
-        assertFalse(allProductCountEntityList.isEmpty());
-        assertEquals(expectedProductCountEntityList, allProductCountEntityList);
-    }
-
-    @Test
-    public void saveProductCountEntityMultipleTimesTest() {
-        // given
-        List<ProductCountEntity> expectedProductCountEntityList = List.of(product1CountEntity);
-        // when
-        stockRepository.save(product1CountEntity);
-        stockRepository.save(product1CountEntity);
-        List<ProductCountEntity> allProductCountEntityList = stockRepository.findAll();
-        // then
-        assertFalse(allProductCountEntityList.isEmpty());
-        assertEquals(expectedProductCountEntityList, allProductCountEntityList);
     }
 
 }

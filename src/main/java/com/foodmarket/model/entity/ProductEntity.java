@@ -3,7 +3,6 @@ package com.foodmarket.model.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.Hibernate;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -15,31 +14,40 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
-@ToString
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "products")
 public class ProductEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "product_id")
     private Long id;
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "category")
     private String category;
+
     @Column(name = "unit_type")
     private String unitType;
+
     @Column(name = "unit_price")
     private double unitPrice;
+
     @Column(name = "description")
     private String description;
+
     @CreatedDate
     @Column(name = "created_date")
     private LocalDateTime createdDate;
+
     @LastModifiedDate
     @Column(name = "last_modified_date")
     private LocalDateTime lastModifiedDate;
+
+    @OneToOne(mappedBy = "productEntity")
+    private ProductCountEntity productCountEntity;
 
     protected ProductEntity() {}
 

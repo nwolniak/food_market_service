@@ -35,6 +35,7 @@ public class ProductCountEntity {
     @CreatedDate
     @Column(name = "created_date")
     private LocalDateTime createdDate;
+
     @LastModifiedDate
     @Column(name = "last_modified_date")
     private LocalDateTime lastModifiedDate;

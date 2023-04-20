@@ -1,6 +1,6 @@
 package com.foodmarket.configuration;
 
-import com.foodmarket.model.mapping.ProductMapper;
+import com.foodmarket.model.mapping.ServiceMapper;
 import com.foodmarket.repository.ProductRepository;
 import com.foodmarket.repository.StockRepository;
 import com.foodmarket.service.MarketService;
@@ -17,13 +17,13 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class TestConfiguration {
 
     @Bean
-    public ProductMapper productMapper() {
-        return ProductMapper.INSTANCE;
+    public ServiceMapper serviceMapper() {
+        return ServiceMapper.INSTANCE;
     }
 
     @Bean
-    public MarketService marketService(ProductRepository productRepository, StockRepository stockRepository, ProductMapper productMapper) {
-        return new MarketService(productRepository, stockRepository, productMapper);
+    public MarketService marketService(ProductRepository productRepository, StockRepository stockRepository, ServiceMapper serviceMapper) {
+        return new MarketService(productRepository, stockRepository, serviceMapper);
     }
 
 }

@@ -2,7 +2,7 @@ package com.foodmarket.service;
 
 import com.foodmarket.model.dto.ProductDTO;
 import com.foodmarket.model.entity.ProductEntity;
-import com.foodmarket.model.mapping.ProductMapper;
+import com.foodmarket.model.mapping.ServiceMapper;
 import com.foodmarket.repository.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +26,7 @@ public class MarketServiceTest {
     private ProductRepository productRepository;
 
     @Mock
-    private ProductMapper productMapper;
+    private ServiceMapper serviceMapper;
 
     private final ProductDTO productDTO1 = new ProductDTO("Bananas", "Fruit", "Bunch", 2.99, "Fresh, ripe bananas");
     private final ProductDTO productDTO2 = new ProductDTO("Apples", "Fruit", "Bag", 4.99, "Juicy, crunchy apples");
@@ -40,7 +40,7 @@ public class MarketServiceTest {
         // when
         Mockito.when(productRepository.findById(productEntity.getId()))
                 .thenReturn(Optional.of(productEntity));
-        Mockito.when(productMapper.productEntityToProductDto(productEntity))
+        Mockito.when(serviceMapper.productEntityToProductDto(productEntity))
                 .thenReturn(productDTO1);
         ProductDTO fromService = marketService.getProductById(productEntity.getId());
         // then

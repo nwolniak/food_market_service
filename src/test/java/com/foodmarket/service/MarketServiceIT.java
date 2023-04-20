@@ -36,9 +36,40 @@ public class MarketServiceIT {
     }
 
     @Test
-    public void getProductByNameTest() {
+    public void addMultipleProductsTest() {
         // when
         marketService.addProduct(productDTO1);
+        marketService.addProduct(productDTO2);
+        marketService.addProduct(productDTO3);
+        List<ProductDTO> allProducts = marketService.getAllProducts();
+        // then
+        List<ProductDTO> expectedProductDtoList = List.of(productDTO1, productDTO2, productDTO3);
+        assertFalse(allProducts.isEmpty());
+        assertEquals(expectedProductDtoList, allProducts);
+        allProducts.forEach(productDTO ->
+                assertEquals(1, marketService.getQuantityInStock(productDTO)));
+    }
+
+    @Test
+    public void addProductMultipleTimesTest() {
+        // when
+        marketService.addProduct(productDTO1);
+        marketService.addProduct(productDTO1);
+        List<ProductDTO> allProducts = marketService.getAllProducts();
+        // then
+        List<ProductDTO> expectedProductDtoList = List.of(productDTO1);
+        assertFalse(allProducts.isEmpty());
+        assertEquals(expectedProductDtoList, allProducts);
+        assertEquals(1, marketService.getQuantityInStock(productDTO1));
+        allProducts.forEach(productDTO ->
+                assertEquals(1, marketService.getQuantityInStock(productDTO)));
+    }
+
+    @Test
+    public void getProductByNameTest() {
+        // given
+        marketService.addProduct(productDTO1);
+        // when
         ProductDTO fromService = marketService.getProductByName(productDTO1.name());
         // then
         assertNotNull(fromService);
@@ -57,19 +88,6 @@ public class MarketServiceIT {
         Assertions.assertThrows(EntityNotFoundException.class, () -> {
             marketService.getProductById(new Random().nextLong());
         });
-    }
-
-    @Test
-    public void getAllProductsTest() {
-        // when
-        marketService.addProduct(productDTO1);
-        marketService.addProduct(productDTO2);
-        marketService.addProduct(productDTO3);
-        List<ProductDTO> allProducts = marketService.getAllProducts();
-        // then
-        List<ProductDTO> expectedProductDtoList = List.of(productDTO1, productDTO2, productDTO3);
-        assertFalse(allProducts.isEmpty());
-        assertEquals(expectedProductDtoList, allProducts);
     }
 
 }
