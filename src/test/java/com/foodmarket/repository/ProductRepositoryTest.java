@@ -33,6 +33,31 @@ public class ProductRepositoryTest {
     }
 
     @Test
+    public void saveMultipleProductsTest() {
+        // when
+        productRepository.save(productEntity1);
+        productRepository.save(productEntity2);
+        productRepository.save(productEntity3);
+        List<ProductEntity> allProducts = productRepository.findAll();
+        // then
+        List<ProductEntity> expectedProducts = List.of(productEntity1, productEntity2, productEntity3);
+        assertFalse(allProducts.isEmpty());
+        assertEquals(expectedProducts, allProducts);
+    }
+
+    @Test
+    public void saveProductMultipleTimesTest() {
+        // when
+        productRepository.save(productEntity1);
+        productRepository.save(productEntity1);
+        List<ProductEntity> allProductEntities = productRepository.findAll();
+        // then
+        List<ProductEntity> expectedEntityList = List.of(productEntity1);
+        assertFalse(allProductEntities.isEmpty());
+        assertEquals(expectedEntityList, allProductEntities);
+    }
+
+    @Test
     public void findByNameTest() {
         // when
         productRepository.save(productEntity1);
@@ -52,31 +77,6 @@ public class ProductRepositoryTest {
         assertTrue(fromRepositoryOptional.isPresent());
         ProductEntity fromRepository = fromRepositoryOptional.get();
         assertEquals(productEntity1, fromRepository);
-    }
-
-    @Test
-    public void findAllTest() {
-        // when
-        productRepository.save(productEntity1);
-        productRepository.save(productEntity2);
-        productRepository.save(productEntity3);
-        List<ProductEntity> allProductEntities = productRepository.findAll();
-        // then
-        List<ProductEntity> expectedEntityList = List.of(productEntity1, productEntity2, productEntity3);
-        assertFalse(allProductEntities.isEmpty());
-        assertEquals(expectedEntityList, allProductEntities);
-    }
-
-    @Test
-    public void saveProductMultipleTimesTest() {
-        // when
-        productRepository.save(productEntity1);
-        productRepository.save(productEntity1);
-        List<ProductEntity> allProductEntities = productRepository.findAll();
-        // then
-        List<ProductEntity> expectedEntityList = List.of(productEntity1);
-        assertFalse(allProductEntities.isEmpty());
-        assertEquals(expectedEntityList, allProductEntities);
     }
 
 }

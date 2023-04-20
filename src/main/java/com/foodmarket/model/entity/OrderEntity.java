@@ -3,34 +3,33 @@ package com.foodmarket.model.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.Hibernate;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Getter
 @Setter
-@ToString
-@EntityListeners(AuditingEntityListener.class)
-@Table(name = "product_counts")
-public class ProductCountEntity {
+@Table(name = "orders")
+public class OrderEntity {
 
     @Id
-    @Column(name = "product_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "order_id")
     private Long id;
 
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "product_id")
-    private ProductEntity productEntity;
-
-    @Column(name = "quantity_in_stock")
-    private int quantityInStock;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "orders_products",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private Set<ProductEntity> orderedProducts = new HashSet<>();
 
     @CreatedDate
     @Column(name = "created_date")
@@ -40,18 +39,17 @@ public class ProductCountEntity {
     @Column(name = "last_modified_date")
     private LocalDateTime lastModifiedDate;
 
-    protected ProductCountEntity() {}
+    protected OrderEntity() {}
 
-    public ProductCountEntity(ProductEntity productEntity, int quantityInStock) {
-        this.productEntity = productEntity;
-        this.quantityInStock = quantityInStock;
+    public OrderEntity(Set<ProductEntity> orderedProducts) {
+        this.orderedProducts = new HashSet<>(orderedProducts);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        ProductCountEntity that = (ProductCountEntity) o;
+        OrderEntity that = (OrderEntity) o;
         return getId() != null && Objects.equals(getId(), that.getId());
     }
 
