@@ -2,15 +2,16 @@ package com.foodmarket.repository;
 
 import com.foodmarket.configuration.TestConfiguration;
 import com.foodmarket.model.entity.OrderEntity;
+import com.foodmarket.model.entity.OrderProductEntity;
 import com.foodmarket.model.entity.ProductEntity;
+import org.apache.commons.collections4.SetUtils;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ContextConfiguration;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,17 +22,28 @@ public class OrderRepositoryTest {
     @Autowired
     private OrderRepository orderRepository;
 
+    private final OrderEntity orderEntity1 = new OrderEntity();
+    private final OrderEntity orderEntity2 = new OrderEntity();
+    private final OrderEntity orderEntity3 = new OrderEntity();
+
     private final ProductEntity productEntity1 = new ProductEntity("Bananas", "Fruit", "Bunch", 2.99, "Fresh, ripe bananas");
     private final ProductEntity productEntity2 = new ProductEntity("Apples", "Fruit", "Bag", 4.99, "Juicy, crunchy apples");
     private final ProductEntity productEntity3 = new ProductEntity("Oranges", "Fruit", "Bag", 3.99, "Sweet and tangy oranges");
 
-    private final Set<ProductEntity> productEntities1 = Set.of(productEntity1);
-    private final Set<ProductEntity> productEntities2 = Set.of(productEntity1, productEntity2);
-    private final Set<ProductEntity> productEntities3 = Set.of(productEntity1, productEntity2, productEntity3);
+    private final OrderProductEntity orderProductEntity1 = new OrderProductEntity(orderEntity1, productEntity1, 5);
+    private final OrderProductEntity orderProductEntity2 = new OrderProductEntity(orderEntity1, productEntity2, 5);
+    private final OrderProductEntity orderProductEntity3 = new OrderProductEntity(orderEntity1, productEntity3, 5);
 
-    private final OrderEntity orderEntity1 = new OrderEntity(productEntities1);
-    private final OrderEntity orderEntity2 = new OrderEntity(productEntities2);
-    private final OrderEntity orderEntity3 = new OrderEntity(productEntities3);
+    private final Set<OrderProductEntity> orderProductEntities1 = SetUtils.hashSet(orderProductEntity1);
+    private final Set<OrderProductEntity> orderProductEntities2 = SetUtils.hashSet(orderProductEntity1, orderProductEntity2);
+    private final Set<OrderProductEntity> orderProductEntities3 = SetUtils.hashSet(orderProductEntity1, orderProductEntity2, orderProductEntity3);
+
+    @BeforeEach
+    public void init() {
+        orderEntity1.setOrderedProducts(orderProductEntities1);
+        orderEntity2.setOrderedProducts(orderProductEntities2);
+        orderEntity3.setOrderedProducts(orderProductEntities3);
+    }
 
     @Test
     public void saveOrderTest() {

@@ -2,6 +2,7 @@ package com.foodmarket.repository;
 
 import com.foodmarket.configuration.TestConfiguration;
 import com.foodmarket.model.entity.ProductEntity;
+import org.apache.commons.collections4.CollectionUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -23,6 +24,9 @@ public class ProductRepositoryTest {
     private final ProductEntity productEntity2 = new ProductEntity("Apples", "Fruit", "Bag", 4.99, "Juicy, crunchy apples");
     private final ProductEntity productEntity3 = new ProductEntity("Oranges", "Fruit", "Bag", 3.99, "Sweet and tangy oranges");
 
+    private final ProductEntity productEntityEqual1 = new ProductEntity("Bananas", "Fruit", "Bunch", 2.99, "Fresh, ripe bananas");
+    private final ProductEntity productEntityEqual2 = new ProductEntity("Bananas", "Fruit", "Bunch", 2.99, "Fresh, ripe bananas");
+
     @Test
     public void saveTest() {
         // when
@@ -42,7 +46,7 @@ public class ProductRepositoryTest {
         // then
         List<ProductEntity> expectedProducts = List.of(productEntity1, productEntity2, productEntity3);
         assertFalse(allProducts.isEmpty());
-        assertEquals(expectedProducts, allProducts);
+        assertTrue(CollectionUtils.isEqualCollection(expectedProducts, allProducts));
     }
 
     @Test
@@ -53,6 +57,19 @@ public class ProductRepositoryTest {
         List<ProductEntity> allProductEntities = productRepository.findAll();
         // then
         List<ProductEntity> expectedEntityList = List.of(productEntity1);
+        assertFalse(allProductEntities.isEmpty());
+        assertEquals(expectedEntityList, allProductEntities);
+    }
+
+    @Test
+    public void saveEquallyProductsTest() {
+        // when
+        productRepository.save(productEntityEqual1);
+        productRepository.save(productEntityEqual2);
+        List<ProductEntity> allProductEntities = productRepository.findAll();
+        // then
+        assertEquals(productEntityEqual1, productEntityEqual2);
+        List<ProductEntity> expectedEntityList = List.of(productEntityEqual1);
         assertFalse(allProductEntities.isEmpty());
         assertEquals(expectedEntityList, allProductEntities);
     }

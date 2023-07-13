@@ -1,27 +1,28 @@
 package com.foodmarket.model.entity;
 
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.Hibernate;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 @Entity
 @Getter
 @Setter
 @ToString
 @EntityListeners(AuditingEntityListener.class)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "product_counts")
 public class ProductCountEntity {
 
     @Id
     @Column(name = "product_id")
+    @EqualsAndHashCode.Include
     private Long id;
 
     @OneToOne
@@ -47,16 +48,4 @@ public class ProductCountEntity {
         this.quantityInStock = quantityInStock;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        ProductCountEntity that = (ProductCountEntity) o;
-        return getId() != null && Objects.equals(getId(), that.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 }
