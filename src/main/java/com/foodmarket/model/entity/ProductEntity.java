@@ -1,27 +1,25 @@
 package com.foodmarket.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.Hibernate;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
-import java.util.Set;
+import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "products")
 public class ProductEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
+    @EqualsAndHashCode.Include
     private Long id;
 
     @Column(name = "name")
@@ -48,14 +46,17 @@ public class ProductEntity {
     private LocalDateTime lastModifiedDate;
 
     @OneToOne(mappedBy = "productEntity")
+    @PrimaryKeyJoinColumn
     private ProductCountEntity productCountEntity;
 
-    @ManyToMany(mappedBy = "orderedProducts")
-    private Set<OrderEntity> orders;
+    @OneToMany(mappedBy = "productEntity")
+    private List<OrderProductEntity> orders;
 
-    protected ProductEntity() {}
+    protected ProductEntity() {
+    }
 
     public ProductEntity(String name, String category, String unitType, double unitPrice, String description) {
+        this.id = (long) name.hashCode();
         this.name = name;
         this.category = category;
         this.unitType = unitType;
@@ -63,16 +64,4 @@ public class ProductEntity {
         this.description = description;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        ProductEntity that = (ProductEntity) o;
-        return getId() != null && Objects.equals(getId(), that.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 }

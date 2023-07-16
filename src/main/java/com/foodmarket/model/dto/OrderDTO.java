@@ -1,5 +1,5 @@
 package com.foodmarket.model.dto;
 
-import java.util.Set;
+import java.util.List;
 
-public record OrderDTO(Set<ProductDTO> orderedProducts) {}
+public record OrderDTO(List<ProductCountDTO> orderedProducts) {}
