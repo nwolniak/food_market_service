@@ -1,19 +1,17 @@
 package com.foodmarket.model.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "products")
@@ -21,10 +19,10 @@ public class ProductEntity {
 
     @Id
     @Column(name = "product_id")
+    @EqualsAndHashCode.Include
     private Long id;
 
     @Column(name = "name")
-    @EqualsAndHashCode.Include
     private String name;
 
     @Column(name = "category")
@@ -48,12 +46,14 @@ public class ProductEntity {
     private LocalDateTime lastModifiedDate;
 
     @OneToOne(mappedBy = "productEntity")
+    @PrimaryKeyJoinColumn
     private ProductCountEntity productCountEntity;
 
     @OneToMany(mappedBy = "productEntity")
-    private Set<OrderProductEntity> orderProductEntities;
+    private List<OrderProductEntity> orders;
 
-    protected ProductEntity() {}
+    protected ProductEntity() {
+    }
 
     public ProductEntity(String name, String category, String unitType, double unitPrice, String description) {
         this.id = (long) name.hashCode();

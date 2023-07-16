@@ -2,7 +2,6 @@ package com.foodmarket.repository;
 
 import com.foodmarket.configuration.TestConfiguration;
 import com.foodmarket.model.entity.ProductEntity;
-import org.apache.commons.collections4.CollectionUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -11,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import java.util.List;
 import java.util.Optional;
 
+import static org.apache.commons.collections4.CollectionUtils.isEqualCollection;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
@@ -38,40 +38,45 @@ public class ProductRepositoryTest {
 
     @Test
     public void saveMultipleProductsTest() {
+        // given
+        List<ProductEntity> expectedProducts = List.of(productEntity1, productEntity2, productEntity3);
         // when
         productRepository.save(productEntity1);
         productRepository.save(productEntity2);
         productRepository.save(productEntity3);
         List<ProductEntity> allProducts = productRepository.findAll();
         // then
-        List<ProductEntity> expectedProducts = List.of(productEntity1, productEntity2, productEntity3);
+        assertNotNull(allProducts);
         assertFalse(allProducts.isEmpty());
-        assertTrue(CollectionUtils.isEqualCollection(expectedProducts, allProducts));
+        assertTrue(isEqualCollection(expectedProducts, allProducts));
     }
 
     @Test
     public void saveProductMultipleTimesTest() {
+        // given
+        List<ProductEntity> expectedProducts = List.of(productEntity1);
         // when
         productRepository.save(productEntity1);
         productRepository.save(productEntity1);
-        List<ProductEntity> allProductEntities = productRepository.findAll();
+        List<ProductEntity> allProducts = productRepository.findAll();
         // then
-        List<ProductEntity> expectedEntityList = List.of(productEntity1);
-        assertFalse(allProductEntities.isEmpty());
-        assertEquals(expectedEntityList, allProductEntities);
+        assertNotNull(allProducts);
+        assertFalse(allProducts.isEmpty());
+        assertTrue(isEqualCollection(expectedProducts, allProducts));
     }
 
     @Test
-    public void saveEquallyProductsTest() {
+    public void saveEqualProductsTest() {
+        // given
+        List<ProductEntity> expectedProducts = List.of(productEntityEqual1);
         // when
         productRepository.save(productEntityEqual1);
         productRepository.save(productEntityEqual2);
-        List<ProductEntity> allProductEntities = productRepository.findAll();
+        List<ProductEntity> allProducts = productRepository.findAll();
         // then
-        assertEquals(productEntityEqual1, productEntityEqual2);
-        List<ProductEntity> expectedEntityList = List.of(productEntityEqual1);
-        assertFalse(allProductEntities.isEmpty());
-        assertEquals(expectedEntityList, allProductEntities);
+        assertNotNull(allProducts);
+        assertFalse(allProducts.isEmpty());
+        assertTrue(isEqualCollection(expectedProducts, allProducts));
     }
 
     @Test

@@ -3,7 +3,7 @@ package com.foodmarket.repository;
 import com.foodmarket.configuration.TestConfiguration;
 import com.foodmarket.model.entity.ProductCountEntity;
 import com.foodmarket.model.entity.ProductEntity;
-import org.apache.commons.collections4.CollectionUtils;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import java.util.List;
 import java.util.Optional;
 
+import static org.apache.commons.collections4.CollectionUtils.isEqualCollection;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
@@ -21,13 +22,26 @@ public class StockRepositoryTest {
     @Autowired
     private StockRepository stockRepository;
 
-    private final ProductEntity productEntity1 = new ProductEntity("Bananas", "Fruit", "Bunch", 2.99, "Fresh, ripe bananas");
-    private final ProductEntity productEntity2 = new ProductEntity("Apples", "Fruit", "Bag", 4.99, "Juicy, crunchy apples");
-    private final ProductEntity productEntity3 = new ProductEntity("Oranges", "Fruit", "Bag", 3.99, "Sweet and tangy oranges");
+    @Autowired
+    private ProductRepository productRepository;
 
-    private final ProductCountEntity product1CountEntity = new ProductCountEntity(productEntity1, 50);
-    private final ProductCountEntity product2CountEntity = new ProductCountEntity(productEntity2, 40);
-    private final ProductCountEntity product3CountEntity = new ProductCountEntity(productEntity3, 35);
+    private ProductEntity productEntity1 = new ProductEntity("Bananas", "Fruit", "Bunch", 2.99, "Fresh, ripe bananas");
+    private ProductEntity productEntity2 = new ProductEntity("Apples", "Fruit", "Bag", 4.99, "Juicy, crunchy apples");
+    private ProductEntity productEntity3 = new ProductEntity("Oranges", "Fruit", "Bag", 3.99, "Sweet and tangy oranges");
+
+    private ProductCountEntity product1CountEntity;
+    private ProductCountEntity product2CountEntity;
+    private ProductCountEntity product3CountEntity;
+
+    @BeforeEach
+    public void init() {
+        productEntity1 = productRepository.save(productEntity1);
+        productEntity2 = productRepository.save(productEntity2);
+        productEntity3 = productRepository.save(productEntity3);
+        product1CountEntity = new ProductCountEntity(productEntity1, 50);
+        product2CountEntity = new ProductCountEntity(productEntity2, 40);
+        product3CountEntity = new ProductCountEntity(productEntity3, 35);
+    }
 
     @Test
     public void saveTest() {
@@ -40,25 +54,29 @@ public class StockRepositoryTest {
 
     @Test
     public void saveMultipleProductCountsTest() {
+        // given
+        List<ProductCountEntity> expectedProductCountEntityList = List.of(product1CountEntity, product2CountEntity, product3CountEntity);
         // when
         stockRepository.save(product1CountEntity);
         stockRepository.save(product2CountEntity);
         stockRepository.save(product3CountEntity);
         List<ProductCountEntity> allProductCountEntityList = stockRepository.findAll();
         // then
-        List<ProductCountEntity> expectedProductCountEntityList = List.of(product1CountEntity, product2CountEntity, product3CountEntity);
+        assertNotNull(allProductCountEntityList);
         assertFalse(allProductCountEntityList.isEmpty());
-        assertTrue(CollectionUtils.isEqualCollection(expectedProductCountEntityList, allProductCountEntityList));
+        assertTrue(isEqualCollection(expectedProductCountEntityList, allProductCountEntityList));
     }
 
     @Test
     public void saveProductCountMultipleTimesTest() {
+        // given
+        List<ProductCountEntity> expectedProductCountEntityList = List.of(product1CountEntity);
         // when
         stockRepository.save(product1CountEntity);
         stockRepository.save(product1CountEntity);
         List<ProductCountEntity> allProductCountEntityList = stockRepository.findAll();
         // then
-        List<ProductCountEntity> expectedProductCountEntityList = List.of(product1CountEntity);
+        assertNotNull(allProductCountEntityList);
         assertFalse(allProductCountEntityList.isEmpty());
         assertEquals(expectedProductCountEntityList, allProductCountEntityList);
     }
@@ -68,7 +86,6 @@ public class StockRepositoryTest {
         // when
         stockRepository.save(product1CountEntity);
         Optional<ProductCountEntity> fromDatabaseOptional = stockRepository.findById(product1CountEntity.getId());
-
         // then
         assertTrue(fromDatabaseOptional.isPresent());
         ProductCountEntity fromDatabase = fromDatabaseOptional.get();

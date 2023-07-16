@@ -4,8 +4,9 @@ import com.foodmarket.model.mapping.ServiceMapper;
 import com.foodmarket.repository.OrderRepository;
 import com.foodmarket.repository.ProductRepository;
 import com.foodmarket.repository.StockRepository;
-import com.foodmarket.service.MarketService;
 import com.foodmarket.service.OrderService;
+import com.foodmarket.service.ProductService;
+import com.foodmarket.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
@@ -35,12 +36,17 @@ public class TestConfiguration {
 
     @Bean
     public OrderService orderService() {
-        return new OrderService(productRepository, stockRepository, orderRepository, serviceMapper());
+        return new OrderService(orderRepository, productService(), stockService(), serviceMapper());
     }
 
     @Bean
-    public MarketService marketService() {
-        return new MarketService(productRepository, stockRepository, orderService(), serviceMapper());
+    public StockService stockService() {
+        return new StockService(stockRepository, productService(), serviceMapper());
+    }
+
+    @Bean
+    public ProductService productService() {
+        return new ProductService(productRepository, serviceMapper());
     }
 
 }

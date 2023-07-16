@@ -1,31 +1,26 @@
 package com.foodmarket.model.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "orders")
 public class OrderEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "order_id")
     @EqualsAndHashCode.Include
     private Long id;
-
-    @OneToMany(mappedBy = "orderEntity")
-    private Set<OrderProductEntity> orderedProducts = new HashSet<>();
 
     @CreatedDate
     @Column(name = "created_date")
@@ -34,5 +29,8 @@ public class OrderEntity {
     @LastModifiedDate
     @Column(name = "last_modified_date")
     private LocalDateTime lastModifiedDate;
+
+    @OneToMany(mappedBy = "orderEntity", cascade = CascadeType.ALL)
+    private List<OrderProductEntity> orderedProducts = new ArrayList<>();
 
 }
