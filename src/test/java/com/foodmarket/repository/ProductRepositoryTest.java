@@ -101,4 +101,15 @@ public class ProductRepositoryTest {
         assertEquals(productEntity1, fromRepository);
     }
 
+    @Test
+    public void deleteByIdTest() {
+        // given
+        ProductEntity saved = productRepository.save(productEntity1);
+        // when
+        productRepository.deleteById(saved.getId());
+        Optional<ProductEntity> deleted = productRepository.findById(saved.getId());
+        // then
+        assertTrue(deleted.isEmpty());
+    }
+
 }

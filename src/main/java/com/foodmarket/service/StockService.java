@@ -7,11 +7,13 @@ import com.foodmarket.model.entity.ProductEntity;
 import com.foodmarket.model.mapping.ServiceMapper;
 import com.foodmarket.repository.StockRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class StockService {
@@ -53,4 +55,8 @@ public class StockService {
         stockRepository.save(productCountEntity);
     }
 
+    public void deleteProductCount(long id) {
+        log.info("Deleting product count with {} id.", id);
+        stockRepository.deleteById(id);
+    }
 }

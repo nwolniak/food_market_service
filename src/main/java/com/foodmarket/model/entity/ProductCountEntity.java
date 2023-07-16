@@ -32,7 +32,7 @@ public class ProductCountEntity {
     @Column(name = "last_modified_date")
     private LocalDateTime lastModifiedDate;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @MapsId
     @JoinColumn(name = "product_id")
     private ProductEntity productEntity;

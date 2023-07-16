@@ -116,4 +116,15 @@ public class StockRepositoryTest {
         assertEquals(49, decremented.get().getQuantityInStock());
     }
 
+    @Test
+    public void deleteByIdTest() {
+        // given
+        ProductCountEntity saved = stockRepository.save(product1CountEntity);
+        // when
+        stockRepository.deleteById(saved.getId());
+        Optional<ProductCountEntity> deleted = stockRepository.findById(saved.getId());
+        // then
+        assertTrue(deleted.isEmpty());
+    }
+
 }

@@ -49,4 +49,8 @@ public class ProductService {
                 .toList();
     }
 
+    public void deleteProduct(long id) {
+        log.info("Deleting product with {} id.", id);
+        productRepository.deleteById(id);
+    }
 }
