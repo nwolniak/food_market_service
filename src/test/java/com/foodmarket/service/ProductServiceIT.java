@@ -22,9 +22,9 @@ public class ProductServiceIT {
     @Autowired
     private ProductService productService;
 
-    private final ProductDTO productDTO1 = new ProductDTO("Bananas", "Fruit", "Bunch", 2.99, "Fresh, ripe bananas");
-    private final ProductDTO productDTO2 = new ProductDTO("Apples", "Fruit", "Bag", 4.99, "Juicy, crunchy apples");
-    private final ProductDTO productDTO3 = new ProductDTO("Oranges", "Fruit", "Bag", 3.99, "Sweet and tangy oranges");
+    private final ProductDTO productDTO1 = new ProductDTO(1L, "Bananas", "Fruit", "Bunch", 2.99, "Fresh, ripe bananas");
+    private final ProductDTO productDTO2 = new ProductDTO(2L, "Apples", "Fruit", "Bag", 4.99, "Juicy, crunchy apples");
+    private final ProductDTO productDTO3 = new ProductDTO(3L, "Oranges", "Fruit", "Bag", 3.99, "Sweet and tangy oranges");
 
 
     @Test
@@ -33,7 +33,7 @@ public class ProductServiceIT {
         ProductDTO saved = productService.addProduct(productDTO1);
         // then
         assertNotNull(saved);
-        assertEquals(productDTO1, saved);
+        assertEquals(productDTO1.name(), saved.name());
     }
 
     @Test

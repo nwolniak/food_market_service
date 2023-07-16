@@ -24,14 +24,19 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
-    @PostMapping("/products")
+    @PostMapping("products")
     public ProductDTO postProduct(@RequestBody ProductDTO productDTO) {
         return productService.addProduct(productDTO);
     }
 
-    @DeleteMapping("/products/{id}")
+    @DeleteMapping("products/{id}")
     public void deleteProduct(@PathVariable long id) {
         productService.deleteProduct(id);
+    }
+
+    @PutMapping("products")
+    public ProductDTO putProduct(@RequestBody ProductDTO productDTO) {
+        return productService.putProduct(productDTO);
     }
 
 }

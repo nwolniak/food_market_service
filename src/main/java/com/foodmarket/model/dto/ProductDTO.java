@@ -1,4 +1,4 @@
 package com.foodmarket.model.dto;
 
 
-public record ProductDTO(String name, String category, String unitType, double unitPrice, String description) {}
+public record ProductDTO(Long id, String name, String category, String unitType, double unitPrice, String description) {}

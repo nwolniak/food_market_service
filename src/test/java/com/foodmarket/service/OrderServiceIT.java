@@ -31,9 +31,9 @@ public class OrderServiceIT {
     @Autowired
     private StockService stockService;
 
-    private final ProductDTO productDTO1 = new ProductDTO("Bananas", "Fruit", "Bunch", 2.99, "Fresh, ripe bananas");
-    private final ProductDTO productDTO2 = new ProductDTO("Apples", "Fruit", "Bag", 4.99, "Juicy, crunchy apples");
-    private final ProductDTO productDTO3 = new ProductDTO("Oranges", "Fruit", "Bag", 3.99, "Sweet and tangy oranges");
+    private final ProductDTO productDTO1 = new ProductDTO(null ,"Bananas", "Fruit", "Bunch", 2.99, "Fresh, ripe bananas");
+    private final ProductDTO productDTO2 = new ProductDTO(null, "Apples", "Fruit", "Bag", 4.99, "Juicy, crunchy apples");
+    private final ProductDTO productDTO3 = new ProductDTO(null, "Oranges", "Fruit", "Bag", 3.99, "Sweet and tangy oranges");
 
     @Test
     public void addOrderTest() {
