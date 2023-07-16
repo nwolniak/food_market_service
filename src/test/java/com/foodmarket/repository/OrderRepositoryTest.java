@@ -97,4 +97,15 @@ public class OrderRepositoryTest {
         assertTrue(isEqualCollection(orderEntity1.getOrderedProducts(), orderEntity.getOrderedProducts()));
     }
 
+    @Test
+    public void deleteByIdTest() {
+        // given
+        OrderEntity saved = orderRepository.save(orderEntity1);
+        // when
+        orderRepository.deleteById(saved.getId());
+        Optional<OrderEntity> deleted = orderRepository.findById(saved.getId());
+        // then
+        assertTrue(deleted.isEmpty());
+    }
+
 }

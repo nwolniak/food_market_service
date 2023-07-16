@@ -37,7 +37,7 @@ public interface ServiceMapper {
     @Mapping(source = "productEntity.id", target = "productId")
     ProductCountDTO orderProductEntityToProductCountDTO(OrderProductEntity orderProductEntity);
 
-    @Mapping(source = "productEntity.id", target = "productId")
+    @Mapping(source = "id", target = "productId")
     @Mapping(source = "quantityInStock", target = "quantity")
     ProductCountDTO productCountEntityToProductCountDTO(ProductCountEntity productCountEntity);
 

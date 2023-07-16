@@ -45,7 +45,7 @@ public class ProductEntity {
     @Column(name = "last_modified_date")
     private LocalDateTime lastModifiedDate;
 
-    @OneToOne(mappedBy = "productEntity")
+    @OneToOne(mappedBy = "productEntity", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private ProductCountEntity productCountEntity;
 

@@ -14,19 +14,24 @@ public class ProductController {
 
     private final ProductService productService;
 
-    @GetMapping(value = "/products/{id}")
+    @GetMapping("products/{id}")
     public ProductDTO getProduct(@PathVariable long id) {
         return productService.getProduct(id);
     }
 
-    @GetMapping(value = "/products")
+    @GetMapping("products")
     public List<ProductDTO> getProducts() {
         return productService.getAllProducts();
     }
 
-    @PostMapping(value = "/products")
+    @PostMapping("/products")
     public ProductDTO postProduct(@RequestBody ProductDTO productDTO) {
         return productService.addProduct(productDTO);
+    }
+
+    @DeleteMapping("/products/{id}")
+    public void deleteProduct(@PathVariable long id) {
+        productService.deleteProduct(id);
     }
 
 }

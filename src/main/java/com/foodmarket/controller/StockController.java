@@ -29,4 +29,9 @@ public class StockController {
         return stockService.setProductCount(productCountDTO);
     }
 
+    @DeleteMapping("stock/{id}")
+    public void deleteProductCount(@PathVariable long id) {
+        stockService.deleteProductCount(id);
+    }
+
 }
