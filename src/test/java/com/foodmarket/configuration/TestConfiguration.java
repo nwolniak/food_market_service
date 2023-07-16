@@ -1,6 +1,8 @@
 package com.foodmarket.configuration;
 
-import com.foodmarket.model.mapping.ServiceMapper;
+import com.foodmarket.model.mapping.OrderMapper;
+import com.foodmarket.model.mapping.ProductCountMapper;
+import com.foodmarket.model.mapping.ProductMapper;
 import com.foodmarket.repository.OrderRepository;
 import com.foodmarket.repository.ProductRepository;
 import com.foodmarket.repository.StockRepository;
@@ -30,23 +32,33 @@ public class TestConfiguration {
     private OrderRepository orderRepository;
 
     @Bean
-    public ServiceMapper serviceMapper() {
-        return ServiceMapper.INSTANCE;
+    public OrderMapper orderMapper() {
+        return OrderMapper.INSTANCE;
+    }
+
+    @Bean
+    public ProductMapper productMapper() {
+        return ProductMapper.INSTANCE;
+    }
+
+    @Bean
+    public ProductCountMapper productCountMapper() {
+        return ProductCountMapper.INSTANCE;
     }
 
     @Bean
     public OrderService orderService() {
-        return new OrderService(orderRepository, productService(), stockService(), serviceMapper());
+        return new OrderService(orderRepository, productService(), stockService(), orderMapper());
     }
 
     @Bean
     public StockService stockService() {
-        return new StockService(stockRepository, productService(), serviceMapper());
+        return new StockService(stockRepository, productService(), productCountMapper());
     }
 
     @Bean
     public ProductService productService() {
-        return new ProductService(productRepository, serviceMapper());
+        return new ProductService(productRepository, productMapper());
     }
 
 }

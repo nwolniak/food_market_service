@@ -8,7 +8,7 @@ import com.foodmarket.model.dto.ProductCountDTO;
 import com.foodmarket.model.entity.OrderEntity;
 import com.foodmarket.model.entity.OrderProductEntity;
 import com.foodmarket.model.entity.ProductEntity;
-import com.foodmarket.model.mapping.ServiceMapper;
+import com.foodmarket.model.mapping.OrderMapper;
 import com.foodmarket.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +24,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final ProductService productService;
     private final StockService stockService;
-    private final ServiceMapper serviceMapper;
+    private final OrderMapper mapper;
 
 
     public OrderDTO addOrder(OrderDTO orderDTO) {
@@ -43,18 +43,18 @@ public class OrderService {
             int currentQuantity = stockService.getProductCount(productId).quantity();
             stockService.setProductCount(new ProductCountDTO(productId, currentQuantity - orderedQuantity));
         });
-        return serviceMapper.orderEntityToOrderDto(saved);
+        return mapper.orderEntityToOrderDto(saved);
     }
 
     public OrderDTO getOrder(long id) {
         return orderRepository.findById(id)
-                .map(serviceMapper::orderEntityToOrderDto)
+                .map(mapper::orderEntityToOrderDto)
                 .orElseThrow(() -> new EntityNotFoundException(String.format(
                         "Order with %s id not found in order repository", id)));
     }
 
     public List<OrderDTO> getAllOrders() {
-        return orderRepository.findAll().stream().map(serviceMapper::orderEntityToOrderDto).toList();
+        return orderRepository.findAll().stream().map(mapper::orderEntityToOrderDto).toList();
     }
 
     private void validate(OrderEntity orderEntity) {

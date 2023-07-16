@@ -34,4 +34,9 @@ public class StockController {
         stockService.deleteProductCount(id);
     }
 
+    @PutMapping("stock")
+    public ProductCountDTO putProductCount(@RequestBody ProductCountDTO productCountDTO) {
+        return stockService.putProductCount(productCountDTO);
+    }
+
 }
