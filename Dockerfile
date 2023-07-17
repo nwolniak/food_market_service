@@ -1,11 +1,11 @@
-FROM maven:3.8.5-eclipse-temurin-17-alpine as base
+FROM eclipse-temurin:17-jdk-alpine as base
 
 WORKDIR /app
 
-COPY .mvn .mvn
-COPY pom.xml .
-COPY mvnw .
-RUN ./mvnw clean install
+COPY .mvn/ .mvn
+COPY pom.xml ./
+COPY mvnw ./
+RUN ./mvnw dependency:resolve
 
 COPY src ./src
 
