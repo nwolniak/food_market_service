@@ -36,6 +36,28 @@ CREATE TABLE IF NOT EXISTS orders_items
     CONSTRAINT pk_orders_items PRIMARY KEY (order_id, item_id)
 );
 
+CREATE TABLE IF NOT EXISTS carts
+(
+    cart_id            BIGINT   NOT NULL,
+    created_date       datetime NULL,
+    last_modified_date datetime NULL,
+    CONSTRAINT pk_carts PRIMARY KEY (cart_id)
+);
+
+CREATE TABLE IF NOT EXISTS carts_items
+(
+    quantity INT    NULL,
+    cart_id  BIGINT NOT NULL,
+    item_id  BIGINT NOT NULL,
+    CONSTRAINT pk_carts_items PRIMARY KEY (cart_id, item_id)
+);
+
+# ALTER TABLE carts_items
+#     ADD CONSTRAINT FK_CARTS_ITEMS_ON_CART FOREIGN KEY (cart_id) REFERENCES carts (cart_id);
+#
+# ALTER TABLE carts_items
+#     ADD CONSTRAINT FK_CARTS_ITEMS_ON_ITEM FOREIGN KEY (item_id) REFERENCES items (item_id);
+
 -- ALTER TABLE orders_items
 --     ADD CONSTRAINT FK_ORDERS_ITEMS_ON_ITEM FOREIGN KEY (item_id) REFERENCES items (item_id);
 --

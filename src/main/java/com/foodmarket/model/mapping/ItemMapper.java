@@ -5,17 +5,20 @@ import com.foodmarket.model.entity.ItemEntity;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
+import static org.mapstruct.NullValueCheckStrategy.ALWAYS;
+import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
+
 @Mapper
 public interface ItemMapper {
 
     ItemMapper INSTANCE = Mappers.getMapper(ItemMapper.class);
 
-    @Mapping(target = "id", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
+    @Mapping(target = "id", nullValueCheckStrategy = ALWAYS)
     ItemEntity itemDtoToEntity(ItemDTO itemDTO);
 
     ItemDTO itemEntityToDto(ItemEntity itemEntity);
 
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @BeanMapping(nullValuePropertyMappingStrategy = IGNORE)
     void updateItemFromDto(ItemDTO itemDTO, @MappingTarget ItemEntity itemEntity);
 
 }

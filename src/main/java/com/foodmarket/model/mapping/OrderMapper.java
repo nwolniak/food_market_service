@@ -20,7 +20,7 @@ public interface OrderMapper {
     OrderDTO orderEntityToDto(OrderEntity orderEntity);
 
     @Named("orderedItemsMapping")
-    default List<ItemQuantity> map(List<OrderItemEntity> orderedProducts) {
+    default List<ItemQuantity> orderedItemsMapping(List<OrderItemEntity> orderedProducts) {
         return orderedProducts
                 .stream()
                 .map(this::orderItemEntityToDto)

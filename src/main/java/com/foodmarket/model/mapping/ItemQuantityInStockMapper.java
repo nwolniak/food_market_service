@@ -5,8 +5,9 @@ import com.foodmarket.model.entity.ItemQuantityInStockEntity;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.factory.Mappers;
+
+import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
 
 @Mapper
 public interface ItemQuantityInStockMapper {
@@ -15,7 +16,7 @@ public interface ItemQuantityInStockMapper {
 
     ItemQuantityInStockDTO itemQuantityInStockToDto(ItemQuantityInStockEntity itemQuantityInStockEntity);
 
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @BeanMapping(nullValuePropertyMappingStrategy = IGNORE)
     void updateItemQuantityInStockFromDto(ItemQuantityInStockDTO itemQuantityInStockDTO, @MappingTarget ItemQuantityInStockEntity itemQuantityInStockEntity);
 
 }
