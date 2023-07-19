@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jdk-alpine as base
+FROM eclipse-temurin:20-jdk-alpine as base
 
 WORKDIR /app
 
@@ -9,4 +9,5 @@ RUN ./mvnw dependency:resolve
 
 COPY src ./src
 
-CMD ["./mvnw", "spring-boot:run"]
+FROM base as development
+CMD ["./mvnw", "spring-boot:run", "-Dspring-boot.run.profiles=mysql"]

@@ -1,0 +1,63 @@
+server:
+  port: 8080
+
+spring:
+  sql:
+    init:
+      schema-locations: classpath*:db/${database}/schema.sql
+      data-locations: classpath*:db/${database}/data.sql
+  jpa:
+    show-sql: true
+    open-in-view: true
+    defer-datasource-initialization: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+---
+database: h2
+
+spring:
+  config:
+    activate:
+      on-profile: h2
+
+  datasource:
+    url: jdbc:h2:file:./database/market
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create
+
+  h2:
+    console:
+      enabled: true
+
+---
+database: mysql
+
+spring:
+  config:
+    activate:
+      on-profile: mysql
+
+  datasource:
+    url: ${MYSQL_URL:jdbc:mysql://localhost:3306/food-market}
+    username: sa
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+  sql:
+    init:
+      mode: always
