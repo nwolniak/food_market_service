@@ -1,0 +1,45 @@
+version: "3.8"
+name: "food-market"
+services:
+  food-market-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: food-market-service
+    depends_on:
+      - mysql-server
+    environment:
+      - MYSQL_URL=jdbc:mysql://mysql-server:3306/food-market
+    ports:
+      - "8080:8080"
+    networks:
+      - mysqlnet
+    volumes:
+      - ./:/app
+
+  mysql-server:
+    image: mysql:latest
+    container_name: mysql-server
+    environment:
+      - MYSQL_DATABASE=food-market
+      - MYSQL_RANDOM_ROOT_PASSWORD=true
+      - MYSQL_USER=sa
+      - MYSQL_PASSWORD=password
+    ports:
+      - "3306:3306"
+    networks:
+      - mysqlnet
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - mysql_config:/etc/mysql/conf.d
+
+networks:
+  mysqlnet:
+    driver: bridge
+
+volumes:
+  mysql_data:
+    driver: local
+  mysql_config:
+    driver: local
