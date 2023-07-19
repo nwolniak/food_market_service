@@ -2,7 +2,7 @@ package com.foodmarket.service;
 
 import com.foodmarket.configuration.TestConfiguration;
 import com.foodmarket.exceptions.EntityNotFoundException;
-import com.foodmarket.model.dto.ItemDTO;
+import com.foodmarket.model.dto.ItemDto;
 import com.foodmarket.model.entity.ItemEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -22,40 +22,40 @@ public class ItemServiceIT {
     @Autowired
     private ItemService itemService;
 
-    private final ItemDTO itemDTO1 = new ItemDTO(1L, "Bananas", "Fruit", "Bunch", 2.99, "Fresh, ripe bananas");
-    private final ItemDTO itemDTO2 = new ItemDTO(2L, "Apples", "Fruit", "Bag", 4.99, "Juicy, crunchy apples");
-    private final ItemDTO itemDTO3 = new ItemDTO(3L, "Oranges", "Fruit", "Bag", 3.99, "Sweet and tangy oranges");
+    private final ItemDto itemDto1 = new ItemDto(1L, "Bananas", "Fruit", "Bunch", 2.99, "Fresh, ripe bananas");
+    private final ItemDto itemDto2 = new ItemDto(2L, "Apples", "Fruit", "Bag", 4.99, "Juicy, crunchy apples");
+    private final ItemDto itemDto3 = new ItemDto(3L, "Oranges", "Fruit", "Bag", 3.99, "Sweet and tangy oranges");
 
 
     @Test
     public void addItemTest() {
         // when
-        ItemDTO saved = itemService.addItem(itemDTO1);
+        ItemDto saved = itemService.addItem(itemDto1);
         // then
         assertNotNull(saved);
-        assertEquals(itemDTO1.name(), saved.name());
+        assertEquals(itemDto1.name(), saved.name());
     }
 
     @Test
     public void getItemTest() {
         // given
-        ItemEntity itemEntity = itemService.addItemReturnEntity(itemDTO1);
+        ItemEntity itemEntity = itemService.addItemReturnEntity(itemDto1);
         // when
-        ItemDTO product = itemService.getItem(itemEntity.getId());
+        ItemDto product = itemService.getItem(itemEntity.getId());
         // then
         assertNotNull(product);
-        assertEquals(itemDTO1, product);
+        assertEquals(itemDto1, product);
     }
 
     @Test
     public void addMultipleItemsTest() {
         // given
-        List<ItemDTO> expectedItems = List.of(itemDTO1, itemDTO2, itemDTO3);
+        List<ItemDto> expectedItems = List.of(itemDto1, itemDto2, itemDto3);
         // when
-        itemService.addItem(itemDTO1);
-        itemService.addItem(itemDTO2);
-        itemService.addItem(itemDTO3);
-        List<ItemDTO> allItems = itemService.getAllItems();
+        itemService.addItem(itemDto1);
+        itemService.addItem(itemDto2);
+        itemService.addItem(itemDto3);
+        List<ItemDto> allItems = itemService.getAllItems();
         // then
         assertNotNull(allItems);
         assertFalse(allItems.isEmpty());
@@ -65,11 +65,11 @@ public class ItemServiceIT {
     @Test
     public void addItemMultipleTimesTest() {
         // given
-        List<ItemDTO> expectedItems = List.of(itemDTO1);
+        List<ItemDto> expectedItems = List.of(itemDto1);
         // when
-        itemService.addItem(itemDTO1);
-        itemService.addItem(itemDTO1);
-        List<ItemDTO> allItems = itemService.getAllItems();
+        itemService.addItem(itemDto1);
+        itemService.addItem(itemDto1);
+        List<ItemDto> allItems = itemService.getAllItems();
         // then
         assertNotNull(allItems);
         assertFalse(allItems.isEmpty());

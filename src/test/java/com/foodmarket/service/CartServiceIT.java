@@ -2,8 +2,8 @@ package com.foodmarket.service;
 
 import com.foodmarket.configuration.TestConfiguration;
 import com.foodmarket.exceptions.EntityNotFoundException;
-import com.foodmarket.model.dto.CartDTO;
-import com.foodmarket.model.dto.ItemDTO;
+import com.foodmarket.model.dto.CartDto;
+import com.foodmarket.model.dto.ItemDto;
 import com.foodmarket.model.entity.ItemEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,18 +24,18 @@ public class CartServiceIT {
     @Autowired
     private ItemService itemService;
 
-    private final ItemDTO itemDTO1 = new ItemDTO(null, "Bananas", "Fruit", "Bunch", 2.99, "Fresh, ripe bananas");
-    private final ItemDTO itemDTO2 = new ItemDTO(null, "Apples", "Fruit", "Bag", 4.99, "Juicy, crunchy apples");
-    private final ItemDTO itemDTO3 = new ItemDTO(null, "Oranges", "Fruit", "Bag", 3.99, "Sweet and tangy oranges");
+    private final ItemDto itemDto1 = new ItemDto(null, "Bananas", "Fruit", "Bunch", 2.99, "Fresh, ripe bananas");
+    private final ItemDto itemDto2 = new ItemDto(null, "Apples", "Fruit", "Bag", 4.99, "Juicy, crunchy apples");
+    private final ItemDto itemDto3 = new ItemDto(null, "Oranges", "Fruit", "Bag", 3.99, "Sweet and tangy oranges");
 
     @Test
     public void addCartTest() {
         // given
-        ItemEntity itemEntity = itemService.addItemReturnEntity(itemDTO1);
-        List<CartDTO.ItemQuantity> cartItems = List.of(new CartDTO.ItemQuantity(itemEntity.getId(), 3));
-        CartDTO cartDTO = new CartDTO(null, cartItems);
+        ItemEntity itemEntity = itemService.addItemReturnEntity(itemDto1);
+        List<CartDto.ItemQuantity> cartItems = List.of(new CartDto.ItemQuantity(itemEntity.getId(), 3));
+        CartDto cartDTO = new CartDto(null, cartItems);
         // when
-        CartDTO saved = cartService.addCart(cartDTO);
+        CartDto saved = cartService.addCart(cartDTO);
         // then
         assertNotNull(saved);
         assertEquals(cartDTO.cartItems(), saved.cartItems());
@@ -44,17 +44,17 @@ public class CartServiceIT {
     @Test
     public void addMultipleCartsTest() {
         // given
-        ItemEntity itemEntity1 = itemService.addItemReturnEntity(itemDTO1);
-        ItemEntity itemEntity2 = itemService.addItemReturnEntity(itemDTO2);
-        List<CartDTO.ItemQuantity> cartedProducts1 = List.of(new CartDTO.ItemQuantity(itemEntity1.getId(), 3));
-        List<CartDTO.ItemQuantity> cartedProducts2 = List.of(new CartDTO.ItemQuantity(itemEntity2.getId(), 3));
-        CartDTO cartDTO1 = new CartDTO(null, cartedProducts1);
-        CartDTO cartDTO2 = new CartDTO(null, cartedProducts2);
-        List<CartDTO> expectedCarts = List.of(cartDTO1, cartDTO2);
+        ItemEntity itemEntity1 = itemService.addItemReturnEntity(itemDto1);
+        ItemEntity itemEntity2 = itemService.addItemReturnEntity(itemDto2);
+        List<CartDto.ItemQuantity> cartedProducts1 = List.of(new CartDto.ItemQuantity(itemEntity1.getId(), 3));
+        List<CartDto.ItemQuantity> cartedProducts2 = List.of(new CartDto.ItemQuantity(itemEntity2.getId(), 3));
+        CartDto cartDto1 = new CartDto(null, cartedProducts1);
+        CartDto cartDto2 = new CartDto(null, cartedProducts2);
+        List<CartDto> expectedCarts = List.of(cartDto1, cartDto2);
         // when
-        cartService.addCart(cartDTO1);
-        cartService.addCart(cartDTO2);
-        List<CartDTO> carts = cartService.getCarts();
+        cartService.addCart(cartDto1);
+        cartService.addCart(cartDto2);
+        List<CartDto> carts = cartService.getCarts();
         // then
         assertNotNull(carts);
         assertFalse(carts.isEmpty());
@@ -64,14 +64,14 @@ public class CartServiceIT {
     @Test
     public void addCartMultipleTimesTest() {
         // given
-        ItemEntity itemEntity = itemService.addItemReturnEntity(itemDTO1);
-        List<CartDTO.ItemQuantity> cartItems = List.of(new CartDTO.ItemQuantity(itemEntity.getId(), 3));
-        CartDTO cartDTO = new CartDTO(null, cartItems);
-        List<CartDTO> expectedCarts = List.of(cartDTO, cartDTO);
+        ItemEntity itemEntity = itemService.addItemReturnEntity(itemDto1);
+        List<CartDto.ItemQuantity> cartItems = List.of(new CartDto.ItemQuantity(itemEntity.getId(), 3));
+        CartDto cartDTO = new CartDto(null, cartItems);
+        List<CartDto> expectedCarts = List.of(cartDTO, cartDTO);
         // when
         cartService.addCart(cartDTO);
         cartService.addCart(cartDTO);
-        List<CartDTO> carts = cartService.getCarts();
+        List<CartDto> carts = cartService.getCarts();
         // then
         assertNotNull(carts);
         assertFalse(carts.isEmpty());
@@ -81,8 +81,8 @@ public class CartServiceIT {
     @Test
     public void cartWithNotExistingItemsShouldThrowExceptionTest() {
         // given
-        List<CartDTO.ItemQuantity> cartedItems = List.of(new CartDTO.ItemQuantity(123, 10));
-        CartDTO cartDTO = new CartDTO(null, cartedItems);
+        List<CartDto.ItemQuantity> cartedItems = List.of(new CartDto.ItemQuantity(123, 10));
+        CartDto cartDTO = new CartDto(null, cartedItems);
         // then
         assertThrows(EntityNotFoundException.class, () -> cartService.addCart(cartDTO));
     }

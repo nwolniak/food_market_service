@@ -1,7 +1,7 @@
 package com.foodmarket.service;
 
 import com.foodmarket.exceptions.EntityNotFoundException;
-import com.foodmarket.model.dto.ItemQuantityInStockDTO;
+import com.foodmarket.model.dto.ItemQuantityInStockDto;
 import com.foodmarket.model.entity.ItemEntity;
 import com.foodmarket.model.entity.ItemQuantityInStockEntity;
 import com.foodmarket.model.mapping.ItemQuantityInStockMapper;
@@ -22,7 +22,7 @@ public class StockService {
     private final ItemService itemService;
     private final ItemQuantityInStockMapper mapper;
 
-    public ItemQuantityInStockDTO setItemQuantity(ItemQuantityInStockDTO itemQuantity) {
+    public ItemQuantityInStockDto setItemQuantity(ItemQuantityInStockDto itemQuantity) {
         AtomicReference<ItemQuantityInStockEntity> reference = new AtomicReference<>();
         stockRepository.findById(itemQuantity.id()).ifPresentOrElse(productCountEntity -> {
             productCountEntity.setQuantityInStock(itemQuantity.quantityInStock());
@@ -35,14 +35,14 @@ public class StockService {
         return mapper.itemQuantityInStockToDto(saved);
     }
 
-    public ItemQuantityInStockDTO getItemQuantity(long id) {
+    public ItemQuantityInStockDto getItemQuantity(long id) {
         return stockRepository.findById(id)
                 .map(mapper::itemQuantityInStockToDto)
                 .orElseThrow(() -> new EntityNotFoundException(String.format(
                         "Item quantity with %s id not found in stock repository.", id)));
     }
 
-    public List<ItemQuantityInStockDTO> getItemQuantities() {
+    public List<ItemQuantityInStockDto> getItemQuantities() {
         return stockRepository.findAll()
                 .stream()
                 .map(mapper::itemQuantityInStockToDto)
@@ -54,7 +54,7 @@ public class StockService {
         stockRepository.deleteById(id);
     }
 
-    public ItemQuantityInStockDTO putItemQuantity(ItemQuantityInStockDTO itemQuantity) {
+    public ItemQuantityInStockDto putItemQuantity(ItemQuantityInStockDto itemQuantity) {
         ItemQuantityInStockEntity itemQuantityInStockEntity = stockRepository.findById(itemQuantity.id())
                 .orElseThrow(() -> new EntityNotFoundException(String.format(
                         "Item quantity with %s id not found in stock repository.", itemQuantity.id())));

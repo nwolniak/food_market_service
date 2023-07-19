@@ -1,6 +1,6 @@
 package com.foodmarket.controller;
 
-import com.foodmarket.model.dto.ItemDTO;
+import com.foodmarket.model.dto.ItemDto;
 import com.foodmarket.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -15,17 +15,17 @@ public class ItemController {
     private final ItemService itemService;
 
     @GetMapping("items/{id}")
-    public ItemDTO getItem(@PathVariable long id) {
+    public ItemDto getItem(@PathVariable long id) {
         return itemService.getItem(id);
     }
 
     @GetMapping("items")
-    public List<ItemDTO> getItems() {
+    public List<ItemDto> getItems() {
         return itemService.getAllItems();
     }
 
     @PostMapping("items")
-    public ItemDTO postItem(@RequestBody ItemDTO itemDTO) {
+    public ItemDto postItem(@RequestBody ItemDto itemDTO) {
         return itemService.addItem(itemDTO);
     }
 
@@ -35,7 +35,7 @@ public class ItemController {
     }
 
     @PutMapping("items")
-    public ItemDTO putItem(@RequestBody ItemDTO itemDTO) {
+    public ItemDto putItem(@RequestBody ItemDto itemDTO) {
         return itemService.putItem(itemDTO);
     }
 

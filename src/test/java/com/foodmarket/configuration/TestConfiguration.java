@@ -59,7 +59,7 @@ public class TestConfiguration {
 
     @Bean
     public OrderService orderService() {
-        return new OrderService(orderRepository, itemService(), stockService(), orderMapper());
+        return new OrderService(orderRepository, cartService(), orderMapper());
     }
 
     @Bean
