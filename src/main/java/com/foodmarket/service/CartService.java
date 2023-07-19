@@ -1,5 +1,6 @@
 package com.foodmarket.service;
 
+import com.foodmarket.exceptions.EntityNotFoundException;
 import com.foodmarket.model.dto.CartDTO;
 import com.foodmarket.model.entity.CartEntity;
 import com.foodmarket.model.entity.CartItemEntity;
@@ -35,7 +36,7 @@ public class CartService {
     public CartDTO getCart(long id) {
         return cartRepository.findById(id)
                 .map(mapper::cartEntityToDto)
-                .orElseThrow();
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Cart with %s id not found in carts repository", id)));
     }
 
     public List<CartDTO> getCarts() {

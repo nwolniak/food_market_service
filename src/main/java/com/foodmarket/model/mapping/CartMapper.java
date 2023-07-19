@@ -31,7 +31,7 @@ public interface CartMapper {
                 .toList();
     }
 
-    @Mapping(source = "cartEntity.id", target = "id")
+    @Mapping(source = "itemEntity.id", target = "id")
     CartDTO.ItemQuantity cartItemEntityToItemQuantity(CartItemEntity cartItemEntity);
 
 //    @BeanMapping(nullValuePropertyMappingStrategy = IGNORE)
