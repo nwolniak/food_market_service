@@ -9,6 +9,7 @@ import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
+import java.util.Set;
 
 @Mapper
 public interface CartMapper {
@@ -24,7 +25,7 @@ public interface CartMapper {
     CartDTO cartEntityToDto(CartEntity cartEntity);
 
     @Named("cartItemsMapping")
-    default List<CartDTO.ItemQuantity> cartItemsMapping(List<CartItemEntity> cartItems) {
+    default List<CartDTO.ItemQuantity> cartItemsMapping(Set<CartItemEntity> cartItems) {
         return cartItems
                 .stream()
                 .map(this::cartItemEntityToItemQuantity)

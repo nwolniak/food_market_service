@@ -2,6 +2,7 @@ package com.foodmarket.service;
 
 import com.foodmarket.exceptions.EntityNotFoundException;
 import com.foodmarket.model.dto.CartDTO;
+import com.foodmarket.model.dto.CartDTO.ItemQuantity;
 import com.foodmarket.model.entity.CartEntity;
 import com.foodmarket.model.entity.CartItemEntity;
 import com.foodmarket.model.entity.ItemEntity;
@@ -12,6 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
+
+import static java.util.stream.Collectors.toSet;
 
 @Slf4j
 @Service
@@ -24,10 +28,10 @@ public class CartService {
 
     public CartDTO addCart(CartDTO cartDTO) {
         CartEntity cartEntity = new CartEntity();
-        List<CartItemEntity> cartItems = cartDTO.cartItems().stream().map(cartItem -> {
+        Set<CartItemEntity> cartItems = cartDTO.cartItems().stream().map(cartItem -> {
             ItemEntity itemEntity = itemService.getItemEntity(cartItem.id());
             return new CartItemEntity(cartEntity, itemEntity, cartItem.quantity());
-        }).toList();
+        }).collect(toSet());
         cartEntity.setCartItems(cartItems);
         CartEntity saved = cartRepository.save(cartEntity);
         return mapper.cartEntityToDto(saved);
@@ -44,5 +48,27 @@ public class CartService {
                 .stream()
                 .map(mapper::cartEntityToDto)
                 .toList();
+    }
+
+    public CartDTO patchCart(long id, List<ItemQuantity> cartItems) {
+        CartEntity cartEntity = cartRepository.findById(id)
+                .orElseThrow();
+        Set<CartItemEntity> cartItemsToInsert = cartItems.stream().map(cartItem -> {
+            ItemEntity itemEntity = itemService.getItemEntity(cartItem.id());
+            return new CartItemEntity(cartEntity, itemEntity, cartItem.quantity());
+        }).collect(toSet());
+
+        cartItemsToInsert
+                .forEach(cartItem -> {
+                    cartEntity.removeCartItem(cartItem);
+                    cartEntity.addCartItem(cartItem);
+                });
+
+        CartEntity saved = cartRepository.save(cartEntity);
+        return mapper.cartEntityToDto(saved);
+    }
+
+    public void deleteCart(long id) {
+        cartRepository.deleteById(id);
     }
 }

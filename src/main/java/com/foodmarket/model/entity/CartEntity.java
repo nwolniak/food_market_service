@@ -7,8 +7,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -28,7 +27,16 @@ public class CartEntity {
     @Column(name = "last_modified_date")
     private LocalDateTime lastModifiedDate;
 
-    @OneToMany(mappedBy = "cartEntity", cascade = CascadeType.ALL)
-    private List<CartItemEntity> cartItems = new ArrayList<>();
+    @OneToMany(mappedBy = "cartEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<CartItemEntity> cartItems;
+
+    public void addCartItem(CartItemEntity cartItemEntity) {
+        this.cartItems.add(cartItemEntity);
+    }
+
+    public void removeCartItem(CartItemEntity cartItemEntity) {
+        this.cartItems.remove(cartItemEntity);
+    }
+
 
 }

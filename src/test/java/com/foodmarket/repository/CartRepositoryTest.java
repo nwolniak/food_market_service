@@ -1,22 +1,22 @@
 package com.foodmarket.repository;
 
 import com.foodmarket.configuration.TestConfiguration;
-import com.foodmarket.model.entity.ItemEntity;
 import com.foodmarket.model.entity.CartEntity;
 import com.foodmarket.model.entity.CartItemEntity;
+import com.foodmarket.model.entity.ItemEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ContextConfiguration;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.apache.commons.collections4.CollectionUtils.isEqualCollection;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DataJpaTest
 @ContextConfiguration(classes = TestConfiguration.class)
@@ -39,9 +39,9 @@ public class CartRepositoryTest {
         CartItemEntity cartItemEntity1 = new CartItemEntity(cartEntity1, itemEntity1, 5);
         CartItemEntity cartItemEntity2 = new CartItemEntity(cartEntity1, itemEntity2, 5);
         CartItemEntity cartItemEntity3 = new CartItemEntity(cartEntity1, itemEntity3, 5);
-        cartEntity1.setCartItems(new ArrayList<>(List.of(cartItemEntity1)));
-        cartEntity2.setCartItems(new ArrayList<>(List.of(cartItemEntity1, cartItemEntity2)));
-        cartEntity3.setCartItems(new ArrayList<>(List.of(cartItemEntity1, cartItemEntity2, cartItemEntity3)));
+        cartEntity1.setCartItems(new HashSet<>(Set.of(cartItemEntity1)));
+        cartEntity2.setCartItems(new HashSet<>(Set.of(cartItemEntity1, cartItemEntity2)));
+        cartEntity3.setCartItems(new HashSet<>(Set.of(cartItemEntity1, cartItemEntity2, cartItemEntity3)));
     }
 
     @Test

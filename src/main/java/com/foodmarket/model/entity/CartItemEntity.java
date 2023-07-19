@@ -3,16 +3,19 @@ package com.foodmarket.model.entity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
 @Entity
 @Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "carts_items")
 public class CartItemEntity {
 
     @EmbeddedId
+    @EqualsAndHashCode.Include
     private CartItemPK id;
 
     @ManyToOne
