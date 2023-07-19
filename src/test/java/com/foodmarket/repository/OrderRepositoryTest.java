@@ -1,9 +1,9 @@
 package com.foodmarket.repository;
 
 import com.foodmarket.configuration.TestConfiguration;
+import com.foodmarket.model.entity.ItemEntity;
 import com.foodmarket.model.entity.OrderEntity;
-import com.foodmarket.model.entity.OrderProductEntity;
-import com.foodmarket.model.entity.ProductEntity;
+import com.foodmarket.model.entity.OrderItemEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,23 +28,23 @@ public class OrderRepositoryTest {
     private final OrderEntity orderEntity2 = new OrderEntity();
     private final OrderEntity orderEntity3 = new OrderEntity();
 
-    private ProductEntity productEntity1 = new ProductEntity("Bananas", "Fruit", "Bunch", 2.99, "Fresh, ripe bananas");
-    private ProductEntity productEntity2 = new ProductEntity("Apples", "Fruit", "Bag", 4.99, "Juicy, crunchy apples");
-    private ProductEntity productEntity3 = new ProductEntity("Oranges", "Fruit", "Bag", 3.99, "Sweet and tangy oranges");
+    private ItemEntity itemEntity1 = new ItemEntity("Bananas", "Fruit", "Bunch", 2.99, "Fresh, ripe bananas");
+    private ItemEntity itemEntity2 = new ItemEntity("Apples", "Fruit", "Bag", 4.99, "Juicy, crunchy apples");
+    private ItemEntity itemEntity3 = new ItemEntity("Oranges", "Fruit", "Bag", 3.99, "Sweet and tangy oranges");
 
-    private OrderProductEntity orderProductEntity1;
-    private OrderProductEntity orderProductEntity2;
-    private OrderProductEntity orderProductEntity3;
+    private OrderItemEntity orderItemEntity1;
+    private OrderItemEntity orderItemEntity2;
+    private OrderItemEntity orderItemEntity3;
 
 
     @BeforeEach
     public void init() {
-        orderProductEntity1 = new OrderProductEntity(orderEntity1, productEntity1, 5);
-        orderProductEntity2 = new OrderProductEntity(orderEntity1, productEntity2, 5);
-        orderProductEntity3 = new OrderProductEntity(orderEntity1, productEntity3, 5);
-        orderEntity1.setOrderedProducts(new ArrayList<>(List.of(orderProductEntity1)));
-        orderEntity2.setOrderedProducts(new ArrayList<>(List.of(orderProductEntity1, orderProductEntity2)));
-        orderEntity3.setOrderedProducts(new ArrayList<>(List.of(orderProductEntity1, orderProductEntity2, orderProductEntity3)));
+        orderItemEntity1 = new OrderItemEntity(orderEntity1, itemEntity1, 5);
+        orderItemEntity2 = new OrderItemEntity(orderEntity1, itemEntity2, 5);
+        orderItemEntity3 = new OrderItemEntity(orderEntity1, itemEntity3, 5);
+        orderEntity1.setOrderedItems(new ArrayList<>(List.of(orderItemEntity1)));
+        orderEntity2.setOrderedItems(new ArrayList<>(List.of(orderItemEntity1, orderItemEntity2)));
+        orderEntity3.setOrderedItems(new ArrayList<>(List.of(orderItemEntity1, orderItemEntity2, orderItemEntity3)));
     }
 
     @Test
@@ -94,7 +94,7 @@ public class OrderRepositoryTest {
         assertTrue(orderEntityOptional.isPresent());
         OrderEntity orderEntity = orderEntityOptional.get();
         assertEquals(orderEntity1, orderEntity);
-        assertTrue(isEqualCollection(orderEntity1.getOrderedProducts(), orderEntity.getOrderedProducts()));
+        assertTrue(isEqualCollection(orderEntity1.getOrderedItems(), orderEntity.getOrderedItems()));
     }
 
     @Test

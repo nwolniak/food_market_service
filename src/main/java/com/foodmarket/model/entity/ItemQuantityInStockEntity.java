@@ -13,11 +13,11 @@ import java.time.LocalDateTime;
 @Data
 @EntityListeners(AuditingEntityListener.class)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Table(name = "product_counts")
-public class ProductCountEntity {
+@Table(name = "items_quantity")
+public class ItemQuantityInStockEntity {
 
     @Id
-    @Column(name = "product_id")
+    @Column(name = "item_id")
     @EqualsAndHashCode.Include
     private Long id;
 
@@ -34,14 +34,14 @@ public class ProductCountEntity {
 
     @OneToOne(cascade = CascadeType.ALL)
     @MapsId
-    @JoinColumn(name = "product_id")
-    private ProductEntity productEntity;
+    @JoinColumn(name = "item_id")
+    private ItemEntity itemEntity;
 
-    protected ProductCountEntity() {
+    protected ItemQuantityInStockEntity() {
     }
 
-    public ProductCountEntity(ProductEntity productEntity, int quantityInStock) {
-        this.productEntity = productEntity;
+    public ItemQuantityInStockEntity(ItemEntity itemEntity, int quantityInStock) {
+        this.itemEntity = itemEntity;
         this.quantityInStock = quantityInStock;
     }
 

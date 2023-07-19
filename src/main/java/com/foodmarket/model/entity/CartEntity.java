@@ -2,26 +2,21 @@ package com.foodmarket.model.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "orders")
-public class OrderEntity {
-
+@Table(name = "carts")
+public class CartEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "order_id")
-    @EqualsAndHashCode.Include
+    @Column(name = "cart_id")
     private Long id;
 
     @CreatedDate
@@ -32,7 +27,16 @@ public class OrderEntity {
     @Column(name = "last_modified_date")
     private LocalDateTime lastModifiedDate;
 
-    @OneToMany(mappedBy = "orderEntity", cascade = CascadeType.ALL)
-    private List<OrderItemEntity> orderedItems = new ArrayList<>();
+    @OneToMany(mappedBy = "cartEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<CartItemEntity> cartItems;
+
+    public void addCartItem(CartItemEntity cartItemEntity) {
+        this.cartItems.add(cartItemEntity);
+    }
+
+    public void removeCartItem(CartItemEntity cartItemEntity) {
+        this.cartItems.remove(cartItemEntity);
+    }
+
 
 }

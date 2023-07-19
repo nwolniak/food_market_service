@@ -1,13 +1,16 @@
 package com.foodmarket.configuration;
 
+import com.foodmarket.model.mapping.CartMapper;
+import com.foodmarket.model.mapping.ItemMapper;
+import com.foodmarket.model.mapping.ItemQuantityInStockMapper;
 import com.foodmarket.model.mapping.OrderMapper;
-import com.foodmarket.model.mapping.ProductCountMapper;
-import com.foodmarket.model.mapping.ProductMapper;
+import com.foodmarket.repository.CartRepository;
 import com.foodmarket.repository.OrderRepository;
-import com.foodmarket.repository.ProductRepository;
+import com.foodmarket.repository.ItemRepository;
 import com.foodmarket.repository.StockRepository;
+import com.foodmarket.service.CartService;
 import com.foodmarket.service.OrderService;
-import com.foodmarket.service.ProductService;
+import com.foodmarket.service.ItemService;
 import com.foodmarket.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -23,7 +26,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class TestConfiguration {
 
     @Autowired
-    private ProductRepository productRepository;
+    private ItemRepository itemRepository;
 
     @Autowired
     private StockRepository stockRepository;
@@ -31,34 +34,47 @@ public class TestConfiguration {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private CartRepository cartRepository;
+
     @Bean
     public OrderMapper orderMapper() {
         return OrderMapper.INSTANCE;
     }
 
     @Bean
-    public ProductMapper productMapper() {
-        return ProductMapper.INSTANCE;
+    public ItemMapper productMapper() {
+        return ItemMapper.INSTANCE;
     }
 
     @Bean
-    public ProductCountMapper productCountMapper() {
-        return ProductCountMapper.INSTANCE;
+    public ItemQuantityInStockMapper productCountMapper() {
+        return ItemQuantityInStockMapper.INSTANCE;
+    }
+
+    @Bean
+    public CartMapper cartMapper() {
+        return CartMapper.INSTANCE;
     }
 
     @Bean
     public OrderService orderService() {
-        return new OrderService(orderRepository, productService(), stockService(), orderMapper());
+        return new OrderService(orderRepository, itemService(), stockService(), orderMapper());
     }
 
     @Bean
     public StockService stockService() {
-        return new StockService(stockRepository, productService(), productCountMapper());
+        return new StockService(stockRepository, itemService(), productCountMapper());
     }
 
     @Bean
-    public ProductService productService() {
-        return new ProductService(productRepository, productMapper());
+    public ItemService itemService() {
+        return new ItemService(itemRepository, productMapper());
+    }
+
+    @Bean
+    public CartService cartService() {
+        return new CartService(cartRepository, itemService(), cartMapper());
     }
 
 }

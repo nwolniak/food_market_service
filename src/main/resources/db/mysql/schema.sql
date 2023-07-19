@@ -1,6 +1,6 @@
-CREATE TABLE IF NOT EXISTS products
+CREATE TABLE IF NOT EXISTS items
 (
-    product_id         BIGINT       NOT NULL,
+    item_id            BIGINT       NOT NULL,
     name               VARCHAR(255) NULL,
     category           VARCHAR(255) NULL,
     unit_type          VARCHAR(255) NULL,
@@ -8,16 +8,16 @@ CREATE TABLE IF NOT EXISTS products
     `description`      VARCHAR(255) NULL,
     created_date       datetime     NULL,
     last_modified_date datetime     NULL,
-    CONSTRAINT pk_products PRIMARY KEY (product_id)
+    CONSTRAINT pk_items PRIMARY KEY (item_id)
 );
 
-CREATE TABLE IF NOT EXISTS product_counts
+CREATE TABLE IF NOT EXISTS items_quantity
 (
-    product_id         BIGINT   NOT NULL,
+    item_id            BIGINT   NOT NULL,
     quantity_in_stock  INT      NULL,
     created_date       datetime NULL,
     last_modified_date datetime NULL,
-    CONSTRAINT pk_product_counts PRIMARY KEY (product_id)
+    CONSTRAINT pk_items_quantity PRIMARY KEY (item_id)
 );
 
 CREATE TABLE IF NOT EXISTS orders
@@ -28,19 +28,41 @@ CREATE TABLE IF NOT EXISTS orders
     CONSTRAINT pk_orders PRIMARY KEY (order_id)
 );
 
-CREATE TABLE IF NOT EXISTS orders_products
+CREATE TABLE IF NOT EXISTS orders_items
 (
-    quantity   INT    NULL,
-    order_id   BIGINT NOT NULL,
-    product_id BIGINT NOT NULL,
-    CONSTRAINT pk_orders_products PRIMARY KEY (order_id, product_id)
+    quantity INT    NULL,
+    order_id BIGINT NOT NULL,
+    item_id  BIGINT NOT NULL,
+    CONSTRAINT pk_orders_items PRIMARY KEY (order_id, item_id)
 );
 
-# ALTER TABLE orders_products
-#     ADD CONSTRAINT FK_ORDERS_PRODUCTS_ON_ORDER FOREIGN KEY (order_id) REFERENCES orders (order_id);
+CREATE TABLE IF NOT EXISTS carts
+(
+    cart_id            BIGINT   NOT NULL,
+    created_date       datetime NULL,
+    last_modified_date datetime NULL,
+    CONSTRAINT pk_carts PRIMARY KEY (cart_id)
+);
+
+CREATE TABLE IF NOT EXISTS carts_items
+(
+    quantity INT    NULL,
+    cart_id  BIGINT NOT NULL,
+    item_id  BIGINT NOT NULL,
+    CONSTRAINT pk_carts_items PRIMARY KEY (cart_id, item_id)
+);
+
+# ALTER TABLE carts_items
+#     ADD CONSTRAINT FK_CARTS_ITEMS_ON_CART FOREIGN KEY (cart_id) REFERENCES carts (cart_id);
 #
-# ALTER TABLE orders_products
-#     ADD CONSTRAINT FK_ORDERS_PRODUCTS_ON_PRODUCT FOREIGN KEY (product_id) REFERENCES products (product_id);
-#
-# ALTER TABLE product_counts
-#     ADD CONSTRAINT FK_PRODUCT_COUNTS_ON_PRODUCT FOREIGN KEY (product_id) REFERENCES products (product_id);
+# ALTER TABLE carts_items
+#     ADD CONSTRAINT FK_CARTS_ITEMS_ON_ITEM FOREIGN KEY (item_id) REFERENCES items (item_id);
+
+-- ALTER TABLE orders_items
+--     ADD CONSTRAINT FK_ORDERS_ITEMS_ON_ITEM FOREIGN KEY (item_id) REFERENCES items (item_id);
+--
+-- ALTER TABLE orders_items
+--     ADD CONSTRAINT FK_ORDERS_ITEMS_ON_ORDER FOREIGN KEY (order_id) REFERENCES orders (order_id);
+--
+-- ALTER TABLE items_quantity
+--     ADD CONSTRAINT FK_ITEMS_QUANTITY_ON_ITEM FOREIGN KEY (item_id) REFERENCES items (item_id);

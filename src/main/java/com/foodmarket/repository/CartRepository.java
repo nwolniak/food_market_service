@@ -1,8 +1,8 @@
 package com.foodmarket.repository;
 
-import com.foodmarket.model.entity.ItemQuantityInStockEntity;
+import com.foodmarket.model.entity.CartEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface StockRepository extends JpaRepository<ItemQuantityInStockEntity, Long> {}
+public interface CartRepository extends JpaRepository<CartEntity, Long> {}

@@ -1,9 +1,9 @@
 package com.foodmarket.model.mapping;
 
 import com.foodmarket.model.dto.OrderDTO;
-import com.foodmarket.model.dto.ProductCountDTO;
+import com.foodmarket.model.dto.OrderDTO.ItemQuantity;
 import com.foodmarket.model.entity.OrderEntity;
-import com.foodmarket.model.entity.OrderProductEntity;
+import com.foodmarket.model.entity.OrderItemEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
@@ -16,18 +16,18 @@ public interface OrderMapper {
 
     OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
 
-    @Mapping(source = "orderedProducts", target = "orderedProducts", qualifiedByName = "orderedProductsMapping")
-    OrderDTO orderEntityToOrderDto(OrderEntity orderEntity);
+    @Mapping(source = "orderedItems", target = "orderedItems", qualifiedByName = "orderedItemsMapping")
+    OrderDTO orderEntityToDto(OrderEntity orderEntity);
 
-    @Named("orderedProductsMapping")
-    default List<ProductCountDTO> map(List<OrderProductEntity> orderedProducts) {
+    @Named("orderedItemsMapping")
+    default List<ItemQuantity> orderedItemsMapping(List<OrderItemEntity> orderedProducts) {
         return orderedProducts
                 .stream()
-                .map(this::orderProductEntityToProductCountDTO)
+                .map(this::orderItemEntityToDto)
                 .toList();
     }
 
-    @Mapping(source = "productEntity.id", target = "productId")
-    ProductCountDTO orderProductEntityToProductCountDTO(OrderProductEntity orderProductEntity);
+    @Mapping(source = "itemEntity.id", target = "id")
+    ItemQuantity orderItemEntityToDto(OrderItemEntity orderItemEntity);
 
 }
