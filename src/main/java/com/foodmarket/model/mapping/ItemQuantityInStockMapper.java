@@ -1,6 +1,6 @@
 package com.foodmarket.model.mapping;
 
-import com.foodmarket.model.dto.ItemQuantityInStockDTO;
+import com.foodmarket.model.dto.ItemQuantityInStockDto;
 import com.foodmarket.model.entity.ItemQuantityInStockEntity;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
@@ -14,9 +14,9 @@ public interface ItemQuantityInStockMapper {
 
     ItemQuantityInStockMapper INSTANCE = Mappers.getMapper(ItemQuantityInStockMapper.class);
 
-    ItemQuantityInStockDTO itemQuantityInStockToDto(ItemQuantityInStockEntity itemQuantityInStockEntity);
+    ItemQuantityInStockDto itemQuantityInStockToDto(ItemQuantityInStockEntity itemQuantityInStockEntity);
 
     @BeanMapping(nullValuePropertyMappingStrategy = IGNORE)
-    void updateItemQuantityInStockFromDto(ItemQuantityInStockDTO itemQuantityInStockDTO, @MappingTarget ItemQuantityInStockEntity itemQuantityInStockEntity);
+    void updateItemQuantityInStockFromDto(ItemQuantityInStockDto itemQuantityInStockDTO, @MappingTarget ItemQuantityInStockEntity itemQuantityInStockEntity);
 
 }

@@ -1,6 +1,6 @@
 package com.foodmarket.model.mapping;
 
-import com.foodmarket.model.dto.CartDTO;
+import com.foodmarket.model.dto.CartDto;
 import com.foodmarket.model.entity.CartEntity;
 import com.foodmarket.model.entity.CartItemEntity;
 import org.mapstruct.Mapper;
@@ -18,14 +18,14 @@ public interface CartMapper {
 
 //    @Mapping(target = "id", nullValueCheckStrategy = ALWAYS)
 //    @Mapping(source = "cartItems", target = "cartItems", qualifiedByName = "cartItemsMapping")
-//    CartEntity cartDtoToEntity(CartDTO cartDTO);
+//    CartEntity cartDtoToEntity(CartDto cartDTO);
 
     @Mapping(source = "id", target = "cartId")
     @Mapping(source = "cartItems", target = "cartItems", qualifiedByName = "cartItemsMapping")
-    CartDTO cartEntityToDto(CartEntity cartEntity);
+    CartDto cartEntityToDto(CartEntity cartEntity);
 
     @Named("cartItemsMapping")
-    default List<CartDTO.ItemQuantity> cartItemsMapping(Set<CartItemEntity> cartItems) {
+    default List<CartDto.ItemQuantity> cartItemsMapping(Set<CartItemEntity> cartItems) {
         return cartItems
                 .stream()
                 .map(this::cartItemEntityToItemQuantity)
@@ -33,9 +33,9 @@ public interface CartMapper {
     }
 
     @Mapping(source = "itemEntity.id", target = "id")
-    CartDTO.ItemQuantity cartItemEntityToItemQuantity(CartItemEntity cartItemEntity);
+    CartDto.ItemQuantity cartItemEntityToItemQuantity(CartItemEntity cartItemEntity);
 
 //    @BeanMapping(nullValuePropertyMappingStrategy = IGNORE)
-//    void updateItemFromDto(ItemDTO itemDTO, @MappingTarget ItemEntity itemEntity);
+//    void updateItemFromDto(ItemDto itemDTO, @MappingTarget ItemEntity itemEntity);
 
 }

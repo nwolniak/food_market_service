@@ -1,6 +1,6 @@
 package com.foodmarket.model.mapping;
 
-import com.foodmarket.model.dto.ItemDTO;
+import com.foodmarket.model.dto.ItemDto;
 import com.foodmarket.model.entity.ItemEntity;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
@@ -14,11 +14,11 @@ public interface ItemMapper {
     ItemMapper INSTANCE = Mappers.getMapper(ItemMapper.class);
 
     @Mapping(target = "id", nullValueCheckStrategy = ALWAYS)
-    ItemEntity itemDtoToEntity(ItemDTO itemDTO);
+    ItemEntity itemDtoToEntity(ItemDto itemDTO);
 
-    ItemDTO itemEntityToDto(ItemEntity itemEntity);
+    ItemDto itemEntityToDto(ItemEntity itemEntity);
 
     @BeanMapping(nullValuePropertyMappingStrategy = IGNORE)
-    void updateItemFromDto(ItemDTO itemDTO, @MappingTarget ItemEntity itemEntity);
+    void updateItemFromDto(ItemDto itemDTO, @MappingTarget ItemEntity itemEntity);
 
 }

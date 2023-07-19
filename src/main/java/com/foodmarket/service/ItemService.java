@@ -1,7 +1,7 @@
 package com.foodmarket.service;
 
 import com.foodmarket.exceptions.EntityNotFoundException;
-import com.foodmarket.model.dto.ItemDTO;
+import com.foodmarket.model.dto.ItemDto;
 import com.foodmarket.model.entity.ItemEntity;
 import com.foodmarket.model.mapping.ItemMapper;
 import com.foodmarket.repository.ItemRepository;
@@ -19,19 +19,19 @@ public class ItemService {
     private final ItemRepository itemRepository;
     private final ItemMapper mapper;
 
-    public ItemDTO addItem(ItemDTO itemDTO) {
+    public ItemDto addItem(ItemDto itemDTO) {
         ItemEntity itemEntity = mapper.itemDtoToEntity(itemDTO);
         ItemEntity saved = itemRepository.save(itemEntity);
         log.info("Saved product with {} id", saved.getId());
         return mapper.itemEntityToDto(saved);
     }
 
-    public ItemEntity addItemReturnEntity(ItemDTO itemDTO) {
+    public ItemEntity addItemReturnEntity(ItemDto itemDTO) {
         ItemEntity itemEntity = mapper.itemDtoToEntity(itemDTO);
         return itemRepository.save(itemEntity);
     }
 
-    public ItemDTO getItem(long id) {
+    public ItemDto getItem(long id) {
         return itemRepository.findById(id)
                 .map(mapper::itemEntityToDto)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Item with %s id not found in items repository.", id)));
@@ -42,7 +42,7 @@ public class ItemService {
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Item with %s id not found in items repository.", id)));
     }
 
-    public List<ItemDTO> getAllItems() {
+    public List<ItemDto> getAllItems() {
         return itemRepository.findAll()
                 .stream()
                 .map(mapper::itemEntityToDto)
@@ -54,7 +54,7 @@ public class ItemService {
         itemRepository.deleteById(id);
     }
 
-    public ItemDTO putItem(ItemDTO itemDTO) {
+    public ItemDto putItem(ItemDto itemDTO) {
         ItemEntity itemEntity = itemRepository.findById(itemDTO.id())
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Item with %s id not found in items repository.", itemDTO.id())));
         mapper.updateItemFromDto(itemDTO, itemEntity);

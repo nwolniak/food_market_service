@@ -2,8 +2,8 @@ package com.foodmarket.service;
 
 import com.foodmarket.configuration.TestConfiguration;
 import com.foodmarket.exceptions.EntityNotFoundException;
-import com.foodmarket.model.dto.ItemDTO;
-import com.foodmarket.model.dto.ItemQuantityInStockDTO;
+import com.foodmarket.model.dto.ItemDto;
+import com.foodmarket.model.dto.ItemQuantityInStockDto;
 import com.foodmarket.model.entity.ItemEntity;
 import org.apache.commons.collections4.CollectionUtils;
 import org.junit.jupiter.api.Test;
@@ -25,18 +25,18 @@ public class StockServiceIT {
     @Autowired
     private ItemService itemService;
 
-    private final ItemDTO itemDTO1 = new ItemDTO(null, "Bananas", "Fruit", "Bunch", 2.99, "Fresh, ripe bananas");
-    private final ItemDTO itemDTO2 = new ItemDTO(null, "Apples", "Fruit", "Bag", 4.99, "Juicy, crunchy apples");
-    private final ItemDTO itemDTO3 = new ItemDTO(null, "Oranges", "Fruit", "Bag", 3.99, "Sweet and tangy oranges");
+    private final ItemDto itemDto1 = new ItemDto(null, "Bananas", "Fruit", "Bunch", 2.99, "Fresh, ripe bananas");
+    private final ItemDto itemDto2 = new ItemDto(null, "Apples", "Fruit", "Bag", 4.99, "Juicy, crunchy apples");
+    private final ItemDto itemDto3 = new ItemDto(null, "Oranges", "Fruit", "Bag", 3.99, "Sweet and tangy oranges");
 
 
     @Test
     public void setProductCountTest() {
         // given
-        ItemEntity itemEntity = itemService.addItemReturnEntity(itemDTO1);
-        ItemQuantityInStockDTO itemQuantity = new ItemQuantityInStockDTO(itemEntity.getId(), 5);
+        ItemEntity itemEntity = itemService.addItemReturnEntity(itemDto1);
+        ItemQuantityInStockDto itemQuantity = new ItemQuantityInStockDto(itemEntity.getId(), 5);
         // when
-        ItemQuantityInStockDTO saved = stockService.setItemQuantity(itemQuantity);
+        ItemQuantityInStockDto saved = stockService.setItemQuantity(itemQuantity);
         // then
         assertNotNull(saved);
         assertEquals(itemQuantity, saved);
@@ -45,12 +45,12 @@ public class StockServiceIT {
     @Test
     public void getProductCountTest() {
         // given
-        ItemEntity itemEntity = itemService.addItemReturnEntity(itemDTO1);
-        ItemQuantityInStockDTO itemQuantity = new ItemQuantityInStockDTO(
+        ItemEntity itemEntity = itemService.addItemReturnEntity(itemDto1);
+        ItemQuantityInStockDto itemQuantity = new ItemQuantityInStockDto(
                 itemEntity.getId(), 5);
         stockService.setItemQuantity(itemQuantity);
         // when
-        ItemQuantityInStockDTO saved = stockService.getItemQuantity(itemQuantity.id());
+        ItemQuantityInStockDto saved = stockService.getItemQuantity(itemQuantity.id());
         // then
         assertNotNull(saved);
         assertEquals(itemQuantity, saved);
@@ -59,21 +59,21 @@ public class StockServiceIT {
     @Test
     public void getProductCountsTest() {
         // given
-        ItemEntity itemEntity1 = itemService.addItemReturnEntity(itemDTO1);
-        ItemEntity itemEntity2 = itemService.addItemReturnEntity(itemDTO2);
-        ItemEntity itemEntity3 = itemService.addItemReturnEntity(itemDTO3);
-        ItemQuantityInStockDTO itemQuantity1 = new ItemQuantityInStockDTO(
+        ItemEntity itemEntity1 = itemService.addItemReturnEntity(itemDto1);
+        ItemEntity itemEntity2 = itemService.addItemReturnEntity(itemDto2);
+        ItemEntity itemEntity3 = itemService.addItemReturnEntity(itemDto3);
+        ItemQuantityInStockDto itemQuantity1 = new ItemQuantityInStockDto(
                 itemEntity1.getId(), 5);
-        ItemQuantityInStockDTO itemQuantity2 = new ItemQuantityInStockDTO(
+        ItemQuantityInStockDto itemQuantity2 = new ItemQuantityInStockDto(
                 itemEntity2.getId(), 10);
-        ItemQuantityInStockDTO itemQuantity3 = new ItemQuantityInStockDTO(
+        ItemQuantityInStockDto itemQuantity3 = new ItemQuantityInStockDto(
                 itemEntity3.getId(), 15);
         stockService.setItemQuantity(itemQuantity1);
         stockService.setItemQuantity(itemQuantity2);
         stockService.setItemQuantity(itemQuantity3);
-        List<ItemQuantityInStockDTO> expectedProductCounts = List.of(itemQuantity1, itemQuantity2, itemQuantity3);
+        List<ItemQuantityInStockDto> expectedProductCounts = List.of(itemQuantity1, itemQuantity2, itemQuantity3);
         // when
-        List<ItemQuantityInStockDTO> allProductCounts = stockService.getItemQuantities();
+        List<ItemQuantityInStockDto> allProductCounts = stockService.getItemQuantities();
         // then
         assertNotNull(allProductCounts);
         assertFalse(allProductCounts.isEmpty());

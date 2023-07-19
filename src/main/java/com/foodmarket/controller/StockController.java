@@ -1,6 +1,6 @@
 package com.foodmarket.controller;
 
-import com.foodmarket.model.dto.ItemQuantityInStockDTO;
+import com.foodmarket.model.dto.ItemQuantityInStockDto;
 import com.foodmarket.service.StockService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -15,17 +15,17 @@ public class StockController {
     private final StockService stockService;
 
     @GetMapping("stock/{id}")
-    public ItemQuantityInStockDTO getItemQuantity(@PathVariable long id) {
+    public ItemQuantityInStockDto getItemQuantity(@PathVariable long id) {
         return stockService.getItemQuantity(id);
     }
 
     @GetMapping("stock")
-    public List<ItemQuantityInStockDTO> getItemQuantities() {
+    public List<ItemQuantityInStockDto> getItemQuantities() {
         return stockService.getItemQuantities();
     }
 
     @PostMapping("stock")
-    public ItemQuantityInStockDTO postItemQuantity(@RequestBody ItemQuantityInStockDTO itemQuantity) {
+    public ItemQuantityInStockDto postItemQuantity(@RequestBody ItemQuantityInStockDto itemQuantity) {
         return stockService.setItemQuantity(itemQuantity);
     }
 
@@ -35,7 +35,7 @@ public class StockController {
     }
 
     @PutMapping("stock")
-    public ItemQuantityInStockDTO putItemQuantity(@RequestBody ItemQuantityInStockDTO itemQuantity) {
+    public ItemQuantityInStockDto putItemQuantity(@RequestBody ItemQuantityInStockDto itemQuantity) {
         return stockService.putItemQuantity(itemQuantity);
     }
 

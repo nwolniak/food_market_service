@@ -1,6 +1,7 @@
 package com.foodmarket.controller;
 
-import com.foodmarket.model.dto.OrderDTO;
+import com.foodmarket.model.dto.OrderRequestDto;
+import com.foodmarket.model.dto.OrderResponseDto;
 import com.foodmarket.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -15,18 +16,18 @@ public class OrderController {
     private final OrderService orderService;
 
     @GetMapping("/orders/{id}")
-    public OrderDTO getOrder(@PathVariable long id) {
+    public OrderResponseDto getOrder(@PathVariable long id) {
         return orderService.getOrder(id);
     }
 
     @GetMapping("orders")
-    public List<OrderDTO> getOrders() {
+    public List<OrderResponseDto> getOrders() {
         return orderService.getAllOrders();
     }
 
     @PostMapping("/orders")
-    public OrderDTO postOrder(@RequestBody OrderDTO orderDTO) {
-        return orderService.addOrder(orderDTO);
+    public OrderResponseDto postOrder(@RequestBody OrderRequestDto orderRequestDTO) {
+        return orderService.addOrder(orderRequestDTO);
     }
 
     @DeleteMapping("orders/{id}")
