@@ -4,10 +4,11 @@ import com.foodmarket.configuration.TestConfiguration;
 import com.foodmarket.exceptions.EntityNotFoundException;
 import com.foodmarket.exceptions.OrderValidationException;
 import com.foodmarket.exceptions.StockQuantityNotSatisfiedException;
+import com.foodmarket.model.dto.ItemDTO;
+import com.foodmarket.model.dto.ItemQuantityInStockDTO;
 import com.foodmarket.model.dto.OrderDTO;
-import com.foodmarket.model.dto.ProductCountDTO;
-import com.foodmarket.model.dto.ProductDTO;
-import com.foodmarket.model.entity.ProductEntity;
+import com.foodmarket.model.dto.OrderDTO.ItemQuantity;
+import com.foodmarket.model.entity.ItemEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -26,21 +27,21 @@ public class OrderServiceIT {
     private OrderService orderService;
 
     @Autowired
-    private ProductService productService;
+    private ItemService itemService;
 
     @Autowired
     private StockService stockService;
 
-    private final ProductDTO productDTO1 = new ProductDTO(null ,"Bananas", "Fruit", "Bunch", 2.99, "Fresh, ripe bananas");
-    private final ProductDTO productDTO2 = new ProductDTO(null, "Apples", "Fruit", "Bag", 4.99, "Juicy, crunchy apples");
-    private final ProductDTO productDTO3 = new ProductDTO(null, "Oranges", "Fruit", "Bag", 3.99, "Sweet and tangy oranges");
+    private final ItemDTO itemDTO1 = new ItemDTO(null ,"Bananas", "Fruit", "Bunch", 2.99, "Fresh, ripe bananas");
+    private final ItemDTO itemDTO2 = new ItemDTO(null, "Apples", "Fruit", "Bag", 4.99, "Juicy, crunchy apples");
+    private final ItemDTO itemDTO3 = new ItemDTO(null, "Oranges", "Fruit", "Bag", 3.99, "Sweet and tangy oranges");
 
     @Test
     public void addOrderTest() {
         // given
-        ProductEntity productEntity = productService.addProductReturnEntity(productDTO1);
-        stockService.setProductCount(new ProductCountDTO(productEntity.getId(), 10));
-        List<ProductCountDTO> orderedProducts = List.of(new ProductCountDTO(productEntity.getId(), 3));
+        ItemEntity itemEntity = itemService.addItemReturnEntity(itemDTO1);
+        stockService.setItemQuantity(new ItemQuantityInStockDTO(itemEntity.getId(), 10));
+        List<ItemQuantity> orderedProducts = List.of(new ItemQuantity(itemEntity.getId(), 3));
         OrderDTO orderDTO = new OrderDTO(orderedProducts);
         // when
         OrderDTO saved = orderService.addOrder(orderDTO);
@@ -52,12 +53,12 @@ public class OrderServiceIT {
     @Test
     public void addMultipleOrdersTest() {
         // given
-        ProductEntity productEntity1 = productService.addProductReturnEntity(productDTO1);
-        ProductEntity productEntity2 = productService.addProductReturnEntity(productDTO2);
-        stockService.setProductCount(new ProductCountDTO(productEntity1.getId(), 10));
-        stockService.setProductCount(new ProductCountDTO(productEntity2.getId(), 10));
-        List<ProductCountDTO> orderedProducts1 = List.of(new ProductCountDTO(productEntity1.getId(), 3));
-        List<ProductCountDTO> orderedProducts2 = List.of(new ProductCountDTO(productEntity2.getId(), 3));
+        ItemEntity itemEntity1 = itemService.addItemReturnEntity(itemDTO1);
+        ItemEntity itemEntity2 = itemService.addItemReturnEntity(itemDTO2);
+        stockService.setItemQuantity(new ItemQuantityInStockDTO(itemEntity1.getId(), 10));
+        stockService.setItemQuantity(new ItemQuantityInStockDTO(itemEntity2.getId(), 10));
+        List<ItemQuantity> orderedProducts1 = List.of(new ItemQuantity(itemEntity1.getId(), 3));
+        List<ItemQuantity> orderedProducts2 = List.of(new ItemQuantity(itemEntity2.getId(), 3));
         OrderDTO orderDTO1 = new OrderDTO(orderedProducts1);
         OrderDTO orderDTO2 = new OrderDTO(orderedProducts2);
         List<OrderDTO> expectedOrders = List.of(orderDTO1, orderDTO2);
@@ -74,9 +75,9 @@ public class OrderServiceIT {
     @Test
     public void addOrderMultipleTimesTest() {
         // given
-        ProductEntity productEntity = productService.addProductReturnEntity(productDTO1);
-        stockService.setProductCount(new ProductCountDTO(productEntity.getId(), 10));
-        List<ProductCountDTO> orderedProducts = List.of(new ProductCountDTO(productEntity.getId(), 3));
+        ItemEntity itemEntity = itemService.addItemReturnEntity(itemDTO1);
+        stockService.setItemQuantity(new ItemQuantityInStockDTO(itemEntity.getId(), 10));
+        List<ItemQuantity> orderedProducts = List.of(new ItemQuantity(itemEntity.getId(), 3));
         OrderDTO orderDTO = new OrderDTO(orderedProducts);
         List<OrderDTO> expectedOrders = List.of(orderDTO, orderDTO);
         // when
@@ -91,26 +92,26 @@ public class OrderServiceIT {
     }
 
     @Test
-    public void orderWithNoProductsShouldThrowExceptionTest() {
+    public void orderWithNoItemsShouldThrowExceptionTest() {
         assertThrows(OrderValidationException.class, () -> orderService.addOrder(new OrderDTO(List.of())));
     }
 
     @Test
-    public void orderUnsatisfiedProductsQuantityShouldThrowExceptionTest() {
+    public void orderUnsatisfiedItemsQuantityShouldThrowExceptionTest() {
         // given
-        ProductEntity productEntity = productService.addProductReturnEntity(productDTO1);
-        stockService.setProductCount(new ProductCountDTO(productEntity.getId(), 2));
-        List<ProductCountDTO> orderedProducts = List.of(new ProductCountDTO(productEntity.getId(), 10));
-        OrderDTO orderDTO = new OrderDTO(orderedProducts);
+        ItemEntity itemEntity = itemService.addItemReturnEntity(itemDTO1);
+        stockService.setItemQuantity(new ItemQuantityInStockDTO(itemEntity.getId(), 2));
+        List<ItemQuantity> orderedItems = List.of(new ItemQuantity(itemEntity.getId(), 10));
+        OrderDTO orderDTO = new OrderDTO(orderedItems);
         // then
         assertThrows(StockQuantityNotSatisfiedException.class, () -> orderService.addOrder(orderDTO));
     }
 
     @Test
-    public void orderWithNotExistingProductsShouldThrowExceptionTest() {
+    public void orderWithNotExistingItemsShouldThrowExceptionTest() {
         // given
-        List<ProductCountDTO> orderedProducts = List.of(new ProductCountDTO(123, 10));
-        OrderDTO orderDTO = new OrderDTO(orderedProducts);
+        List<ItemQuantity> orderedItems = List.of(new ItemQuantity(123, 10));
+        OrderDTO orderDTO = new OrderDTO(orderedItems);
         // then
         assertThrows(EntityNotFoundException.class, () -> orderService.addOrder(orderDTO));
     }

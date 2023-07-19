@@ -1,13 +1,13 @@
 package com.foodmarket.configuration;
 
+import com.foodmarket.model.mapping.ItemMapper;
+import com.foodmarket.model.mapping.ItemQuantityInStockMapper;
 import com.foodmarket.model.mapping.OrderMapper;
-import com.foodmarket.model.mapping.ProductCountMapper;
-import com.foodmarket.model.mapping.ProductMapper;
 import com.foodmarket.repository.OrderRepository;
-import com.foodmarket.repository.ProductRepository;
+import com.foodmarket.repository.ItemRepository;
 import com.foodmarket.repository.StockRepository;
 import com.foodmarket.service.OrderService;
-import com.foodmarket.service.ProductService;
+import com.foodmarket.service.ItemService;
 import com.foodmarket.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -23,7 +23,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class TestConfiguration {
 
     @Autowired
-    private ProductRepository productRepository;
+    private ItemRepository itemRepository;
 
     @Autowired
     private StockRepository stockRepository;
@@ -37,13 +37,13 @@ public class TestConfiguration {
     }
 
     @Bean
-    public ProductMapper productMapper() {
-        return ProductMapper.INSTANCE;
+    public ItemMapper productMapper() {
+        return ItemMapper.INSTANCE;
     }
 
     @Bean
-    public ProductCountMapper productCountMapper() {
-        return ProductCountMapper.INSTANCE;
+    public ItemQuantityInStockMapper productCountMapper() {
+        return ItemQuantityInStockMapper.INSTANCE;
     }
 
     @Bean
@@ -57,8 +57,8 @@ public class TestConfiguration {
     }
 
     @Bean
-    public ProductService productService() {
-        return new ProductService(productRepository, productMapper());
+    public ItemService productService() {
+        return new ItemService(itemRepository, productMapper());
     }
 
 }

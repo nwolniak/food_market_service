@@ -14,11 +14,11 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "products")
-public class ProductEntity {
+@Table(name = "items")
+public class ItemEntity {
 
     @Id
-    @Column(name = "product_id")
+    @Column(name = "item_id")
     @EqualsAndHashCode.Include
     private Long id;
 
@@ -45,17 +45,17 @@ public class ProductEntity {
     @Column(name = "last_modified_date")
     private LocalDateTime lastModifiedDate;
 
-    @OneToOne(mappedBy = "productEntity", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "itemEntity", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
-    private ProductCountEntity productCountEntity;
+    private ItemQuantityInStockEntity itemQuantityInStockEntity;
 
-    @OneToMany(mappedBy = "productEntity")
-    private List<OrderProductEntity> orders;
+    @OneToMany(mappedBy = "itemEntity")
+    private List<OrderItemEntity> orders;
 
-    protected ProductEntity() {
+    protected ItemEntity() {
     }
 
-    public ProductEntity(String name, String category, String unitType, double unitPrice, String description) {
+    public ItemEntity(String name, String category, String unitType, double unitPrice, String description) {
         this.id = (long) name.hashCode();
         this.name = name;
         this.category = category;

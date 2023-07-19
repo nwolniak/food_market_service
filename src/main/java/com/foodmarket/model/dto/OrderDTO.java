@@ -2,4 +2,8 @@ package com.foodmarket.model.dto;
 
 import java.util.List;
 
-public record OrderDTO(List<ProductCountDTO> orderedProducts) {}
+public record OrderDTO(List<ItemQuantity> orderedItems) {
+    public record ItemQuantity(long id, int quantity) {
+    }
+
+}

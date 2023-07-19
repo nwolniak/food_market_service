@@ -2,7 +2,6 @@ package com.foodmarket.model.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -13,15 +12,12 @@ import java.util.List;
 
 @Entity
 @Data
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "orders")
-public class OrderEntity {
-
+@Table(name = "carts")
+public class CartEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "order_id")
-    @EqualsAndHashCode.Include
+    @Column(name = "cart_id")
     private Long id;
 
     @CreatedDate
@@ -32,7 +28,7 @@ public class OrderEntity {
     @Column(name = "last_modified_date")
     private LocalDateTime lastModifiedDate;
 
-    @OneToMany(mappedBy = "orderEntity", cascade = CascadeType.ALL)
-    private List<OrderItemEntity> orderedItems = new ArrayList<>();
+    @OneToMany(mappedBy = "cartEntity", cascade = CascadeType.ALL)
+    private List<CartItemEntity> cartItems = new ArrayList<>();
 
 }

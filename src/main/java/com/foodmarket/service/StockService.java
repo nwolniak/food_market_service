@@ -1,10 +1,10 @@
 package com.foodmarket.service;
 
 import com.foodmarket.exceptions.EntityNotFoundException;
-import com.foodmarket.model.dto.ProductCountDTO;
-import com.foodmarket.model.entity.ProductCountEntity;
-import com.foodmarket.model.entity.ProductEntity;
-import com.foodmarket.model.mapping.ProductCountMapper;
+import com.foodmarket.model.dto.ItemQuantityInStockDTO;
+import com.foodmarket.model.entity.ItemEntity;
+import com.foodmarket.model.entity.ItemQuantityInStockEntity;
+import com.foodmarket.model.mapping.ItemQuantityInStockMapper;
 import com.foodmarket.repository.StockRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,47 +19,47 @@ import java.util.concurrent.atomic.AtomicReference;
 public class StockService {
 
     private final StockRepository stockRepository;
-    private final ProductService productService;
-    private final ProductCountMapper mapper;
+    private final ItemService itemService;
+    private final ItemQuantityInStockMapper mapper;
 
-    public ProductCountDTO setProductCount(ProductCountDTO productCountDTO) {
-        AtomicReference<ProductCountEntity> reference = new AtomicReference<>();
-        stockRepository.findById(productCountDTO.productId()).ifPresentOrElse(productCountEntity -> {
-            productCountEntity.setQuantityInStock(productCountDTO.quantity());
+    public ItemQuantityInStockDTO setItemQuantity(ItemQuantityInStockDTO itemQuantity) {
+        AtomicReference<ItemQuantityInStockEntity> reference = new AtomicReference<>();
+        stockRepository.findById(itemQuantity.id()).ifPresentOrElse(productCountEntity -> {
+            productCountEntity.setQuantityInStock(itemQuantity.quantityInStock());
             reference.set(productCountEntity);
         }, () -> {
-            ProductEntity productEntity = productService.getProductEntity(productCountDTO.productId());
-            reference.set(new ProductCountEntity(productEntity, productCountDTO.quantity()));
+            ItemEntity itemEntity = itemService.getItemEntity(itemQuantity.id());
+            reference.set(new ItemQuantityInStockEntity(itemEntity, itemQuantity.quantityInStock()));
         });
-        ProductCountEntity saved = stockRepository.save(reference.get());
-        return mapper.productCountEntityToProductCountDTO(saved);
+        ItemQuantityInStockEntity saved = stockRepository.save(reference.get());
+        return mapper.itemQuantityInStockToDto(saved);
     }
 
-    public ProductCountDTO getProductCount(long id) {
+    public ItemQuantityInStockDTO getItemQuantity(long id) {
         return stockRepository.findById(id)
-                .map(mapper::productCountEntityToProductCountDTO)
+                .map(mapper::itemQuantityInStockToDto)
                 .orElseThrow(() -> new EntityNotFoundException(String.format(
-                        "Product Count with %s id not found in products counts repository.", id)));
+                        "Item quantity with %s id not found in stock repository.", id)));
     }
 
-    public List<ProductCountDTO> getProductCounts() {
+    public List<ItemQuantityInStockDTO> getItemQuantities() {
         return stockRepository.findAll()
                 .stream()
-                .map(mapper::productCountEntityToProductCountDTO)
+                .map(mapper::itemQuantityInStockToDto)
                 .toList();
     }
 
-    public void deleteProductCount(long id) {
-        log.info("Deleting product count with {} id.", id);
+    public void deleteItemQuantity(long id) {
+        log.info("Deleting item quantity with {} id.", id);
         stockRepository.deleteById(id);
     }
 
-    public ProductCountDTO putProductCount(ProductCountDTO productCountDTO) {
-        ProductCountEntity productCountEntity = stockRepository.findById(productCountDTO.productId())
+    public ItemQuantityInStockDTO putItemQuantity(ItemQuantityInStockDTO itemQuantity) {
+        ItemQuantityInStockEntity itemQuantityInStockEntity = stockRepository.findById(itemQuantity.id())
                 .orElseThrow(() -> new EntityNotFoundException(String.format(
-                        "Product Count with %s id not found in products counts repository.", productCountDTO.productId())));
-        mapper.updateProductCountFromDto(productCountDTO, productCountEntity);
-        ProductCountEntity saved = stockRepository.save(productCountEntity);
-        return mapper.productCountEntityToProductCountDTO(saved);
+                        "Item quantity with %s id not found in stock repository.", itemQuantity.id())));
+        mapper.updateItemQuantityInStockFromDto(itemQuantity, itemQuantityInStockEntity);
+        ItemQuantityInStockEntity saved = stockRepository.save(itemQuantityInStockEntity);
+        return mapper.itemQuantityInStockToDto(saved);
     }
 }
