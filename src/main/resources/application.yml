@@ -15,7 +15,9 @@ management:
     web:
       exposure:
         include: '*'
-
+logging:
+  level:
+    org.springframework.security: DEBUG
 ---
 database: h2
 
