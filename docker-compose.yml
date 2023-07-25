@@ -3,7 +3,7 @@ name: "food-market"
 services:
   food-market-service:
     build:
-      context: .
+      context: backend
       dockerfile: Dockerfile
       target: development
     container_name: food-market-service
