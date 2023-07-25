@@ -8,7 +8,5 @@ target/
 database/
 
 ### IntelliJ IDEA ###
-backend/.idea
 *.iws
-*.iml
 *.ipr
