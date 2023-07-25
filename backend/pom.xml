@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.foodmarket</groupId>
-    <artifactId>FoodMarket</artifactId>
+    <artifactId>food-market-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>FoodMarket</name>
     <description>FoodMarket</description>
