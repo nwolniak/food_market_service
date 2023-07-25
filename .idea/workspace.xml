@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3fd05cba-bfce-4a3f-95dc-6975d874d465" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/.gitattributes" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mvnw" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,21 +128,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CartServiceIT" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="food-market-api" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.foodmarket.security.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.foodmarket.service" />
-      <option name="MAIN_CLASS_NAME" value="com.foodmarket.service.CartServiceIT" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="OrderServiceIT.addOrderTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="food-market-api" />
       <extension name="coverage">
@@ -230,7 +213,6 @@
       <item itemvalue="Docker.backend/Dockerfile" />
       <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
       <item itemvalue="JavaScript Debug.Angular Application" />
-      <item itemvalue="JUnit.CartServiceIT" />
       <item itemvalue="JUnit.OrderServiceIT.addOrderTest" />
       <item itemvalue="JUnit.All in FoodMarket" />
       <item itemvalue="npm.Angular CLI Server" />
@@ -242,7 +224,6 @@
         <item itemvalue="Docker.backend/Dockerfile" />
         <item itemvalue="JUnit.All in FoodMarket" />
         <item itemvalue="JUnit.OrderServiceIT.addOrderTest" />
-        <item itemvalue="JUnit.CartServiceIT" />
       </list>
     </recent_temporary>
   </component>
@@ -273,7 +254,7 @@
       <workItem from="1690270138238" duration="1013000" />
       <workItem from="1690271181440" duration="3323000" />
       <workItem from="1690274570970" duration="1507000" />
-      <workItem from="1690280612831" duration="939000" />
+      <workItem from="1690280612831" duration="2446000" />
     </task>
     <servers />
   </component>

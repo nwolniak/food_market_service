@@ -1,6 +1,6 @@
 FROM eclipse-temurin:20-jdk-alpine as base
 
-WORKDIR /app
+WORKDIR /backend
 
 COPY .mvn/ .mvn
 COPY pom.xml ./
