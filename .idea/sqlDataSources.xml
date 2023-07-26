@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="6dee3a11-f2a0-4af4-bd7a-98c5de48942b" name="DDL Mapping">
+      <data-sources db="4656072a-de9c-4ff3-a26b-af8fc1ab4a34" ddl="3e52a30f-abb2-4cd3-b266-2f9d61406a6b" />
+    </mapping>
+  </component>
+  <component name="SqlDataSourceStorage">
+    <option name="dataSources">
+      <list>
+        <State>
+          <option name="id" value="3e52a30f-abb2-4cd3-b266-2f9d61406a6b" />
+          <option name="name" value="food-market@localhost (DDL)" />
+          <option name="dbmsName" value="MYSQL" />
+          <option name="urls">
+            <array>
+              <option value="file://$PROJECT_DIR$/backend/src/main/resources/db/mysql/schema.sql" />
+            </array>
+          </option>
+          <option name="outLayout" value="File per object by schema.groovy" />
+        </State>
+      </list>
+    </option>
+  </component>
+</project>
