@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("food-market")
+@CrossOrigin
 @RequiredArgsConstructor
 public class AuthController {
 
@@ -34,8 +35,8 @@ public class AuthController {
     }
 
     @PostMapping("login")
-    public void login(@RequestBody LoginDto loginDto, HttpServletRequest request, HttpServletResponse response) {
-        authService.login(loginDto, request, response);
+    public UserDto login(@RequestBody LoginDto loginDto, HttpServletRequest request, HttpServletResponse response) {
+        return authService.login(loginDto, request, response);
     }
 
 }

@@ -7,6 +7,7 @@ import com.foodmarket.model.dto.UserDto;
 import com.foodmarket.model.entity.UserEntity;
 import com.foodmarket.model.mapping.AuthMapper;
 import com.foodmarket.repository.UserRepository;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -42,7 +43,7 @@ public class AuthService {
         return mapper.userToDto(saved);
     }
 
-    public void login(LoginDto loginDto, HttpServletRequest request, HttpServletResponse response) {
+    public UserDto login(LoginDto loginDto, HttpServletRequest request, HttpServletResponse response) {
         var token = UsernamePasswordAuthenticationToken.unauthenticated(
                 loginDto.username(), loginDto.password());
         Authentication authentication = authenticationManager.authenticate(token);
@@ -50,6 +51,8 @@ public class AuthService {
         context.setAuthentication(authentication);
         securityContextHolderStrategy.setContext(context);
         securityContextRepository.saveContext(context, request, response);
+        UserEntity user = (UserEntity) authentication.getPrincipal();
+        return mapper.userToDto(user);
     }
 
     public UserDto getUser(long id) {

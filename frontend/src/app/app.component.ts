@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {User} from "@app/_models";
+import {AuthService} from "@app/_services";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'food-market-ui';
+
+  user?: User | null;
+
+  constructor(private auth: AuthService) {
+    this.auth.user.subscribe(user => this.user = user);
+  }
+
+  logout() {
+    this.auth.logout();
+  }
+
 }

@@ -11,7 +11,7 @@ public class CustomLogoutSuccessHandler implements LogoutSuccessHandler {
 
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
-        log.info("User {} logged out", authentication.getName());
+//        log.info("User {} logged out", authentication.getName());
         response.setStatus(HttpServletResponse.SC_OK);
     }
 
