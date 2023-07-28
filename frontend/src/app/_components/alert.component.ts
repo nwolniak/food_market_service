@@ -2,8 +2,17 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 
 import {AlertService} from '@app/_services';
+import {NgClass, NgIf} from "@angular/common";
 
-@Component({selector: 'alert', templateUrl: 'alert.component.html'})
+@Component({
+  selector: 'alert',
+  templateUrl: 'alert.component.html',
+  imports: [
+    NgClass,
+    NgIf
+  ],
+  standalone: true
+})
 export class AlertComponent implements OnInit, OnDestroy {
 
   private subscription!: Subscription;
