@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/food-market")
+@CrossOrigin
 @RequiredArgsConstructor
 public class ItemController {
 
@@ -34,9 +35,9 @@ public class ItemController {
         itemService.deleteItem(id);
     }
 
-    @PutMapping("items")
-    public ItemDto putItem(@RequestBody ItemDto itemDTO) {
-        return itemService.putItem(itemDTO);
+    @PutMapping("items/{id}")
+    public ItemDto putItem(@PathVariable long id, @RequestBody ItemDto itemDTO) {
+        return itemService.putItem(id, itemDTO);
     }
 
 }

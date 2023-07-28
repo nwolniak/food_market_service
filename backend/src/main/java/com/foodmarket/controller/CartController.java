@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("food-market")
+@CrossOrigin
 @RequiredArgsConstructor
 public class CartController {
 
