@@ -1,11 +1,19 @@
 import {Component, OnInit} from "@angular/core";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {AlertService, ItemsService} from "@app/_services";
 import {first} from "rxjs";
+import {NgClass, NgIf} from "@angular/common";
 
 @Component({
-  templateUrl: "add.component.html"
+  templateUrl: "add.component.html",
+  imports: [
+    ReactiveFormsModule,
+    NgClass,
+    RouterLink,
+    NgIf
+  ],
+  standalone: true
 })
 export class AddComponent implements OnInit {
   form!: FormGroup;

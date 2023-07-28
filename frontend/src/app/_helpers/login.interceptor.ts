@@ -1,23 +1,22 @@
 import {Injectable} from "@angular/core";
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
+import {HttpEvent, HttpHandler, HttpHandlerFn, HttpRequest} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "@environments/environment";
 
-@Injectable()
-export class LoginInterceptor implements HttpInterceptor {
+export function loginInterceptor(request: HttpRequest<any>, next: HttpHandlerFn): Observable<HttpEvent<any>> {
+  return intercept();
 
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (!this.isLoginUrl(request)) {
-      return next.handle(request);
+  function intercept() {
+    if (!isLoginUrl(request)) {
+      return next(request);
     }
     request = request.clone({
       withCredentials: true,
     })
-    return next.handle(request);
+    return next(request);
   }
 
-  private isLoginUrl(request: HttpRequest<any>): boolean {
+  function isLoginUrl(request: HttpRequest<any>): boolean {
     return request.url === environment.loginUrl;
   }
-
 }

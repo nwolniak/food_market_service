@@ -2,8 +2,18 @@ import {Component, OnInit} from "@angular/core";
 import {ItemsService} from "@app/_services";
 import {first} from "rxjs";
 import {Item} from "@app/items/item";
+import {NgForOf, NgIf} from "@angular/common";
+import {RouterLink} from "@angular/router";
 
-@Component({templateUrl: "list.component.html"})
+@Component({
+  templateUrl: "list.component.html",
+  imports: [
+    NgIf,
+    NgForOf,
+    RouterLink
+  ],
+  standalone: true
+})
 export class ListComponent implements OnInit {
 
   items?: Array<Item>;
