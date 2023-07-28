@@ -54,8 +54,8 @@ public class ItemService {
         itemRepository.deleteById(id);
     }
 
-    public ItemDto putItem(ItemDto itemDTO) {
-        ItemEntity itemEntity = itemRepository.findById(itemDTO.id())
+    public ItemDto putItem(long id, ItemDto itemDTO) {
+        ItemEntity itemEntity = itemRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Item with %s id not found in items repository.", itemDTO.id())));
         mapper.updateItemFromDto(itemDTO, itemEntity);
         ItemEntity saved = itemRepository.save(itemEntity);
