@@ -1,3 +1,3 @@
 package com.foodmarket.model.dto;
 
-public record UserDto(String name, String username, String email) {}
+public record UserDto(long id, String name, String username, String email) {}

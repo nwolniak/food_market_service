@@ -1,9 +1,9 @@
 import {Component, OnInit} from "@angular/core";
-import {ItemsService} from "@app/_services";
+import {CartService, ItemService} from "@app/_services";
 import {first} from "rxjs";
-import {Item} from "@app/items/item";
 import {NgForOf, NgIf} from "@angular/common";
 import {RouterLink} from "@angular/router";
+import {Item} from "@app/_models";
 
 @Component({
   templateUrl: "list.component.html",
@@ -18,7 +18,8 @@ export class ListComponent implements OnInit {
 
   items?: Array<Item>;
 
-  constructor(private itemsService: ItemsService) {
+  constructor(private itemsService: ItemService,
+              private cartService: CartService) {
   }
 
   ngOnInit(): void {
@@ -27,11 +28,15 @@ export class ListComponent implements OnInit {
       .subscribe(itemDtoList => this.items = itemDtoList.map(itemDto => new Item(itemDto)));
   }
 
+  addItemToCart(itemId: string) {
+    this.cartService.addItemToCart(itemId)
+      .subscribe();
+  }
+
   deleteItem(id: string) {
     const item = this.items!.find(item => item.id === id);
     item!.isDeleting = true;
     this.itemsService.deleteItem(id)
-      .pipe(first())
       .subscribe(() => this.items = this.items!.filter(item => item.id !== id));
   }
 

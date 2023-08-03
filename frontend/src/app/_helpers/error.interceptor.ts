@@ -1,5 +1,5 @@
 import {inject} from '@angular/core';
-import {HttpEvent, HttpHandler, HttpHandlerFn, HttpRequest} from '@angular/common/http';
+import {HttpEvent, HttpHandlerFn, HttpRequest} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 
@@ -12,7 +12,8 @@ export function errorInterceptor(request: HttpRequest<any>, next: HttpHandlerFn)
     if ([401, 403].includes(error.status) && auth.userValue) {
       auth.logout();
     }
-    const errorMessage = error.error?.message || error.statusText;
+
+    const errorMessage = `[${error.status}]${error.message} => ${error.error}`
     console.error(errorMessage);
     return throwError(() => errorMessage);
   }))

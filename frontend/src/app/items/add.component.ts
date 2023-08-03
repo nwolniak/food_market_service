@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
-import {AlertService, ItemsService} from "@app/_services";
+import {AlertService, ItemService} from "@app/_services";
 import {first} from "rxjs";
 import {NgClass, NgIf} from "@angular/common";
 
@@ -24,7 +24,7 @@ export class AddComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
               private router: Router,
-              private itemsService: ItemsService,
+              private itemsService: ItemService,
               private alertService: AlertService
   ) {
   }

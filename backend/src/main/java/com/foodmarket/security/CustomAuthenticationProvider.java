@@ -32,7 +32,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         }
 
         log.info("Authentication successful for user {}", userDetails.getUsername());
-        return UsernamePasswordAuthenticationToken.authenticated(userDetails.getUsername(),
+        return UsernamePasswordAuthenticationToken.authenticated(userDetails,
                 userDetails.getPassword(),
                 userDetails.getAuthorities());
     }

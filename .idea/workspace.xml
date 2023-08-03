@@ -5,27 +5,48 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3fd05cba-bfce-4a3f-95dc-6975d874d465" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/app.routes.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/cart/cart.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/items/items.routes.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/controller/RestExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/_models/_domain/cart.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/_models/_domain/item.quantity.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/_models/_dto/cart.dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/_models/_dto/item.quantity.dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/_services/cart.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/cart/cart.routes.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/cart/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/cart/list.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/cart/list.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4656072a-de9c-4ff3-a26b-af8fc1ab4a34.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/4656072a-de9c-4ff3-a26b-af8fc1ab4a34.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/_components/alert.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/_components/alert.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/_helpers/auth.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/_helpers/auth.guard.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/configuration/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/configuration/SecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/controller/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/controller/CartController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/model/dto/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/model/dto/UserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/model/entity/CartEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/model/entity/CartEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/model/entity/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/model/entity/UserEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/security/CustomAuthenticationProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/security/CustomAuthenticationProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/security/UserAuthenticationEntryPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/security/UserAuthenticationEntryPoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/service/CartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/service/CartService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/db/mysql/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/db/mysql/schema.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/_helpers/error.interceptor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/_helpers/error.interceptor.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/_helpers/http.interceptor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/_helpers/http.interceptor.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/_helpers/login.interceptor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/_helpers/login.interceptor.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/account/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/account/login.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/account/register.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/account/register.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app-routing.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/_models/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/_models/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/_models/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/_models/_domain/user.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/_services/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/_services/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/_services/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/_services/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/_services/items.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/_services/item.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/home/home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/home/home.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/cart/cart.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/items/add.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/items/add.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/items/add.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/items/add.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/items/edit.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/items/edit.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/items/edit.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/items/edit.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/items/items-routing.module.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/items/items.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/items/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/items/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/items/item.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/_models/_domain/item.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/items/list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/items/list.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/items/list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/items/list.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/main.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,9 +63,9 @@
         <option value="Interface" />
         <option value="com.haulmont.jpb.JpaRepository" />
         <option value="Record" />
-        <option value="Class" />
         <option value="HTML File" />
         <option value="TypeScript File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -131,11 +152,11 @@
       <recent name="C:\Users\niedz\IdeaProjects\food_market_service" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\niedz\IdeaProjects\food_market_service\frontend\src\app\_models\_domain" />
       <recent name="C:\Users\niedz\IdeaProjects\food_market_service\frontend\src\app\_models\_dto" />
       <recent name="C:\Users\niedz\IdeaProjects\food_market_service\frontend\src" />
       <recent name="C:\Users\niedz\IdeaProjects\food_market_service\frontend\src\app\account" />
       <recent name="C:\Users\niedz\IdeaProjects\food_market_service\backend" />
-      <recent name="C:\Users\niedz\IdeaProjects\food_market_service\frontend" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -143,7 +164,7 @@
       <command value="mvn wrapper:wrapper" />
     </option>
   </component>
-  <component name="RunManager" selected="npm.Angular CLI Server">
+  <component name="RunManager" selected="Spring Boot.FoodMarketApplication">
     <configuration name="All in FoodMarket" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="food-market-api" />
       <option name="PACKAGE_NAME" value="" />
@@ -284,7 +305,13 @@
       <workItem from="1690288689163" duration="8507000" />
       <workItem from="1690361343302" duration="36022000" />
       <workItem from="1690445944461" duration="27587000" />
-      <workItem from="1690532196721" duration="27919000" />
+      <workItem from="1690532196721" duration="36882000" />
+      <workItem from="1690789535780" duration="21953000" />
+      <workItem from="1690877851042" duration="600000" />
+      <workItem from="1690899903669" duration="1865000" />
+      <workItem from="1690960835367" duration="18528000" />
+      <workItem from="1690999812309" duration="6176000" />
+      <workItem from="1691049945809" duration="30871000" />
     </task>
     <servers />
   </component>

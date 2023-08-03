@@ -1,3 +1,4 @@
 export * from "./auth.service";
 export * from "./alert.service";
-export * from "./items.service";
+export * from "./item.service";
+export * from "./cart.service";
