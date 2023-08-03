@@ -1,0 +1,40 @@
+<div class="p-4">
+  <div class="container">
+    <h1>Cart</h1>
+    <button (click)="deleteCart(cartId!)" class="btn btn-sm btn-danger" style="width: 58px"
+            [disabled]="cart?.isDeleting">
+      <span *ngIf="cart?.isDeleting" class="spinner-border spinner-border-sm"></span>
+      <span *ngIf="!cart?.isDeleting">Delete</span>
+    </button>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th style="width: 15%">Quantity</th>
+        <th style="width: 15%">Name</th>
+        <th style="width: 15%">Category</th>
+        <th style="width: 15%">Unit Type</th>
+        <th style="width: 15%">Unit Price</th>
+        <th style="width: 15%">Description</th>
+        <th style="width: 30%"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let cartItem of cart?.cartItems">
+        <td>{{cartItem.quantity}}</td>
+        <td>{{cartItem.item.name}}</td>
+        <td>{{cartItem.item.category}}</td>
+        <td>{{cartItem.item.unitType}}</td>
+        <td>{{cartItem.item.unitPrice}}</td>
+        <td>{{cartItem.item.description}}</td>
+        <td style="white-space: nowrap">
+          <button (click)="deleteItem(cartItem.item.id)" class="btn btn-sm btn-danger" style="width: 58px"
+                  [disabled]="cartItem.item.isDeleting">
+            <span *ngIf="cartItem.item.isDeleting" class="spinner-border spinner-border-sm"></span>
+            <span *ngIf="!cartItem.item.isDeleting">Delete</span>
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from "@app/_models";
 import {AuthService} from "@app/_services";
 import {RouterLink, RouterOutlet} from "@angular/router";
@@ -17,11 +17,14 @@ import {NgIf} from "@angular/common";
   ],
   standalone: true
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   user?: User | null;
 
   constructor(private auth: AuthService) {
+  }
+
+  ngOnInit(): void {
     this.auth.user.subscribe(user => this.user = user);
   }
 

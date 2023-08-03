@@ -6,8 +6,11 @@ import com.foodmarket.model.dto.CartDto.ItemQuantity;
 import com.foodmarket.model.entity.CartEntity;
 import com.foodmarket.model.entity.CartItemEntity;
 import com.foodmarket.model.entity.ItemEntity;
+import com.foodmarket.model.entity.UserEntity;
 import com.foodmarket.model.mapping.CartMapper;
 import com.foodmarket.repository.CartRepository;
+import com.foodmarket.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,16 +26,21 @@ import static java.util.stream.Collectors.toSet;
 public class CartService {
 
     private final CartRepository cartRepository;
+    private final UserRepository userRepository;
     private final ItemService itemService;
     private final CartMapper mapper;
 
-    public CartDto addCart(CartDto cartDTO) {
+    @Transactional
+    public CartDto addCart(CartDto cartDTO, UserEntity userEntity) {
+        UserEntity byUsername = userRepository.findByUsername(userEntity.getUsername()).orElseThrow();
         CartEntity cartEntity = new CartEntity();
         Set<CartItemEntity> cartItems = cartDTO.cartItems().stream().map(cartItem -> {
             ItemEntity itemEntity = itemService.getItemEntity(cartItem.id());
             return new CartItemEntity(cartEntity, itemEntity, cartItem.quantity());
         }).collect(toSet());
         cartEntity.setCartItems(cartItems);
+        byUsername.setCartEntity(cartEntity);
+        cartEntity.setUserEntity(byUsername);
         CartEntity saved = cartRepository.save(cartEntity);
         return mapper.cartEntityToDto(saved);
     }
@@ -73,7 +81,23 @@ public class CartService {
         return mapper.cartEntityToDto(saved);
     }
 
+    public CartDto deleteItem(long cartId, long itemId) {
+        CartEntity cartEntity = cartRepository.findById(cartId)
+                .orElseThrow();
+        cartEntity.getCartItems().stream()
+                .filter(cartItemEntity -> cartItemEntity.getItemEntity().getId().equals(itemId))
+                .findFirst()
+                .ifPresent(cartItemEntity -> {
+                    cartEntity.removeCartItem(cartItemEntity);
+                    cartRepository.save(cartEntity);
+                });
+        return mapper.cartEntityToDto(cartEntity);
+    }
+
     public void deleteCart(long id) {
+        UserEntity userEntity = userRepository.findById(id).orElseThrow();
+        userEntity.setCartEntity(null);
+        userRepository.save(userEntity);
         cartRepository.deleteById(id);
     }
 }

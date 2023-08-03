@@ -1,5 +1,5 @@
 import {inject} from "@angular/core";
-import {HttpEvent, HttpHandler, HttpHandlerFn, HttpRequest} from "@angular/common/http";
+import {HttpEvent, HttpHandlerFn, HttpRequest} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {AuthService} from "@app/_services";
 import {environment} from "@environments/environment";

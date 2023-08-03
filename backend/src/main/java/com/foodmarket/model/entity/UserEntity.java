@@ -47,6 +47,10 @@ public class UserEntity implements UserDetails {
     @Column(name = "last_modified_date")
     private LocalDateTime lastModifiedDate;
 
+    @OneToOne(mappedBy = "userEntity", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private CartEntity cartEntity;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));

@@ -2,6 +2,7 @@ package com.foodmarket.model.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -13,9 +14,10 @@ import java.util.Set;
 @Data
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "carts")
+@ToString(onlyExplicitlyIncluded = true)
 public class CartEntity {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "cart_id")
     private Long id;
 
@@ -29,6 +31,11 @@ public class CartEntity {
 
     @OneToMany(mappedBy = "cartEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<CartItemEntity> cartItems;
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "user_id")
+    private UserEntity userEntity;
 
     public void addCartItem(CartItemEntity cartItemEntity) {
         this.cartItems.add(cartItemEntity);

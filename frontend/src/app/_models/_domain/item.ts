@@ -8,6 +8,7 @@ export class Item {
   unitPrice: string;
   description: string;
   isDeleting: boolean = false;
+  isBuying: boolean = false;
 
   constructor(itemDto: ItemDto) {
     this.id = itemDto.id || "";

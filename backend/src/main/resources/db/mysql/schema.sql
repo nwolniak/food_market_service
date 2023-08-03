@@ -38,10 +38,10 @@ CREATE TABLE IF NOT EXISTS orders_items
 
 CREATE TABLE IF NOT EXISTS carts
 (
-    cart_id            BIGINT   NOT NULL,
+    user_id            BIGINT   NOT NULL,
     created_date       datetime NULL,
     last_modified_date datetime NULL,
-    CONSTRAINT pk_carts PRIMARY KEY (cart_id)
+    CONSTRAINT pk_carts PRIMARY KEY (user_id)
 );
 
 CREATE TABLE IF NOT EXISTS carts_items
@@ -64,6 +64,9 @@ CREATE TABLE IF NOT EXISTS users
     CONSTRAINT pk_users PRIMARY KEY (user_id),
     CONSTRAINT uc_users_name UNIQUE (name)
 );
+
+# ALTER TABLE carts
+#     ADD CONSTRAINT FK_CARTS_ON_USER FOREIGN KEY (user_id) REFERENCES users (user_id);
 
 # ALTER TABLE carts_items
 #     ADD CONSTRAINT FK_CARTS_ITEMS_ON_CART FOREIGN KEY (cart_id) REFERENCES carts (cart_id);
