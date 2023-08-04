@@ -8,7 +8,6 @@ export class AlertService {
   private showAfterRedirect: boolean = false;
 
   constructor(private router: Router) {
-    // clear alert messages on route change unless 'showAfterRedirect' flag is true
     this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
         if (this.showAfterRedirect) {
@@ -24,18 +23,17 @@ export class AlertService {
     return this.subject.asObservable();
   }
 
-  success(message: string, showAfterRedirect: boolean = false) {
+  success(message: string, showAfterRedirect: boolean = false): void {
     this.showAfterRedirect = showAfterRedirect;
     this.subject.next({type: 'success', message});
   }
 
-  error(message: string, showAfterRedirect = false) {
+  error(message: string, showAfterRedirect: boolean = false): void {
     this.showAfterRedirect = showAfterRedirect;
     this.subject.next({type: 'error', message});
   }
 
-  clear() {
-    // clear by calling subject.next() with null
+  clear(): void {
     this.subject.next(null);
   }
 }

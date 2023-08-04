@@ -1,5 +1,6 @@
 package com.foodmarket.service;
 
+import com.foodmarket.exceptions.EntityDeleteException;
 import com.foodmarket.exceptions.EntityNotFoundException;
 import com.foodmarket.model.dto.ItemDto;
 import com.foodmarket.model.entity.ItemEntity;
@@ -32,31 +33,31 @@ public class ItemService {
     }
 
     public ItemDto getItem(long id) {
-        return itemRepository.findById(id)
-                .map(mapper::itemEntityToDto)
-                .orElseThrow(() -> new EntityNotFoundException(String.format("Item with %s id not found in items repository.", id)));
+        return itemRepository.findById(id).map(mapper::itemEntityToDto).orElseThrow(() -> new EntityNotFoundException(String.format("Item with %s id not found in items repository.", id)));
     }
 
     public ItemEntity getItemEntity(long id) {
-        return itemRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(String.format("Item with %s id not found in items repository.", id)));
+        return itemRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(String.format("Item with %s id not found in items repository.", id)));
     }
 
     public List<ItemDto> getAllItems() {
-        return itemRepository.findAll()
-                .stream()
-                .map(mapper::itemEntityToDto)
-                .toList();
+        return itemRepository.findAll().stream().map(mapper::itemEntityToDto).toList();
     }
 
     public void deleteItem(long id) {
+        itemRepository.findById(id).ifPresent(itemEntity -> {
+            if (!itemEntity.getCarts().isEmpty()) {
+                throw new EntityDeleteException(String.format("Item with %s id is contained in existing carts.", id));
+            } else if (!itemEntity.getOrders().isEmpty()) {
+                throw new EntityDeleteException(String.format("Item with %s id is contained in existing orders.", id));
+            }
+        });
         log.info("Deleting item with {} id.", id);
         itemRepository.deleteById(id);
     }
 
     public ItemDto putItem(long id, ItemDto itemDTO) {
-        ItemEntity itemEntity = itemRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(String.format("Item with %s id not found in items repository.", itemDTO.id())));
+        ItemEntity itemEntity = itemRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(String.format("Item with %s id not found in items repository.", itemDTO.id())));
         mapper.updateItemFromDto(itemDTO, itemEntity);
         ItemEntity saved = itemRepository.save(itemEntity);
         return mapper.itemEntityToDto(saved);

@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
-import {CartService, ItemService} from "@app/_services";
-import {first} from "rxjs";
+import {AlertService, CartService, ItemService} from "@app/_services";
+import {delay, first} from "rxjs";
 import {NgForOf, NgIf} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {Item} from "@app/_models";
@@ -16,10 +16,11 @@ import {Item} from "@app/_models";
 })
 export class ListComponent implements OnInit {
 
-  items?: Array<Item>;
+  items?: Item[];
 
   constructor(private itemsService: ItemService,
-              private cartService: CartService) {
+              private cartService: CartService,
+              private alertService: AlertService) {
   }
 
   ngOnInit(): void {
@@ -28,16 +29,37 @@ export class ListComponent implements OnInit {
       .subscribe(itemDtoList => this.items = itemDtoList.map(itemDto => new Item(itemDto)));
   }
 
-  addItemToCart(itemId: string) {
-    this.cartService.addItemToCart(itemId)
-      .subscribe();
+  addItemToCart(item: Item) {
+    item.isBuying = true;
+    this.cartService.addItemToCart(item.id)
+      .pipe(delay(250))
+      .subscribe({
+        next: () => {
+          item.isBuying = false;
+          this.alertService.success("Item added to cart");
+        },
+        error: err => {
+          item.isBuying = false;
+          this.alertService.error(err);
+        }
+      });
   }
 
-  deleteItem(id: string) {
-    const item = this.items!.find(item => item.id === id);
-    item!.isDeleting = true;
-    this.itemsService.deleteItem(id)
-      .subscribe(() => this.items = this.items!.filter(item => item.id !== id));
+  deleteItem(item: Item) {
+    item.isDeleting = true;
+    this.itemsService.deleteItem(item.id)
+      .pipe(delay(250))
+      .subscribe({
+        next: () => {
+          item.isDeleting = false;
+          this.items = this.items!.filter(item => item.id !== item.id);
+          this.alertService.success("Item deleted");
+        },
+        error: err => {
+          item.isDeleting = false;
+          this.alertService.error(err);
+        }
+      });
   }
 
 }

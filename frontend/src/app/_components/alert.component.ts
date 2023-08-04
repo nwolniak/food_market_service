@@ -5,7 +5,7 @@ import {AlertService} from '@app/_services';
 import {NgClass, NgIf} from "@angular/common";
 
 @Component({
-  selector: 'alert',
+  selector: 'alert-component',
   templateUrl: 'alert.component.html',
   imports: [
     NgClass,
@@ -17,6 +17,7 @@ export class AlertComponent implements OnInit, OnDestroy {
 
   private subscription!: Subscription;
   alert: any;
+  timeoutId?: number;
 
   constructor(private alertService: AlertService) {
   }
@@ -26,18 +27,29 @@ export class AlertComponent implements OnInit, OnDestroy {
       .subscribe(alert => {
         switch (alert?.type) {
           case 'success':
-            alert.cssClass = 'alert alert-success';
+            alert.cssClass = 'alert-success';
             break;
           case 'error':
-            alert.cssClass = 'alert alert-danger';
+            alert.cssClass = 'alert-danger';
             break;
         }
         this.alert = alert;
+        window.clearTimeout(this.timeoutId);
+        if (this.alert) {
+          this.timeoutId = window.setTimeout(() => {
+            console.log("hemloł");
+            this.clear();
+          }, 2500);
+        }
       });
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  clear() {
+    this.alertService.clear();
   }
 
 }

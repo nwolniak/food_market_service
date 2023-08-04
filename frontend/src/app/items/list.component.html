@@ -23,13 +23,13 @@
         <td>{{item.unitPrice}}</td>
         <td>{{item.description}}</td>
         <td style="white-space: nowrap">
-          <button (click)="addItemToCart(item.id)" class="btn btn-sm btn-success" style="width: 60px"
+          <button (click)="addItemToCart(item)" class="btn btn-sm btn-success" style="width: 60px"
                   [disabled]="item.isBuying">
             <span *ngIf="item.isBuying" class="spinner-border spinner-border-sm"></span>
             <span *ngIf="!item.isBuying">Buy</span>
           </button>
           <a routerLink="edit/{{item.id}}" class="btn btn-sm btn-primary" style="width: 60px">Edit</a>
-          <button (click)="deleteItem(item.id)" class="btn btn-sm btn-danger me-2" style="width: 60px"
+          <button (click)="deleteItem(item)" class="btn btn-sm btn-danger me-2" style="width: 60px"
                   [disabled]="item.isDeleting">
             <span *ngIf="item.isDeleting" class="spinner-border spinner-border-sm"></span>
             <span *ngIf="!item.isDeleting">Delete</span>
