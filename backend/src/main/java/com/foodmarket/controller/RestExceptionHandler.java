@@ -1,6 +1,8 @@
 package com.foodmarket.controller;
 
+import com.foodmarket.exceptions.EntityDeleteException;
 import com.foodmarket.exceptions.EntityNotFoundException;
+import jakarta.persistence.EntityExistsException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,11 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = EntityNotFoundException.class)
     private ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException ex, WebRequest request) {
         return this.handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+    }
+
+    @ExceptionHandler(value = {EntityDeleteException.class, EntityExistsException.class})
+    private ResponseEntity<Object> handleEntityNotFoundException(EntityDeleteException ex, WebRequest request) {
+        return this.handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.METHOD_NOT_ALLOWED, request);
     }
 
 }

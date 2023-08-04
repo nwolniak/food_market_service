@@ -50,6 +50,9 @@ public class ItemEntity {
     private ItemQuantityInStockEntity itemQuantityInStockEntity;
 
     @OneToMany(mappedBy = "itemEntity")
+    private List<CartItemEntity> carts;
+
+    @OneToMany(mappedBy = "itemEntity")
     private List<OrderItemEntity> orders;
 
     protected ItemEntity() {

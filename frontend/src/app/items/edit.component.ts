@@ -17,7 +17,7 @@ import {NgClass, NgIf} from "@angular/common";
 })
 export class EditComponent implements OnInit {
   form!: FormGroup;
-  id?: string;
+  itemId?: string;
   loading: boolean = false;
   submitting: boolean = false;
   submitted: boolean = false;
@@ -31,7 +31,7 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.params['id'];
+    this.itemId = this.route.snapshot.params['id'];
 
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
@@ -42,7 +42,7 @@ export class EditComponent implements OnInit {
     });
 
     this.loading = true;
-    this.itemsService.getById(this.id!)
+    this.itemsService.getById(this.itemId!)
       .pipe(first())
       .subscribe(itemDto => {
         this.form.patchValue(itemDto);
@@ -59,7 +59,7 @@ export class EditComponent implements OnInit {
     }
 
     this.submitting = true;
-    this.itemsService.putItem(this.id!, this.form.value)
+    this.itemsService.putItem(this.itemId!, this.form.value)
       .pipe(first())
       .subscribe({
         next: () => {

@@ -1,7 +1,7 @@
 <div class="p-4">
   <div class="container">
     <h1>Cart</h1>
-    <button (click)="deleteCart(cartId!)" class="btn btn-sm btn-danger" style="width: 58px"
+    <button (click)="deleteCart(cart!)" class="btn btn-sm btn-danger" style="width: 58px"
             [disabled]="cart?.isDeleting">
       <span *ngIf="cart?.isDeleting" class="spinner-border spinner-border-sm"></span>
       <span *ngIf="!cart?.isDeleting">Delete</span>
@@ -27,7 +27,7 @@
         <td>{{cartItem.item.unitPrice}}</td>
         <td>{{cartItem.item.description}}</td>
         <td style="white-space: nowrap">
-          <button (click)="deleteItem(cartItem.item.id)" class="btn btn-sm btn-danger" style="width: 58px"
+          <button (click)="deleteItem(cartItem.item)" class="btn btn-sm btn-danger" style="width: 58px"
                   [disabled]="cartItem.item.isDeleting">
             <span *ngIf="cartItem.item.isDeleting" class="spinner-border spinner-border-sm"></span>
             <span *ngIf="!cartItem.item.isDeleting">Delete</span>

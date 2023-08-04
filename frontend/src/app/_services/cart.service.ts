@@ -4,6 +4,7 @@ import {BehaviorSubject, concatAll, concatMap, from, map, Observable, toArray} f
 import {environment} from "@environments/environment";
 import {Cart, CartDto, Item, ItemQuantity, ItemQuantityDto} from "@app/_models";
 import {ItemService} from "@app/_services/item.service";
+import {AuthService} from "@app/_services/auth.service";
 
 @Injectable({
   providedIn: "root"
@@ -13,9 +14,13 @@ export class CartService {
   private cartSubject: BehaviorSubject<Cart | undefined>;
   private _cart: Observable<Cart | undefined>;
 
-  constructor(private http: HttpClient, private itemService: ItemService) {
+  constructor(private http: HttpClient,
+              private auth: AuthService,
+              private itemService: ItemService) {
     this.cartSubject = new BehaviorSubject<Cart | undefined>(undefined);
     this._cart = this.cartSubject.asObservable();
+    this.getById(this.auth.userValue?.id!)
+      .subscribe();
   }
 
   getById(id: string): Observable<Cart> {
@@ -77,11 +82,7 @@ export class CartService {
   }
 
   deleteItem(itemId: string) {
-    if (!this.cartValue) {
-      console.log("Cart is null");
-      return;
-    }
-    return this.http.delete<CartDto>(`${environment.apiUrl}/carts/${this.cartValue.id}/${itemId}`)
+    return this.http.delete<CartDto>(`${environment.apiUrl}/carts/${this.cartValue?.id}/${itemId}`)
       .pipe(
         concatMap(cartDto => this.mapDtoToCart(cartDto)),
         map(cart => {
