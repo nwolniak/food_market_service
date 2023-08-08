@@ -11,7 +11,7 @@ export function loginInterceptor(request: HttpRequest<any>, next: HttpHandlerFn)
     }
     request = request.clone({
       withCredentials: true,
-    })
+    });
     return next(request);
   }
 

@@ -38,14 +38,14 @@ public class CookieAuthenticationFilter extends OncePerRequestFilter {
                 .flatMap(Arrays::stream)
                 .filter(cookie -> COOKIE_NAME.equals(cookie.getName()))
                 .findFirst()
-                .ifPresent(cookie -> {
+                .ifPresentOrElse(cookie -> {
                     PreAuthenticatedAuthenticationToken token = new PreAuthenticatedAuthenticationToken(cookie.getValue(), null);
                     Authentication authentication = authenticationManager.authenticate(token);
                     SecurityContext context = securityContextHolderStrategy.createEmptyContext();
                     context.setAuthentication(authentication);
                     securityContextHolderStrategy.setContext(context);
                     securityContextRepository.saveContext(context, request, response);
-                });
+                }, () -> log.info("Required cookie not found: {}", (Object[]) request.getCookies()));
         filterChain.doFilter(request, response);
     }
 

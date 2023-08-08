@@ -15,6 +15,12 @@ export class AuthService {
   constructor(private router: Router, private http: HttpClient) {
     this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem("user")!));
     this._user = this.userSubject.asObservable();
+    if (this.userValue) {
+      this.login(this.userValue.username, this.userValue.password);
+    } else {
+      localStorage.removeItem("user");
+      this.userSubject.next(null);
+    }
   }
 
   login(username: string, password: string): Observable<User> {
@@ -43,7 +49,6 @@ export class AuthService {
         }
       });
   }
-
 
   isLoggedIn(): boolean {
     return this.userSubject.value !== null;

@@ -39,7 +39,7 @@ public class StockService {
         return stockRepository.findById(id)
                 .map(mapper::itemQuantityInStockToDto)
                 .orElseThrow(() -> new EntityNotFoundException(String.format(
-                        "Item quantity with %s id not found in stock repository.", id)));
+                        "Item quantity with %s itemId not found in stock repository.", id)));
     }
 
     public List<ItemQuantityInStockDto> getItemQuantities() {
@@ -50,14 +50,14 @@ public class StockService {
     }
 
     public void deleteItemQuantity(long id) {
-        log.info("Deleting item quantity with {} id.", id);
+        log.info("Deleting item quantity with {} itemId.", id);
         stockRepository.deleteById(id);
     }
 
     public ItemQuantityInStockDto putItemQuantity(ItemQuantityInStockDto itemQuantity) {
         ItemQuantityInStockEntity itemQuantityInStockEntity = stockRepository.findById(itemQuantity.id())
                 .orElseThrow(() -> new EntityNotFoundException(String.format(
-                        "Item quantity with %s id not found in stock repository.", itemQuantity.id())));
+                        "Item quantity with %s itemId not found in stock repository.", itemQuantity.id())));
         mapper.updateItemQuantityInStockFromDto(itemQuantity, itemQuantityInStockEntity);
         ItemQuantityInStockEntity saved = stockRepository.save(itemQuantityInStockEntity);
         return mapper.itemQuantityInStockToDto(saved);

@@ -5,3 +5,5 @@ export * from "./_dto/item.quantity.dto";
 export * from "./_domain/cart";
 export * from "./_domain/item";
 export * from "./_domain/item.quantity";
+export * from "./_domain/order";
+export * from "./_dto/order.dto";

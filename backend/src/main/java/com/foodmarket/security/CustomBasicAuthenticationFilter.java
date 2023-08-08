@@ -43,6 +43,8 @@ public class CustomBasicAuthenticationFilter extends OncePerRequestFilter {
             context.setAuthentication(authentication);
             securityContextHolderStrategy.setContext(context);
             securityContextRepository.saveContext(context, request, response);
+        } else {
+            log.info("Path did not matched");
         }
         filterChain.doFilter(request, response);
     }

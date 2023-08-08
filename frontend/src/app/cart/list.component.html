@@ -1,11 +1,16 @@
 <div class="p-4">
   <div class="container">
     <h1>Cart</h1>
-    <button (click)="deleteCart(cart!)" class="btn btn-sm btn-danger" style="width: 58px"
-            [disabled]="cart?.isDeleting">
-      <span *ngIf="cart?.isDeleting" class="spinner-border spinner-border-sm"></span>
-      <span *ngIf="!cart?.isDeleting">Delete</span>
-    </button>
+    <div class="btn-group">
+      <button class="btn btn-sm btn-success" (click)="createOrder(cart!)" [disabled]="cart?.isDeleting">
+        <span *ngIf="cart?.isDeleting" class="spinner-border spinner-border-sm"></span>
+        <span *ngIf="!cart?.isDeleting">Order</span>
+      </button>
+      <button class="btn btn-sm btn-danger" (click)="deleteCart(cart!)" [disabled]="cart?.isDeleting">
+        <span *ngIf="cart?.isDeleting" class="spinner-border spinner-border-sm"></span>
+        <span *ngIf="!cart?.isDeleting">Delete</span>
+      </button>
+    </div>
     <table class="table table-striped">
       <thead>
       <tr>

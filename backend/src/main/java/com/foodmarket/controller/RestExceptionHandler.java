@@ -20,7 +20,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(value = {EntityDeleteException.class, EntityExistsException.class})
-    private ResponseEntity<Object> handleEntityNotFoundException(EntityDeleteException ex, WebRequest request) {
+    private ResponseEntity<Object> handleEntityNotFoundException(RuntimeException ex, WebRequest request) {
         return this.handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.METHOD_NOT_ALLOWED, request);
     }
 

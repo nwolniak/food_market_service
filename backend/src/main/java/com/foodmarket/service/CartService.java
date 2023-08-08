@@ -35,7 +35,7 @@ public class CartService {
         UserEntity byUsername = userRepository.findByUsername(userEntity.getUsername()).orElseThrow();
         CartEntity cartEntity = new CartEntity();
         Set<CartItemEntity> cartItems = cartDTO.cartItems().stream().map(cartItem -> {
-            ItemEntity itemEntity = itemService.getItemEntity(cartItem.id());
+            ItemEntity itemEntity = itemService.getItemEntity(cartItem.itemId());
             return new CartItemEntity(cartEntity, itemEntity, cartItem.quantity());
         }).collect(toSet());
         cartEntity.setCartItems(cartItems);
@@ -48,12 +48,12 @@ public class CartService {
     public CartDto getCart(long id) {
         return cartRepository.findById(id)
                 .map(mapper::cartEntityToDto)
-                .orElseThrow(() -> new EntityNotFoundException(String.format("Cart with %s id not found in carts repository", id)));
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Cart with %s itemId not found in carts repository", id)));
     }
 
     public CartEntity getCartEntity(long id) {
         return cartRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(String.format("Cart with %s id not found in carts repository", id)));
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Cart with %s itemId not found in carts repository", id)));
     }
 
     public List<CartDto> getCarts() {
@@ -67,7 +67,7 @@ public class CartService {
         CartEntity cartEntity = cartRepository.findById(id)
                 .orElseThrow();
         Set<CartItemEntity> cartItemsToInsert = cartItems.stream().map(cartItem -> {
-            ItemEntity itemEntity = itemService.getItemEntity(cartItem.id());
+            ItemEntity itemEntity = itemService.getItemEntity(cartItem.itemId());
             return new CartItemEntity(cartEntity, itemEntity, cartItem.quantity());
         }).collect(toSet());
 
