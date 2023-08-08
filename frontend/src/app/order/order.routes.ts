@@ -1,6 +1,6 @@
 import {Routes} from "@angular/router";
-import {ListComponent} from "@app/cart";
+import {ListComponent} from "@app/order";
 
-export const CART_ROUTES: Routes = [
+export const ORDER_ROUTES: Routes = [
   {path: "", component: ListComponent}
 ]

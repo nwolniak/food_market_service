@@ -1,9 +1,9 @@
 export class ItemQuantityDto {
-  id: string;
+  itemId: string;
   quantity: number;
 
-  constructor(id: string, quantity: number) {
-    this.id = id;
+  constructor(itemId: string, quantity: number) {
+    this.itemId = itemId;
     this.quantity = quantity;
   }
 

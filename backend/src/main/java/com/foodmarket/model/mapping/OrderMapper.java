@@ -17,7 +17,7 @@ public interface OrderMapper {
     OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
 
     @Mapping(source = "id", target = "orderId")
-    @Mapping(source = "orderedItems", target = "orderedItems", qualifiedByName = "orderedItemsMapping")
+    @Mapping(source = "orderedItems", target = "orderItems", qualifiedByName = "orderedItemsMapping")
     OrderResponseDto orderEntityToDto(OrderEntity orderEntity);
 
     @Named("orderedItemsMapping")

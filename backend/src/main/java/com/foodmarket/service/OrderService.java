@@ -33,14 +33,14 @@ public class OrderService {
         }).toList();
         orderEntity.setOrderedItems(orderedItems);
         OrderEntity saved = orderRepository.save(orderEntity);
-        log.info("Saved order with id: {}", orderEntity.getId());
+        log.info("Saved order with itemId: {}", orderEntity.getId());
         return mapper.orderEntityToDto(saved);
     }
 
     public OrderResponseDto getOrder(long id) {
         return orderRepository.findById(id)
                 .map(mapper::orderEntityToDto)
-                .orElseThrow(() -> new EntityNotFoundException(String.format("Order with %s id not found in order repository", id)));
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Order with %s itemId not found in order repository", id)));
     }
 
     public List<OrderResponseDto> getAllOrders() {

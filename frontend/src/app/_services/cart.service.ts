@@ -19,7 +19,7 @@ export class CartService {
               private itemService: ItemService) {
     this.cartSubject = new BehaviorSubject<Cart | undefined>(undefined);
     this._cart = this.cartSubject.asObservable();
-    this.getById(this.auth.userValue?.id!)
+    this.getById(this.auth.userValue!.id!)
       .subscribe();
   }
 
@@ -111,18 +111,6 @@ export class CartService {
     }
   }
 
-  mapCartItems(cartDto: CartDto): Observable<ItemQuantity> {
-    return from(cartDto.cartItems!)
-      .pipe(concatMap(cartItem =>
-        from(this.itemService.getById(cartItem.id))
-          .pipe(map(itemDto => {
-            return {
-              item: new Item(itemDto),
-              quantity: cartItem.quantity
-            }
-          }))))
-  }
-
   mapDtoToCart(cartDto: CartDto): Observable<Cart> {
     return this.mapCartItems(cartDto)
       .pipe(
@@ -134,6 +122,18 @@ export class CartService {
           }
         })
       )
+  }
+
+  mapCartItems(cartDto: CartDto): Observable<ItemQuantity> {
+    return from(cartDto.cartItems!)
+      .pipe(concatMap(cartItem =>
+        from(this.itemService.getById(cartItem.itemId))
+          .pipe(map(itemDto => {
+            return {
+              item: new Item(itemDto),
+              quantity: cartItem.quantity
+            }
+          }))))
   }
 
   get cart(): Observable<Cart | undefined> {
