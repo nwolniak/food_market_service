@@ -42,9 +42,9 @@ public class OrderRepositoryTest {
         orderItemEntity1 = new OrderItemEntity(orderEntity1, itemEntity1, 5);
         orderItemEntity2 = new OrderItemEntity(orderEntity1, itemEntity2, 5);
         orderItemEntity3 = new OrderItemEntity(orderEntity1, itemEntity3, 5);
-        orderEntity1.setOrderedItems(new ArrayList<>(List.of(orderItemEntity1)));
-        orderEntity2.setOrderedItems(new ArrayList<>(List.of(orderItemEntity1, orderItemEntity2)));
-        orderEntity3.setOrderedItems(new ArrayList<>(List.of(orderItemEntity1, orderItemEntity2, orderItemEntity3)));
+        orderEntity1.setOrderItems(new ArrayList<>(List.of(orderItemEntity1)));
+        orderEntity2.setOrderItems(new ArrayList<>(List.of(orderItemEntity1, orderItemEntity2)));
+        orderEntity3.setOrderItems(new ArrayList<>(List.of(orderItemEntity1, orderItemEntity2, orderItemEntity3)));
     }
 
     @Test
@@ -94,7 +94,7 @@ public class OrderRepositoryTest {
         assertTrue(orderEntityOptional.isPresent());
         OrderEntity orderEntity = orderEntityOptional.get();
         assertEquals(orderEntity1, orderEntity);
-        assertTrue(isEqualCollection(orderEntity1.getOrderedItems(), orderEntity.getOrderedItems()));
+        assertTrue(isEqualCollection(orderEntity1.getOrderItems(), orderEntity.getOrderItems()));
     }
 
     @Test

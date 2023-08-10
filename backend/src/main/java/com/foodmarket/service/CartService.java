@@ -6,7 +6,6 @@ import com.foodmarket.model.dto.CartDto.ItemQuantity;
 import com.foodmarket.model.entity.CartEntity;
 import com.foodmarket.model.entity.CartItemEntity;
 import com.foodmarket.model.entity.ItemEntity;
-import com.foodmarket.model.entity.UserEntity;
 import com.foodmarket.model.mapping.CartMapper;
 import com.foodmarket.repository.CartRepository;
 import com.foodmarket.repository.UserRepository;
@@ -16,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import static java.util.stream.Collectors.toSet;
@@ -31,29 +31,35 @@ public class CartService {
     private final CartMapper mapper;
 
     @Transactional
-    public CartDto addCart(CartDto cartDTO, UserEntity userEntity) {
-        UserEntity byUsername = userRepository.findByUsername(userEntity.getUsername()).orElseThrow();
+    public CartDto addCart(CartDto cartDTO) {
+//        UserEntity byUsername = userRepository.findByUsername(userEntity.getUsername()).orElseThrow();
         CartEntity cartEntity = new CartEntity();
         Set<CartItemEntity> cartItems = cartDTO.cartItems().stream().map(cartItem -> {
             ItemEntity itemEntity = itemService.getItemEntity(cartItem.itemId());
             return new CartItemEntity(cartEntity, itemEntity, cartItem.quantity());
         }).collect(toSet());
         cartEntity.setCartItems(cartItems);
-        byUsername.setCartEntity(cartEntity);
-        cartEntity.setUserEntity(byUsername);
+//        byUsername.setCartEntity(cartEntity);
+//        cartEntity.setUserEntity(byUsername);
         CartEntity saved = cartRepository.save(cartEntity);
         return mapper.cartEntityToDto(saved);
     }
 
-    public CartDto getCart(long id) {
-        return cartRepository.findById(id)
+    public CartDto getCart(long cartId) {
+        return cartRepository.findById(cartId)
                 .map(mapper::cartEntityToDto)
-                .orElseThrow(() -> new EntityNotFoundException(String.format("Cart with %s itemId not found in carts repository", id)));
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Cart with %s id not found in carts repository", cartId)));
     }
 
-    public CartEntity getCartEntity(long id) {
-        return cartRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(String.format("Cart with %s itemId not found in carts repository", id)));
+    public CartDto getCartByUserId(long userId) {
+        return cartRepository.findByUserEntity_Id(userId)
+                .map(mapper::cartEntityToDto)
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Cart with %s userId not found in carts repository", userId)));
+    }
+
+    public CartEntity getCartEntity(long cartId) {
+        return cartRepository.findById(cartId)
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Cart with %s id not found in carts repository", cartId)));
     }
 
     public List<CartDto> getCarts() {
@@ -63,8 +69,8 @@ public class CartService {
                 .toList();
     }
 
-    public CartDto patchCart(long id, List<ItemQuantity> cartItems) {
-        CartEntity cartEntity = cartRepository.findById(id)
+    public CartDto patchCart(long cartId, List<ItemQuantity> cartItems) {
+        CartEntity cartEntity = cartRepository.findById(cartId)
                 .orElseThrow();
         Set<CartItemEntity> cartItemsToInsert = cartItems.stream().map(cartItem -> {
             ItemEntity itemEntity = itemService.getItemEntity(cartItem.itemId());
@@ -94,10 +100,17 @@ public class CartService {
         return mapper.cartEntityToDto(cartEntity);
     }
 
-    public void deleteCart(long id) {
-        UserEntity userEntity = userRepository.findById(id).orElseThrow();
-        userEntity.setCartEntity(null);
-        userRepository.save(userEntity);
-        cartRepository.deleteById(id);
+    public void deleteCart(long cartId) {
+        Optional<CartEntity> cartEntityOptional = cartRepository.findById(cartId);
+        if (cartEntityOptional.isEmpty()) {
+            return;
+        }
+        CartEntity cartEntity = cartEntityOptional.get();
+        userRepository.findById(cartEntity.getUserEntity().getId())
+                .ifPresent(userEntity -> {
+                    userEntity.setCartEntity(null);
+                    userRepository.save(userEntity);
+                });
+        cartRepository.deleteById(cartId);
     }
 }

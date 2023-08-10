@@ -3,6 +3,7 @@ package com.foodmarket.model.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -49,7 +51,12 @@ public class UserEntity implements UserDetails {
 
     @OneToOne(mappedBy = "userEntity", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
+    @ToString.Exclude
     private CartEntity cartEntity;
+
+    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private Set<OrderEntity> orders;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -2,10 +2,8 @@ package com.foodmarket.controller;
 
 import com.foodmarket.model.dto.CartDto;
 import com.foodmarket.model.dto.CartDto.ItemQuantity;
-import com.foodmarket.model.entity.UserEntity;
 import com.foodmarket.service.CartService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,10 +14,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CartController {
 
+    private static final String BY_USER_ID = "user";
+
     private final CartService cartService;
 
     @GetMapping("carts/{id}")
-    public CartDto getCart(@PathVariable long id) {
+    public CartDto getCart(@PathVariable long id, @RequestParam(name = "findBy") String findBy) {
+        if (BY_USER_ID.equals(findBy)) {
+            return cartService.getCartByUserId(id);
+        }
         return cartService.getCart(id);
     }
 
@@ -29,8 +32,8 @@ public class CartController {
     }
 
     @PostMapping("carts")
-    public CartDto addCart(@RequestBody CartDto cartDTO, @AuthenticationPrincipal UserEntity userEntity) {
-        return cartService.addCart(cartDTO, userEntity);
+    public CartDto addCart(@RequestBody CartDto cartDTO) {
+        return cartService.addCart(cartDTO);
     }
 
     @PatchMapping("carts/{cartId}")

@@ -57,7 +57,8 @@ export class OrderService {
         map(itemQuantities => {
           return {
             orderId: orderDto.orderId!,
-            orderItems: itemQuantities
+            orderItems: itemQuantities,
+            createdDate: orderDto.createdDate!
           }
         })
       )

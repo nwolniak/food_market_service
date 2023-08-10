@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS orders
     order_id           BIGINT   NOT NULL,
     created_date       datetime NULL,
     last_modified_date datetime NULL,
+    user_id            BIGINT   NULL,
     CONSTRAINT pk_orders PRIMARY KEY (order_id)
 );
 
@@ -38,10 +39,11 @@ CREATE TABLE IF NOT EXISTS orders_items
 
 CREATE TABLE IF NOT EXISTS carts
 (
-    user_id            BIGINT   NOT NULL,
+    cart_id            BIGINT   NOT NULL,
     created_date       datetime NULL,
     last_modified_date datetime NULL,
-    CONSTRAINT pk_carts PRIMARY KEY (user_id)
+    user_id            BIGINT   NULL,
+    CONSTRAINT pk_carts PRIMARY KEY (cart_id)
 );
 
 CREATE TABLE IF NOT EXISTS carts_items
