@@ -12,7 +12,7 @@
       </button>
     </div>
     <table class="table table-striped">
-      <thead>
+      <thead class="table-secondary">
       <tr>
         <th style="width: 15%">Quantity</th>
         <th style="width: 15%">Name</th>
@@ -29,7 +29,7 @@
         <td>{{cartItem.item.name}}</td>
         <td>{{cartItem.item.category}}</td>
         <td>{{cartItem.item.unitType}}</td>
-        <td>{{cartItem.item.unitPrice}}</td>
+        <td>{{cartItem.item.unitPrice}} &dollar;</td>
         <td>{{cartItem.item.description}}</td>
         <td style="white-space: nowrap">
           <button (click)="deleteItem(cartItem.item)" class="btn btn-sm btn-danger" style="width: 58px"

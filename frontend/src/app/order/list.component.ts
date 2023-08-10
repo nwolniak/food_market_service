@@ -13,6 +13,8 @@ import {NgForOf} from "@angular/common";
 })
 export class ListComponent implements OnInit {
 
+  protected readonly parseFloat = parseFloat;
+
   userId?: string;
   orders?: Order[];
 
@@ -24,6 +26,12 @@ export class ListComponent implements OnInit {
     this.userId = this.route.snapshot.params["userId"];
     this.orderService.getAll()
       .subscribe(orders => this.orders = orders);
+  }
+
+  orderPrice(order: Order): number {
+    return order.orderItems
+      .map(orderItem => orderItem.quantity * parseFloat(orderItem.item.unitPrice))
+      .reduce((previousValue, currentValue) => previousValue + currentValue);
   }
 
 }

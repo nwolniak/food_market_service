@@ -34,7 +34,7 @@ export class ListComponent implements OnInit {
 
   createOrder(cart: Cart) {
     cart.isDeleting = true;
-    this.orderService.postOrder(this.cartId!)
+    this.orderService.postOrder(cart.id)
       .subscribe({
         next: () => {
           this.alertService.success("Order created");

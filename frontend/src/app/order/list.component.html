@@ -1,14 +1,24 @@
 <div class="p-4">
   <div class="container">
     <h1>Orders</h1>
-    <div *ngFor="let order of orders">
-      <h3>Order Id : {{order.orderId}}</h3>
-      <div *ngFor="let orderItem of order.orderItems">
-        <h5>item_name: {{orderItem.item.name}}</h5>
-        <h5>item_type: {{orderItem.item.unitType}}</h5>
-        <h5>item_price: {{orderItem.item.unitPrice}}</h5>
-        <h5>item_description: {{orderItem.item.description}}</h5>
-        <h5>quantity: {{orderItem.quantity}}</h5>
+    <div *ngFor="let order of orders" class="card mb-3">
+      <div class="card-header">
+        <div class="row">
+          <div class="col">Order Id: {{order.orderId}}</div>
+          <div class="col text-end">Created date: {{order.createdDate}}</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div *ngFor="let orderItem of order.orderItems" class="row">
+          <div class="col">{{orderItem.item.name}}</div>
+          <div class="col">{{orderItem.quantity}} pcs &times; {{orderItem.item.unitPrice}} &dollar;</div>
+          <div class="col">{{(orderItem.quantity * parseFloat(orderItem.item.unitPrice)).toFixed(2)}} &dollar;</div>
+        </div>
+        <div class="row">
+          <div class="col">Total:</div>
+          <div class="col"></div>
+          <div class="col">{{orderPrice(order).toFixed(2)}} &dollar;</div>
+        </div>
       </div>
     </div>
   </div>

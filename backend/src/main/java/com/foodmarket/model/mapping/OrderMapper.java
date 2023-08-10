@@ -10,6 +10,7 @@ import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
+import java.util.Set;
 
 @Mapper
 public interface OrderMapper {
@@ -17,12 +18,12 @@ public interface OrderMapper {
     OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
 
     @Mapping(source = "id", target = "orderId")
-    @Mapping(source = "orderedItems", target = "orderItems", qualifiedByName = "orderedItemsMapping")
+    @Mapping(source = "orderItems", target = "orderItems", qualifiedByName = "orderItemsMapping")
     OrderResponseDto orderEntityToDto(OrderEntity orderEntity);
 
-    @Named("orderedItemsMapping")
-    default List<ItemQuantity> orderedItemsMapping(List<OrderItemEntity> orderedProducts) {
-        return orderedProducts
+    @Named("orderItemsMapping")
+    default List<ItemQuantity> orderItemsMapping(Set<OrderItemEntity> orderItems) {
+        return orderItems
                 .stream()
                 .map(this::orderItemEntityToDto)
                 .toList();

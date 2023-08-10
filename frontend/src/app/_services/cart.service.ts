@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {BehaviorSubject, concatAll, concatMap, from, map, Observable, toArray} from "rxjs";
 import {environment} from "@environments/environment";
 import {Cart, CartDto, Item, ItemQuantity, ItemQuantityDto} from "@app/_models";
@@ -19,12 +19,25 @@ export class CartService {
               private itemService: ItemService) {
     this.cartSubject = new BehaviorSubject<Cart | undefined>(undefined);
     this._cart = this.cartSubject.asObservable();
-    this.getById(this.auth.userValue!.id!)
+    this.getByUserId(this.auth.userValue!.id!)
       .subscribe();
   }
 
   getById(id: string): Observable<Cart> {
     return this.http.get<CartDto>(`${environment.apiUrl}/carts/${id}`)
+      .pipe(
+        concatMap(cartDto => this.mapDtoToCart(cartDto)),
+        map(cart => {
+          this.cartSubject.next(cart);
+          console.log(`Get cart: ${cart}`);
+          return cart;
+        }));
+  }
+
+  getByUserId(userId: string) {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append("findBy", "user");
+    return this.http.get<CartDto>(`${environment.apiUrl}/carts/${userId}`, {params: httpParams})
       .pipe(
         concatMap(cartDto => this.mapDtoToCart(cartDto)),
         map(cart => {
