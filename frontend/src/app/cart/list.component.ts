@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {NgForOf, NgIf} from "@angular/common";
 import {ActivatedRoute, RouterLink} from "@angular/router";
-import {AlertService, CartService, ItemService, OrderService} from "@app/_services";
+import {AlertService, AuthService, CartService, ItemService, OrderService} from "@app/_services";
 import {Cart} from "@app/_models/_domain/cart";
 import {delay} from "rxjs";
 import {Item} from "@app/_models";
@@ -23,17 +23,18 @@ export class ListComponent implements OnInit {
               private itemService: ItemService,
               private orderService: OrderService,
               private alertService: AlertService,
+              private auth: AuthService,
               private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.cartId = this.route.snapshot.params["cartId"];
+    this.cartId = this.auth.userValue?.id;
     this.cartService.cart
       .subscribe(cart => this.cart = cart)
   }
 
   createOrder(cart: Cart) {
-    cart.isDeleting = true;
+    cart.isAction = true;
     this.orderService.postOrder(cart.id)
       .subscribe({
         next: () => {
@@ -41,7 +42,7 @@ export class ListComponent implements OnInit {
           this.deleteCart(cart);
         },
         error: err => {
-          cart.isDeleting = false;
+          cart.isAction = false;
           this.alertService.error(err);
         }
       })
@@ -53,7 +54,6 @@ export class ListComponent implements OnInit {
       .pipe(delay(250))
       .subscribe({
         next: () => {
-          item.isDeleting = false;
           this.alertService.success("Item deleted from cart");
         },
         error: err => {
@@ -64,16 +64,15 @@ export class ListComponent implements OnInit {
   }
 
   deleteCart(cart: Cart) {
-    cart.isDeleting = true;
+    cart.isAction = true;
     this.cartService.deleteCart(cart.id)
       .pipe(delay(250))
       .subscribe({
         next: () => {
-          cart.isDeleting = false;
           this.alertService.success("Cart deleted");
         },
         error: err => {
-          cart.isDeleting = false;
+          cart.isAction = false;
           this.alertService.error(err);
         }
       });

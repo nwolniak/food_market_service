@@ -24,6 +24,9 @@ public class OrderEntity {
     @EqualsAndHashCode.Include
     private Long id;
 
+    @Column(name = "is_paid", nullable = false)
+    private boolean isPaid = false;
+
     @CreatedDate
     @Column(name = "created_date")
     private LocalDateTime createdDate;
@@ -40,4 +43,17 @@ public class OrderEntity {
     @OneToMany(mappedBy = "orderEntity", cascade = CascadeType.ALL)
     private Set<OrderItemEntity> orderItems;
 
+    @OneToOne
+    @JoinColumn(name = "payment_id")
+    private PaymentEntity paymentEntity;
+
+    @Override
+    public String toString() {
+        return "OrderEntity{" +
+                "id=" + id +
+                ", isPaid=" + isPaid +
+                ", createdDate=" + createdDate +
+                ", lastModifiedDate=" + lastModifiedDate +
+                '}';
+    }
 }

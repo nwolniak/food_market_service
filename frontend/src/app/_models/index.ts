@@ -7,3 +7,5 @@ export * from "./_domain/item";
 export * from "./_domain/item.quantity";
 export * from "./_domain/order";
 export * from "./_dto/order.dto";
+export * from "./_domain/payment";
+export * from "./_dto/payment.dto";

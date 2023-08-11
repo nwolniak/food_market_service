@@ -2,13 +2,13 @@
   <div class="container">
     <h1>Cart</h1>
     <div class="btn-group">
-      <button class="btn btn-sm btn-success" (click)="createOrder(cart!)" [disabled]="cart?.isDeleting">
-        <span *ngIf="cart?.isDeleting" class="spinner-border spinner-border-sm"></span>
-        <span *ngIf="!cart?.isDeleting">Order</span>
+      <button class="btn btn-sm btn-success" (click)="createOrder(cart!)" [disabled]="cart?.isAction">
+        <span *ngIf="cart?.isAction" class="spinner-border spinner-border-sm"></span>
+        <span *ngIf="!cart?.isAction">Order</span>
       </button>
-      <button class="btn btn-sm btn-danger" (click)="deleteCart(cart!)" [disabled]="cart?.isDeleting">
-        <span *ngIf="cart?.isDeleting" class="spinner-border spinner-border-sm"></span>
-        <span *ngIf="!cart?.isDeleting">Delete</span>
+      <button class="btn btn-sm btn-danger" (click)="deleteCart(cart!)" [disabled]="cart?.isAction">
+        <span *ngIf="cart?.isAction" class="spinner-border spinner-border-sm"></span>
+        <span *ngIf="!cart?.isAction">Delete</span>
       </button>
     </div>
     <table class="table table-striped">

@@ -13,7 +13,7 @@ export const APP_ROUTES: Routes = [
   {path: "account/login", component: LoginComponent},
   {path: "account/register", component: RegisterComponent},
   {path: "items", loadChildren: itemsModuleLazy, canActivate: [authGuard]},
-  {path: "cart/:cartId", loadChildren: cartModuleLazy, canActivate: [authGuard]},
-  {path: "orders/:userId", loadChildren: orderModuleLazy, canActivate: [authGuard]},
+  {path: "cart", loadChildren: cartModuleLazy, canActivate: [authGuard]},
+  {path: "orders", loadChildren: orderModuleLazy, canActivate: [authGuard]},
   {path: "**", redirectTo: ""}
 ];

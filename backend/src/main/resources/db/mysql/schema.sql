@@ -23,9 +23,11 @@ CREATE TABLE IF NOT EXISTS items_quantity
 CREATE TABLE IF NOT EXISTS orders
 (
     order_id           BIGINT   NOT NULL,
+    is_paid            BIT(1)   NOT NULL,
     created_date       datetime NULL,
     last_modified_date datetime NULL,
     user_id            BIGINT   NULL,
+    payment_id         BIGINT   NULL,
     CONSTRAINT pk_orders PRIMARY KEY (order_id)
 );
 
@@ -65,6 +67,16 @@ CREATE TABLE IF NOT EXISTS users
     last_modified_date datetime     NULL,
     CONSTRAINT pk_users PRIMARY KEY (user_id),
     CONSTRAINT uc_users_name UNIQUE (name)
+);
+
+CREATE TABLE IF NOT EXISTS payments
+(
+    payment_id   BIGINT   NOT NULL,
+    amount       DOUBLE   NOT NULL,
+    payment_date datetime NULL,
+    user_id      BIGINT   NULL,
+    order_id     BIGINT   NULL,
+    CONSTRAINT pk_payments PRIMARY KEY (payment_id)
 );
 
 # ALTER TABLE carts
