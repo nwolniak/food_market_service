@@ -47,7 +47,7 @@ export class CartService {
         }));
   }
 
-  getAll() {
+  getAll(): Observable<Cart[]> {
     return this.http.get<Array<CartDto>>(`${environment.apiUrl}/carts`)
       .pipe(
         concatMap(cartDtoList => cartDtoList.map(cartDto => this.mapDtoToCart(cartDto))),

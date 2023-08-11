@@ -40,10 +40,15 @@ public class OrderService {
         return mapper.orderEntityToDto(saved);
     }
 
-    public OrderResponseDto getOrder(long id) {
-        return orderRepository.findById(id)
+    public OrderResponseDto getOrder(long orderId) {
+        return orderRepository.findById(orderId)
                 .map(mapper::orderEntityToDto)
-                .orElseThrow(() -> new EntityNotFoundException(String.format("Order with %s id not found in order repository", id)));
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Order with %s id not found in order repository", orderId)));
+    }
+
+    public OrderEntity getOrderEntity(long orderId) {
+        return orderRepository.findById(orderId)
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Order with %s id not found in order repository", orderId)));
     }
 
     public List<OrderResponseDto> getAllOrders() {

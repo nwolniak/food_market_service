@@ -16,9 +16,9 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    @GetMapping("/orders/{id}")
-    public OrderResponseDto getOrder(@PathVariable long id) {
-        return orderService.getOrder(id);
+    @GetMapping("/orders/{orderId}")
+    public OrderResponseDto getOrder(@PathVariable long orderId) {
+        return orderService.getOrder(orderId);
     }
 
     @GetMapping("orders")
@@ -31,9 +31,9 @@ public class OrderController {
         return orderService.addOrder(orderRequestDTO);
     }
 
-    @DeleteMapping("orders/{id}")
-    public void deleteOrder(@PathVariable long id) {
-        orderService.deleteOrder(id);
+    @DeleteMapping("orders/{orderId}")
+    public void deleteOrder(@PathVariable long orderId) {
+        orderService.deleteOrder(orderId);
     }
 
 }

@@ -3,7 +3,7 @@ import {ItemQuantity} from "@app/_models";
 export class Cart {
   id: string;
   cartItems: ItemQuantity[];
-  isDeleting?: boolean;
+  isAction?: boolean;
 
   constructor(id: string, cartItems: ItemQuantity[]) {
     this.id = id;

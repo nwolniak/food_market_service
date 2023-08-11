@@ -1,23 +1,84 @@
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"/>
+</head>
 <div class="p-4">
   <div class="container">
     <h1>Orders</h1>
-    <div *ngFor="let order of orders" class="card mb-3">
-      <div class="card-header">
-        <div class="row">
-          <div class="col">Order Id: {{order.orderId}}</div>
-          <div class="col text-end">Created date: {{order.createdDate}}</div>
+    <div>
+      <h3>Unpaid</h3>
+      <div *ngFor="let order of unPaidOrdersSorted(); index as i" class="card mb-3">
+        <div class="card-header text-bg-danger" data-bs-toggle="collapse"
+             [attr.data-bs-target]="'#order1Collapsible' + i">
+          <div class="row">
+            <div class="col">Order Id: {{order.orderId}}</div>
+            <div class="col text-end">Created date: {{order.createdDate}}</div>
+            <div class="col-1 text-center">
+              <i class="bi bi-chevron-left pull-right"></i>
+            </div>
+          </div>
+        </div>
+        <div class="collapse" id="order1Collapsible{{i}}">
+          <div class="card-body">
+            <div *ngFor="let orderItem of order.orderItems" class="row">
+              <table></table>
+              <div class="col">{{orderItem.item.name}}</div>
+              <div class="col">{{orderItem.quantity}} pcs &times; {{orderItem.item.unitPrice}} &dollar;</div>
+              <div class="col">{{(orderItem.quantity * parseFloat(orderItem.item.unitPrice)).toFixed(2)}} &dollar;</div>
+            </div>
+            <div class="row">
+              <div class="col">Total:</div>
+              <div class="col"></div>
+              <div class="col">{{order.price.toFixed(2)}} &dollar;</div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="row">
+              <div class="col">
+                <button class="btn btn-sm btn-primary" routerLink="payment/{{order.orderId}}"
+                        [disabled]="order.isAction">
+                  Pay
+                </button>
+                <button class="btn btn-sm btn-danger" (click)="delete(order)" [disabled]="order.isAction">Delete
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="card-body">
-        <div *ngFor="let orderItem of order.orderItems" class="row">
-          <div class="col">{{orderItem.item.name}}</div>
-          <div class="col">{{orderItem.quantity}} pcs &times; {{orderItem.item.unitPrice}} &dollar;</div>
-          <div class="col">{{(orderItem.quantity * parseFloat(orderItem.item.unitPrice)).toFixed(2)}} &dollar;</div>
+    </div>
+
+    <div>
+      <h3>Paid</h3>
+      <div *ngFor="let order of paidOrdersSorted(); index as i" class="card mb-3">
+        <div class="card-header text-bg-success" data-bs-toggle="collapse"
+             [attr.data-bs-target]="'#order2Collapsible' + i">
+          <div class="row">
+            <div class="col">Order Id: {{order.orderId}}</div>
+            <div class="col text-end">Created date: {{order.createdDate}}</div>
+            <div class="col-1 text-center">
+              <i class="bi bi-chevron-left pull-right"></i>
+            </div>
+          </div>
         </div>
-        <div class="row">
-          <div class="col">Total:</div>
-          <div class="col"></div>
-          <div class="col">{{orderPrice(order).toFixed(2)}} &dollar;</div>
+        <div class="collapse" id="order2Collapsible{{i}}">
+          <div class="card-body">
+            <div *ngFor="let orderItem of order.orderItems" class="row">
+              <table></table>
+              <div class="col">{{orderItem.item.name}}</div>
+              <div class="col">{{orderItem.quantity}} pcs &times; {{orderItem.item.unitPrice}} &dollar;</div>
+              <div class="col">{{(orderItem.quantity * parseFloat(orderItem.item.unitPrice)).toFixed(2)}} &dollar;</div>
+            </div>
+            <div class="row">
+              <div class="col">Total:</div>
+              <div class="col"></div>
+              <div class="col">{{order.price.toFixed(2)}} &dollar;</div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="row">
+              <div class="col">Payment date: {{order.payment?.paymentDate}} [{{order.payment?.paymentId}}]</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

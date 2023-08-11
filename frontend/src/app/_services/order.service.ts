@@ -1,18 +1,22 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {AuthService} from "@app/_services/auth.service";
-import {Item, ItemQuantity, Order, OrderDto} from "@app/_models";
+import {Cart, Item, ItemQuantity, Order, OrderDto, Payment} from "@app/_models";
 import {environment} from "@environments/environment";
-import {concatAll, concatMap, from, map, Observable, toArray} from "rxjs";
+import {BehaviorSubject, concatAll, concatMap, from, map, Observable, tap, toArray} from "rxjs";
 import {ItemService} from "@app/_services/item.service";
 
 @Injectable({providedIn: "root"})
 export class OrderService {
 
+  private ordersSubject: BehaviorSubject<Order[] | undefined>;
+  private _orders: Observable<Order[] | undefined>;
 
   constructor(private http: HttpClient,
               private auth: AuthService,
               private itemService: ItemService) {
+    this.ordersSubject = new BehaviorSubject<Order[] | undefined>(undefined);
+    this._orders = this.ordersSubject.asObservable();
   }
 
   getById(orderId: string): Observable<Order> {
@@ -31,7 +35,12 @@ export class OrderService {
       .pipe(
         concatMap((orderDtoList: OrderDto[]) => orderDtoList.map(orderDto => this.mapDtoToOrder(orderDto))),
         concatAll(),
-        toArray()
+        toArray(),
+        map(orders => {
+          console.log("Get orders");
+          this.ordersSubject.next(orders);
+          return orders;
+        })
       );
   }
 
@@ -40,14 +49,21 @@ export class OrderService {
       .pipe(
         concatMap(orderDto => this.mapDtoToOrder(orderDto)),
         map(order => {
-          console.log(`Get order ${order}`)
+          console.log(`Post order ${order}`)
+          this.ordersValue?.push(order);
+          this.ordersSubject.next(this.ordersValue);
           return order;
         })
       );
   }
 
-  deleteOrder(userId: string, orderId: string) {
-    return this.http.delete(`${environment.apiUrl}/orders/${userId}/${orderId}`);
+  deleteOrder(orderId: string) {
+    return this.http.delete(`${environment.apiUrl}/orders/${orderId}`)
+      .pipe(map(() => {
+        console.log(`Deleted ${orderId} order`)
+        const orders = this.ordersValue?.filter(order => order.orderId !== orderId);
+        this.ordersSubject.next(orders);
+      }));
   }
 
   mapDtoToOrder(orderDto: OrderDto): Observable<Order> {
@@ -58,7 +74,13 @@ export class OrderService {
           return {
             orderId: orderDto.orderId!,
             orderItems: itemQuantities,
-            createdDate: orderDto.createdDate!
+            createdDate: orderDto.createdDate!,
+            price: this.orderPrice(itemQuantities),
+            isPaid: orderDto.isPaid!,
+            payment: new Payment(orderDto.paymentDto?.paymentId!,
+              orderDto.paymentDto?.orderId!,
+              orderDto.paymentDto?.amount!,
+              orderDto.paymentDto?.paymentDate!)
           }
         })
       )
@@ -74,6 +96,20 @@ export class OrderService {
               quantity: orderItem.quantity
             }
           }))))
+  }
+
+  private orderPrice(orderItems: ItemQuantity[]): number {
+    return orderItems
+      .map(orderItem => orderItem.quantity * parseFloat(orderItem.item.unitPrice))
+      .reduce((previousValue, currentValue) => previousValue + currentValue);
+  }
+
+  get orders(): Observable<Order[] | undefined> {
+    return this._orders;
+  }
+
+  get ordersValue(): Order[] | undefined {
+    return this.ordersSubject.value;
   }
 
 }

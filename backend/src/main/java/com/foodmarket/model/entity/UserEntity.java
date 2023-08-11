@@ -3,7 +3,6 @@ package com.foodmarket.model.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -50,13 +49,13 @@ public class UserEntity implements UserDetails {
     private LocalDateTime lastModifiedDate;
 
     @OneToOne(mappedBy = "userEntity", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    @ToString.Exclude
     private CartEntity cartEntity;
 
     @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL)
-    @ToString.Exclude
     private Set<OrderEntity> orders;
+
+    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL)
+    private Set<PaymentEntity> payments;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -93,4 +92,16 @@ public class UserEntity implements UserDetails {
         this.email = email;
     }
 
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", createdDate=" + createdDate +
+                ", lastModifiedDate=" + lastModifiedDate +
+                '}';
+    }
 }

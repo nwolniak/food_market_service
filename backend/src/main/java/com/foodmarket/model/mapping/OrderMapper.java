@@ -12,12 +12,14 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 import java.util.Set;
 
-@Mapper
+@Mapper(uses = PaymentMapper.class)
 public interface OrderMapper {
 
     OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
 
     @Mapping(source = "id", target = "orderId")
+    @Mapping(source = "paid", target = "isPaid")
+    @Mapping(source = "paymentEntity", target = "paymentDto")
     @Mapping(source = "orderItems", target = "orderItems", qualifiedByName = "orderItemsMapping")
     OrderResponseDto orderEntityToDto(OrderEntity orderEntity);
 
