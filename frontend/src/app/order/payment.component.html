@@ -25,16 +25,16 @@
         </table>
       </div>
       <div *ngIf="order" class="card-footer">
-        Total: {{order.price.toFixed(2)}} &dollar;
+        <h5 class="font-weight-bold">Total: {{order.price.toFixed(2)}} &dollar;</h5>
       </div>
     </div>
 
     <div class="btn-group-lg mt-3">
-      <button [disabled]="submitting" class="btn btn-outline-success" (click)="pay(order!)">
-        <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
+      <button class="btn btn-outline-success" (click)="pay(order!)" [disabled]="order?.isAction">
+        <span *ngIf="order?.isAction" class="spinner-border spinner-border-sm me-1"></span>
         Pay now
       </button>
-      <button class="btn btn-outline-primary" routerLink="../..">Cancel</button>
+      <button class="btn btn-outline-danger" [disabled]="order?.isAction" routerLink="../..">Cancel</button>
     </div>
   </div>
 </div>
