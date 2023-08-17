@@ -1,0 +1,23 @@
+<div class="p-4">
+  <div class="container">
+    <h1>Payments</h1>
+    <table class="table table-striped">
+      <thead class="table-secondary">
+      <tr>
+        <th style="width: 25%" direction="asc" sortable="paymentId" (sort)="onSort($event)">Payment Id</th>
+        <th style="width: 25%" sortable="orderId" (sort)="onSort($event)">Order Id</th>
+        <th style="width: 25%" sortable="amount" (sort)="onSort($event)">Amount</th>
+        <th style="width: 25%" sortable="paymentDate" (sort)="onSort($event)">Date</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let payment of payments">
+        <td>{{payment.paymentId}}</td>
+        <td>{{payment.orderId}}</td>
+        <td>{{payment.amount}}</td>
+        <td>{{payment.paymentDate}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

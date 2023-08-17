@@ -8,6 +8,8 @@ const cartModuleLazy = () => import("@app/cart/cart.routes").then(routes => rout
 
 const orderModuleLazy = () => import("@app/order/order.routes").then(routes => routes.ORDER_ROUTES);
 
+const paymentsModuleLazy = () => import("@app/payments/payments.routes").then(routes => routes.PAYMENTS_ROUTES);
+
 export const APP_ROUTES: Routes = [
   {path: "", component: HomeComponent, canActivate: [authGuard]},
   {path: "account/login", component: LoginComponent},
@@ -15,5 +17,6 @@ export const APP_ROUTES: Routes = [
   {path: "items", loadChildren: itemsModuleLazy, canActivate: [authGuard]},
   {path: "cart", loadChildren: cartModuleLazy, canActivate: [authGuard]},
   {path: "orders", loadChildren: orderModuleLazy, canActivate: [authGuard]},
+  {path: "payments", loadChildren: paymentsModuleLazy, canActivate: [authGuard]},
   {path: "**", redirectTo: ""}
 ];

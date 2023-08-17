@@ -2,7 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {AlertService, CartService, OrderService, PaymentService} from "@app/_services";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
-import {Cart, Order, PaymentDto} from "@app/_models";
+import {Cart, PaymentDto} from "@app/_models";
 import {concatMap} from "rxjs";
 
 @Component({

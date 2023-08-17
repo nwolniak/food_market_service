@@ -30,11 +30,11 @@
     </div>
 
     <div class="btn-group-lg mt-3">
-      <button class="btn btn-outline-success" (click)="orderAndPay(cart!)" [disabled]="cart?.isAction" >
+      <button class="btn btn-outline-success" (click)="orderAndPay(cart!)" [disabled]="cart?.isAction">
         <span *ngIf="cart?.isAction" class="spinner-border spinner-border-sm me-1"></span>
         Pay now
       </button>
-      <button class="btn btn-outline-primary" (click)="order(cart!)" [disabled]="cart?.isAction" >
+      <button class="btn btn-outline-primary" (click)="order(cart!)" [disabled]="cart?.isAction">
         <span *ngIf="cart?.isAction" class="spinner-border spinner-border-sm me-1"></span>
         Pay later
       </button>
