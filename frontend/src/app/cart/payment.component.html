@@ -1,1 +1,44 @@
-<h1>Payment</h1>
+<div class="p-4">
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
+        <h1>Payment details</h1>
+      </div>
+      <div class="card-body">
+        <table *ngIf="cart" class="table m-0">
+          <thead class="table-light">
+          <tr>
+            <th>Product name</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Sum</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let cartItem of cart.cartItems">
+            <td>{{cartItem.item.name}}</td>
+            <td>{{cartItem.quantity}}</td>
+            <td>{{cartItem.item.unitPrice}} &dollar;</td>
+            <td>{{(cartItem.quantity * parseFloat(cartItem.item.unitPrice)).toFixed(2)}} &dollar;</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngIf="cart" class="card-footer">
+        <h5 class="font-weight-bold">Total: {{cart.price.toFixed(2)}} &dollar;</h5>
+      </div>
+    </div>
+
+    <div class="btn-group-lg mt-3">
+      <button class="btn btn-outline-success" (click)="orderAndPay(cart!)" [disabled]="cart?.isAction" >
+        <span *ngIf="cart?.isAction" class="spinner-border spinner-border-sm me-1"></span>
+        Pay now
+      </button>
+      <button class="btn btn-outline-primary" (click)="order(cart!)" [disabled]="cart?.isAction" >
+        <span *ngIf="cart?.isAction" class="spinner-border spinner-border-sm me-1"></span>
+        Pay later
+      </button>
+      <button class="btn btn-outline-danger" [disabled]="cart?.isAction" routerLink="..">Cancel</button>
+    </div>
+  </div>
+</div>

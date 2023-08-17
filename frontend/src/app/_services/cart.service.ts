@@ -131,7 +131,8 @@ export class CartService {
         map(itemQuantities => {
           return {
             id: cartDto.cartId!,
-            cartItems: itemQuantities
+            cartItems: itemQuantities,
+            price: this.cartPrice(itemQuantities)
           }
         })
       )
@@ -147,6 +148,12 @@ export class CartService {
               quantity: cartItem.quantity
             }
           }))))
+  }
+
+  private cartPrice(cartItems: ItemQuantity[]): number {
+    return cartItems
+      .map(cartItem => cartItem.quantity * parseFloat(cartItem.item.unitPrice))
+      .reduce((previousValue, currentValue) => previousValue + currentValue, 0);
   }
 
   get cart(): Observable<Cart | undefined> {

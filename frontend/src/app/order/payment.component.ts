@@ -18,8 +18,6 @@ import {Order, PaymentDto} from "@app/_models";
 export class PaymentComponent implements OnInit {
   orderId?: string;
   order?: Order;
-  submitting: boolean = false;
-  submitted: boolean = false;
 
   protected readonly parseFloat = parseFloat;
 
@@ -41,7 +39,7 @@ export class PaymentComponent implements OnInit {
   }
 
   pay(order: Order): void {
-    this.submitting = true;
+    order.isAction = true;
     let paymentDto = new PaymentDto();
     paymentDto.amount = order.price;
     paymentDto.orderId = order.orderId;
@@ -54,8 +52,8 @@ export class PaymentComponent implements OnInit {
         },
         error: err => {
           console.error("Payment: " + err);
+          order.isAction = false;
           this.alertService.error(err);
-          this.submitting = false;
         }
       });
   }

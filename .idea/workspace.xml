@@ -5,48 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3fd05cba-bfce-4a3f-95dc-6975d874d465" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/controller/PaymentController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/model/dto/PaymentDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/model/entity/PaymentEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/model/mapping/PaymentMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/repository/PaymentRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/service/PaymentService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/_models/_domain/payment.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/_models/_dto/payment.dto.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/_services/payment.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/cart/payment.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/cart/payment.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/order/payment.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/order/payment.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/4656072a-de9c-4ff3-a26b-af8fc1ab4a34.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/4656072a-de9c-4ff3-a26b-af8fc1ab4a34.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/controller/OrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/model/dto/OrderResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/model/dto/OrderResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/model/entity/OrderEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/model/entity/OrderEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/model/entity/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/model/entity/UserEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/model/mapping/OrderMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/model/mapping/OrderMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/db/mysql/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/db/mysql/schema.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/angular.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/food-market-ui.iml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/food-market-ui.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/_models/_domain/cart.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/_models/_domain/cart.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/_models/_domain/order.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/_models/_domain/order.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/_models/_dto/order.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/_models/_dto/order.dto.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/_models/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/_models/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/_services/cart.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/_services/cart.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/_services/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/_services/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/_services/order.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/_services/order.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/cart/cart.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/cart/cart.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/cart/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/cart/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/cart/list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/cart/list.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/cart/list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/cart/list.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/order/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/order/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/order/list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/order/list.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/order/list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/order/list.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/order/order.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/order/order.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/cart/payment.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/cart/payment.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/cart/payment.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/cart/payment.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/order/payment.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/order/payment.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/order/payment.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/order/payment.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +94,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;order-payment-gui&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-20&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/niedz/IdeaProjects/food_market_service/backend/src/main/resources/db/mysql/schema.sql&quot;,
@@ -140,7 +109,7 @@
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
     &quot;settings.build.tools.auto.reload&quot;: &quot;SELECTIVE&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.completion&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.tabs&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;a9271a91667d1b2993f1ef7042775713&quot;,
     &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\niedz\\IdeaProjects\\food_market_service\\frontend\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
@@ -173,7 +142,7 @@
       <command value="mvn wrapper:wrapper" />
     </option>
   </component>
-  <component name="RunManager" selected="npm.Angular CLI Server">
+  <component name="RunManager" selected="Spring Boot.FoodMarketApplication">
     <configuration name="All in FoodMarket" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="food-market-api" />
       <option name="PACKAGE_NAME" value="" />
@@ -327,7 +296,10 @@
       <workItem from="1691569266183" duration="14144000" />
       <workItem from="1691652722192" duration="10093000" />
       <workItem from="1691663471755" duration="25070000" />
-      <workItem from="1691742825636" duration="16932000" />
+      <workItem from="1691742825636" duration="21154000" />
+      <workItem from="1691864196805" duration="796000" />
+      <workItem from="1692179411782" duration="8808000" />
+      <workItem from="1692263543240" duration="2111000" />
     </task>
     <servers />
   </component>
