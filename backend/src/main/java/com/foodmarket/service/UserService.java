@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -42,13 +43,9 @@ public class UserService {
         Authentication authentication = context.getAuthentication();
         UserEntity userEntity = userRepository.findByUsername(authentication.getName())
                 .orElseThrow();
-        Cookie cookie = new Cookie(CookieAuthenticationFilter.COOKIE_NAME, authenticationService.createToken(userEntity));
-        cookie.setHttpOnly(true);
-        cookie.setSecure(false);
-        cookie.setPath("/");
-        cookie.setMaxAge((int) Duration.of(1, ChronoUnit.HOURS).toSeconds());
-
+        Cookie cookie = createCookie(userEntity);
         response.addCookie(cookie);
+
         return mapper.userToDto(userEntity);
     }
 
@@ -65,4 +62,25 @@ public class UserService {
                 .toList();
     }
 
+    public UserDto changePassword(String password, HttpServletResponse response, SecurityContext context) {
+        Authentication authentication = context.getAuthentication();
+        UserEntity userEntity = userRepository.findByUsername(authentication.getName())
+                .orElseThrow();
+        userEntity.setPassword(passwordEncoder.encode(password));
+        UserEntity saved = userRepository.save(userEntity);
+
+        Cookie cookie = createCookie(saved);
+        response.addCookie(cookie);
+
+        return mapper.userToDto(saved);
+    }
+
+    private Cookie createCookie(UserDetails userDetails) {
+        Cookie cookie = new Cookie(CookieAuthenticationFilter.COOKIE_NAME, authenticationService.createToken(userDetails));
+        cookie.setHttpOnly(true);
+        cookie.setSecure(false);
+        cookie.setPath("/");
+        cookie.setMaxAge((int) Duration.of(1, ChronoUnit.HOURS).toSeconds());
+        return cookie;
+    }
 }

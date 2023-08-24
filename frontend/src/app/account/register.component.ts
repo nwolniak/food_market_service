@@ -4,6 +4,7 @@ import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {AlertService, AuthService} from "@app/_services";
 import {first} from "rxjs";
 import {NgClass, NgIf} from "@angular/common";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 @Component({
   selector: 'app-register',
@@ -13,12 +14,14 @@ import {NgClass, NgIf} from "@angular/common";
     ReactiveFormsModule,
     NgClass,
     NgIf,
-    RouterLink
+    RouterLink,
+    FontAwesomeModule
   ],
   standalone: true
 })
 export class RegisterComponent implements OnInit {
   form!: FormGroup;
+  passwordVisibility: string = "password";
   loading: boolean = false;
   submitted: boolean = false;
 
@@ -61,6 +64,14 @@ export class RegisterComponent implements OnInit {
           this.loading = false;
         }
       })
+  }
+
+  changePasswordVisibility() {
+    if (this.passwordVisibility === "password") {
+      this.passwordVisibility = "text";
+    } else {
+      this.passwordVisibility = "password";
+    }
   }
 
   get controls() {

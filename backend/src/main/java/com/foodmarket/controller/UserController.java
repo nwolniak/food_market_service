@@ -39,4 +39,9 @@ public class UserController {
         return userService.getUsers();
     }
 
+    @PatchMapping("password/change")
+    public UserDto changePassword(@RequestBody String password, HttpServletResponse response, @CurrentSecurityContext SecurityContext context) {
+        return userService.changePassword(password, response, context);
+    }
+
 }
