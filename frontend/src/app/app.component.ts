@@ -4,6 +4,8 @@ import {AuthService} from "@app/_services";
 import {RouterLink, RouterOutlet} from "@angular/router";
 import {AlertComponent} from "@app/_components";
 import {NgIf} from "@angular/common";
+import {FaIconLibrary, FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {faEye, faPencilSquare, faUser} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-root',
@@ -13,7 +15,8 @@ import {NgIf} from "@angular/common";
     RouterLink,
     AlertComponent,
     RouterOutlet,
-    NgIf
+    NgIf,
+    FontAwesomeModule
   ],
   standalone: true
 })
@@ -21,7 +24,9 @@ export class AppComponent implements OnInit {
 
   user?: User | null;
 
-  constructor(private auth: AuthService) {
+  constructor(library: FaIconLibrary,
+              private auth: AuthService) {
+    library.addIcons(faEye, faPencilSquare, faUser);
   }
 
   ngOnInit(): void {

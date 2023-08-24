@@ -16,7 +16,8 @@ export class AuthService {
     this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem("user")!));
     this._user = this.userSubject.asObservable();
     if (this.userValue) {
-      this.login(this.userValue.username, this.userValue.password);
+      this.login(this.userValue.username, this.userValue.password)
+        .subscribe();
     } else {
       localStorage.removeItem("user");
       this.userSubject.next(null);
@@ -26,6 +27,7 @@ export class AuthService {
   login(username: string, password: string): Observable<User> {
     return this.http.post<User>(`${environment.apiUrl}/login`, {username, password})
       .pipe(map(user => {
+        user.password = password;
         localStorage.setItem("user", JSON.stringify(user));
         this.userSubject.next(user);
         return user;
@@ -48,6 +50,16 @@ export class AuthService {
           console.error(`Logout error: ${error}`);
         }
       });
+  }
+
+  changePassword(password: string): Observable<User> {
+    return this.http.patch<User>(`${environment.apiUrl}/password/change`, password)
+      .pipe(map(user => {
+        user.password = password;
+        localStorage.setItem("user", JSON.stringify(user));
+        this.userSubject.next(user);
+        return user;
+      }));
   }
 
   isLoggedIn(): boolean {

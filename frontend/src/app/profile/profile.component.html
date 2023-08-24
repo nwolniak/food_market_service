@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-center p-4" xmlns="http://www.w3.org/1999/html">
+  <div class="card" style="width: 25rem;">
+    <img class="card-img-top" src="assets/images/profile_img.jpeg" width="200" height="200">
+    <div class="list-group list-group-flush">
+      <h3>Profile: {{user?.name}}</h3>
+      <div class="list-group-item">
+        <label class="col-form-label-lg col-sm-4">Username:</label>
+        {{user?.username}}
+      </div>
+      <div class="list-group-item">
+        <label class="col-form-label-lg col-sm-4">Password:</label>
+        <input class="col-5" [type]="passwordVisibility" value="{{user?.password}}" disabled="disabled">
+        <button class="btn mx-1" (click)="changePasswordVisibility()">
+          <fa-icon [icon]="['fas', 'eye']"></fa-icon>
+        </button>
+        <button class="btn" routerLink="password/change">
+          <fa-icon [icon]="['fas', 'pencil-square']"></fa-icon>
+        </button>
+      </div>
+      <div class="list-group-item">
+        <label class="col-form-label-lg col-sm-4">Email:</label>
+        {{user?.email}}
+      </div>
+      <div class="list-group-item">
+        <label class="col-form-label-lg col-sm-4">Created date:</label>
+        {{user?.createdDate}}
+      </div>
+    </div>
+  </div>
+</div>
