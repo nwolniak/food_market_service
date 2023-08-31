@@ -23,7 +23,7 @@
       </div>
       <div class="list-group-item">
         <label class="col-form-label-lg col-sm-4">Created date:</label>
-        {{user?.createdDate}}
+        {{user?.createdDate | date: "medium"}}
       </div>
     </div>
   </div>

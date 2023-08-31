@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {NgIf, NgOptimizedImage} from "@angular/common";
+import {DatePipe, NgIf, NgOptimizedImage} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AuthService} from "@app/_services";
 import {User} from "@app/_models";
@@ -14,7 +14,8 @@ import {RouterLink} from "@angular/router";
     NgIf,
     ReactiveFormsModule,
     FontAwesomeModule,
-    RouterLink
+    RouterLink,
+    DatePipe
   ],
   standalone: true
 })

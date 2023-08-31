@@ -1,0 +1,23 @@
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.img-fluid {
+  max-width: 92%;
+}
+
+.top-center {
+  position: absolute;
+  color: lightgray;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.bottom-right {
+  position: absolute;
+  bottom: 3%;
+  right: 7%;
+}

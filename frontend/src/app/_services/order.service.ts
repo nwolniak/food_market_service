@@ -100,7 +100,7 @@ export class OrderService {
 
   private orderPrice(orderItems: ItemQuantity[]): number {
     return orderItems
-      .map(orderItem => orderItem.quantity * parseFloat(orderItem.item.unitPrice))
+      .map(orderItem => parseFloat((orderItem.quantity * parseFloat(orderItem.item.unitPrice)).toFixed(2)))
       .reduce((previousValue, currentValue) => previousValue + currentValue);
   }
 

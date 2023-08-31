@@ -14,8 +14,8 @@
       <tr *ngFor="let payment of payments">
         <td>{{payment.paymentId}}</td>
         <td>{{payment.orderId}}</td>
-        <td>{{payment.amount}}</td>
-        <td>{{payment.paymentDate}}</td>
+        <td>{{payment.amount.toFixed(2)}} &dollar;</td>
+        <td>{{payment.paymentDate | date: "medium"}}</td>
       </tr>
       </tbody>
     </table>
