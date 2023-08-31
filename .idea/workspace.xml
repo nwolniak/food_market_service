@@ -5,27 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3fd05cba-bfce-4a3f-95dc-6975d874d465" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/profile/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/profile/password.edit.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/profile/password.edit.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/profile/profile.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/profile/profile.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/profile/profile.routes.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/profile_img.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/_helpers/sortable.header.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/cart/list.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/items/list.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/favicon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/images/food-market.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/model/dto/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/model/dto/UserDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/foodmarket/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/_models/_domain/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/_models/_domain/user.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/_services/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/_services/auth.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/account/register.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/account/register.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/account/register.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/account/register.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/_helpers/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/_helpers/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/_services/order.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/_services/order.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/payments/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/payments/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/cart/list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/cart/list.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/cart/list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/cart/list.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/home/home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/home/home.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/home/home.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/home/home.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/items/list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/items/list.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/items/list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/items/list.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/order/list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/order/list.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/order/list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/order/list.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/payments/list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/payments/list.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/payments/list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/payments/list.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/profile/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/profile/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/profile/profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/profile/profile.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/profile/profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/profile/profile.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/profile/profile.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/profile/profile.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,9 +49,9 @@
         <option value="com.haulmont.jpb.NewInterface" />
         <option value="Class" />
         <option value="com.haulmont.jpb.NewRecord" />
-        <option value="SCSS File" />
-        <option value="TypeScript File" />
         <option value="HTML File" />
+        <option value="TypeScript File" />
+        <option value="SCSS File" />
       </list>
     </option>
   </component>
@@ -92,51 +96,52 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;DtoCreateDialog.USE_JAVA_RECORDS_INITIAL_PROP_KEY&quot;: &quot;true&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-20&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/niedz/IdeaProjects/food_market_service/backend/src/main/resources/db/mysql/schema.sql&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;SCSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.build.tools.auto.reload&quot;: &quot;SELECTIVE&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.tabs&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;a9271a91667d1b2993f1ef7042775713&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\niedz\\IdeaProjects\\food_market_service\\frontend\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "DtoCreateDialog.USE_JAVA_RECORDS_INITIAL_PROP_KEY": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "openjdk-20",
+    "last_opened_file_path": "C:/Users/niedz/IdeaProjects/food_market_service/frontend/src/assets/images",
+    "list.type.of.created.stylesheet": "SCSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.build.tools.auto.reload": "SELECTIVE",
+    "settings.editor.selected.configurable": "editor.preferences.tabs",
+    "spring.configuration.checksum": "a9271a91667d1b2993f1ef7042775713",
+    "ts.external.directory.path": "C:\\Users\\niedz\\IdeaProjects\\food_market_service\\frontend\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;h2&quot;,
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "h2",
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.foodmarket.security" />
       <recent name="com.foodmarket.model.mapping" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\niedz\IdeaProjects\food_market_service\frontend\src\assets\images" />
       <recent name="C:\Users\niedz\IdeaProjects\food_market_service" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -152,7 +157,7 @@
       <command value="mvn wrapper:wrapper" />
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.FoodMarketApplication">
+  <component name="RunManager" selected="npm.Angular CLI Server">
     <configuration name="All in FoodMarket" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="food-market-api" />
       <option name="PACKAGE_NAME" value="" />
@@ -313,7 +318,9 @@
       <workItem from="1692353000899" duration="1314000" />
       <workItem from="1692616819001" duration="22548000" />
       <workItem from="1692785347281" duration="4490000" />
-      <workItem from="1692863394914" duration="5127000" />
+      <workItem from="1692863394914" duration="8845000" />
+      <workItem from="1693301262385" duration="7320000" />
+      <workItem from="1693473024751" duration="5906000" />
     </task>
     <servers />
   </component>
@@ -338,11 +345,6 @@
           <url>file://$PROJECT_DIR$/backend/src/main/java/com/foodmarket/service/CartService.java</url>
           <line>35</line>
           <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/src/main/java/com/foodmarket/controller/PaymentController.java</url>
-          <line>24</line>
-          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

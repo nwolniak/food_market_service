@@ -1,23 +1,31 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, QueryList, ViewChildren} from "@angular/core";
 import {NgForOf, NgIf} from "@angular/common";
 import {ActivatedRoute, RouterLink} from "@angular/router";
 import {AlertService, AuthService, CartService, ItemService, OrderService} from "@app/_services";
 import {Cart} from "@app/_models/_domain/cart";
 import {delay} from "rxjs";
-import {Item} from "@app/_models";
+import {Item, ItemQuantity} from "@app/_models";
+import {SortableHeader, SortEvent} from "@app/_helpers";
+
+const compare = (v1: any, v2: any) => (v1 < v2 ? -1 : v1 > v2 ? 1 : 0);
 
 @Component({
   templateUrl: "list.component.html",
+  styleUrls: ["list.component.scss"],
   imports: [
     NgForOf,
     NgIf,
-    RouterLink
+    RouterLink,
+    SortableHeader
   ],
   standalone: true
 })
 export class ListComponent implements OnInit {
   cartId?: string;
   cart?: Cart;
+
+  @ViewChildren(SortableHeader)
+  headers?: QueryList<SortableHeader>;
 
   constructor(private cartService: CartService,
               private itemService: ItemService,
@@ -31,6 +39,25 @@ export class ListComponent implements OnInit {
     this.cartId = this.auth.userValue?.id;
     this.cartService.cart
       .subscribe(cart => this.cart = cart)
+  }
+
+  onSort({column, direction}: SortEvent) {
+    if (!this.cart || column === "" || !this.headers) {
+      return;
+    }
+    console.log("Column: " + column);
+    this.headers
+      .filter(header => header.sortable !== column)
+      .forEach(header => header.direction = "");
+
+    this.cart.cartItems = this.cart.cartItems
+      .sort((itemQuantity1, itemQuantity2) => {
+      let res = compare(itemQuantity1[column as keyof ItemQuantity], itemQuantity2[column as keyof ItemQuantity]);
+      if (res == 0) {
+        res = compare(itemQuantity1.item[column as keyof Item], itemQuantity2.item[column as keyof Item]);
+      }
+      return direction === "asc" ? res : -res;
+    });
   }
 
   createOrder(cart: Cart) {

@@ -2,7 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {Order} from "@app/_models";
 import {AlertService, AuthService, OrderService} from "@app/_services";
 import {ActivatedRoute, RouterLink} from "@angular/router";
-import {NgClass, NgForOf, NgIf} from "@angular/common";
+import {DatePipe, NgClass, NgForOf, NgIf} from "@angular/common";
 import {CollapseModule} from "ngx-bootstrap/collapse";
 
 @Component({
@@ -13,6 +13,7 @@ import {CollapseModule} from "ngx-bootstrap/collapse";
     NgIf,
     NgClass,
     CollapseModule,
+    DatePipe,
   ],
   standalone: true
 })

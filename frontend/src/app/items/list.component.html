@@ -5,12 +5,12 @@
     <table class="table table-striped">
       <thead class="table-secondary">
       <tr>
-        <th style="width: 14%">Id</th>
-        <th style="width: 14%">Name</th>
-        <th style="width: 14%">Category</th>
-        <th style="width: 14%">Unit Type</th>
-        <th style="width: 14%">Unit Price</th>
-        <th style="width: 14%">Description</th>
+        <th style="width: 14%" direction="asc" sortable="id" (sort)="onSort($event)">Id</th>
+        <th style="width: 14%" sortable="name" (sort)="onSort($event)">Name</th>
+        <th style="width: 14%" sortable="category" (sort)="onSort($event)">Category</th>
+        <th style="width: 14%" sortable="unitType" (sort)="onSort($event)">Unit Type</th>
+        <th style="width: 14%" sortable="unitPrice" (sort)="onSort($event)">Unit Price</th>
+        <th style="width: 14%" sortable="description" (sort)="onSort($event)">Description</th>
         <th style="width: 16%"></th>
       </tr>
       </thead>
