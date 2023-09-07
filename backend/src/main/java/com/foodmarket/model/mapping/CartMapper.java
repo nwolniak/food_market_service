@@ -16,10 +16,6 @@ public interface CartMapper {
 
     CartMapper INSTANCE = Mappers.getMapper(CartMapper.class);
 
-//    @Mapping(target = "itemId", nullValueCheckStrategy = ALWAYS)
-//    @Mapping(source = "cartItems", target = "cartItems", qualifiedByName = "cartItemsMapping")
-//    CartEntity cartDtoToEntity(CartDto cartDTO);
-
     @Mapping(source = "id", target = "cartId")
     @Mapping(source = "cartItems", target = "cartItems", qualifiedByName = "cartItemsMapping")
     CartDto cartEntityToDto(CartEntity cartEntity);
@@ -34,8 +30,5 @@ public interface CartMapper {
 
     @Mapping(source = "itemEntity.id", target = "itemId")
     CartDto.ItemQuantity cartItemEntityToItemQuantity(CartItemEntity cartItemEntity);
-
-//    @BeanMapping(nullValuePropertyMappingStrategy = IGNORE)
-//    void updateItemFromDto(ItemDto itemDTO, @MappingTarget ItemEntity itemEntity);
 
 }

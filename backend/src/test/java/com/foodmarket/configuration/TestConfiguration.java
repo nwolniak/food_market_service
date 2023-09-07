@@ -1,16 +1,10 @@
 package com.foodmarket.configuration;
 
-import com.foodmarket.model.mapping.CartMapper;
-import com.foodmarket.model.mapping.ItemMapper;
-import com.foodmarket.model.mapping.ItemQuantityInStockMapper;
-import com.foodmarket.model.mapping.OrderMapper;
-import com.foodmarket.repository.CartRepository;
-import com.foodmarket.repository.OrderRepository;
-import com.foodmarket.repository.ItemRepository;
-import com.foodmarket.repository.StockRepository;
+import com.foodmarket.model.mapping.*;
+import com.foodmarket.repository.*;
 import com.foodmarket.service.CartService;
-import com.foodmarket.service.OrderService;
 import com.foodmarket.service.ItemService;
+import com.foodmarket.service.OrderService;
 import com.foodmarket.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -37,6 +31,9 @@ public class TestConfiguration {
     @Autowired
     private CartRepository cartRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Bean
     public OrderMapper orderMapper() {
         return OrderMapper.INSTANCE;
@@ -58,8 +55,18 @@ public class TestConfiguration {
     }
 
     @Bean
+    public PaymentMapper paymentMapper() {
+        return PaymentMapper.INSTANCE;
+    }
+
+    @Bean
+    public AuthMapper authMapper() {
+        return AuthMapper.INSTANCE;
+    }
+
+    @Bean
     public OrderService orderService() {
-        return new OrderService(orderRepository, cartService(), orderMapper());
+        return new OrderService(userRepository, orderRepository, cartService(), orderMapper());
     }
 
     @Bean
@@ -74,7 +81,7 @@ public class TestConfiguration {
 
     @Bean
     public CartService cartService() {
-        return new CartService(cartRepository, itemService(), cartMapper());
+        return new CartService(cartRepository, userRepository, itemService(), cartMapper());
     }
 
 }
