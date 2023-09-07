@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ContextConfiguration;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,23 +28,19 @@ public class OrderRepositoryTest {
     private final OrderEntity orderEntity2 = new OrderEntity();
     private final OrderEntity orderEntity3 = new OrderEntity();
 
-    private ItemEntity itemEntity1 = new ItemEntity("Bananas", "Fruit", "Bunch", 2.99, "Fresh, ripe bananas");
-    private ItemEntity itemEntity2 = new ItemEntity("Apples", "Fruit", "Bag", 4.99, "Juicy, crunchy apples");
-    private ItemEntity itemEntity3 = new ItemEntity("Oranges", "Fruit", "Bag", 3.99, "Sweet and tangy oranges");
-
-    private OrderItemEntity orderItemEntity1;
-    private OrderItemEntity orderItemEntity2;
-    private OrderItemEntity orderItemEntity3;
+    private final ItemEntity itemEntity1 = new ItemEntity("Bananas", "Fruit", "Bunch", 2.99, "Fresh, ripe bananas");
+    private final ItemEntity itemEntity2 = new ItemEntity("Apples", "Fruit", "Bag", 4.99, "Juicy, crunchy apples");
+    private final ItemEntity itemEntity3 = new ItemEntity("Oranges", "Fruit", "Bag", 3.99, "Sweet and tangy oranges");
 
 
     @BeforeEach
     public void init() {
-        orderItemEntity1 = new OrderItemEntity(orderEntity1, itemEntity1, 5);
-        orderItemEntity2 = new OrderItemEntity(orderEntity1, itemEntity2, 5);
-        orderItemEntity3 = new OrderItemEntity(orderEntity1, itemEntity3, 5);
-        orderEntity1.setOrderItems(new ArrayList<>(List.of(orderItemEntity1)));
-        orderEntity2.setOrderItems(new ArrayList<>(List.of(orderItemEntity1, orderItemEntity2)));
-        orderEntity3.setOrderItems(new ArrayList<>(List.of(orderItemEntity1, orderItemEntity2, orderItemEntity3)));
+        OrderItemEntity orderItemEntity1 = new OrderItemEntity(orderEntity1, itemEntity1, 5);
+        OrderItemEntity orderItemEntity2 = new OrderItemEntity(orderEntity1, itemEntity2, 5);
+        OrderItemEntity orderItemEntity3 = new OrderItemEntity(orderEntity1, itemEntity3, 5);
+        orderEntity1.setOrderItems(new HashSet<>(List.of(orderItemEntity1)));
+        orderEntity2.setOrderItems(new HashSet<>(List.of(orderItemEntity1, orderItemEntity2)));
+        orderEntity3.setOrderItems(new HashSet<>(List.of(orderItemEntity1, orderItemEntity2, orderItemEntity3)));
     }
 
     @Test
