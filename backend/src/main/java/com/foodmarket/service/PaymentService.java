@@ -6,9 +6,12 @@ import com.foodmarket.model.entity.OrderEntity;
 import com.foodmarket.model.entity.PaymentEntity;
 import com.foodmarket.model.mapping.PaymentMapper;
 import com.foodmarket.repository.PaymentRepository;
+import com.foodmarket.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +22,7 @@ import java.util.List;
 public class PaymentService {
 
     private final PaymentRepository paymentRepository;
+    private final UserRepository userRepository;
     private final OrderService orderService;
     private final PaymentMapper mapper;
 
@@ -31,6 +35,16 @@ public class PaymentService {
     public List<PaymentDto> getAll() {
         return paymentRepository.findAll()
                 .stream()
+                .map(mapper::toDto)
+                .toList();
+    }
+
+    @Transactional
+    public List<PaymentDto> getUserPayments(SecurityContext context) {
+        Authentication authentication = context.getAuthentication();
+        return userRepository.findByUsername(authentication.getName())
+                .stream()
+                .flatMap(userEntity -> paymentRepository.findByUserEntity_Id(userEntity.getId()))
                 .map(mapper::toDto)
                 .toList();
     }

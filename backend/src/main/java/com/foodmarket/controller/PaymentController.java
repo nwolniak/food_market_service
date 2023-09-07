@@ -3,6 +3,8 @@ package com.foodmarket.controller;
 import com.foodmarket.model.dto.PaymentDto;
 import com.foodmarket.service.PaymentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,9 +22,14 @@ public class PaymentController {
         return paymentService.getPayment(paymentId);
     }
 
-    @GetMapping("payments")
+    @GetMapping("allPayments")
     public List<PaymentDto> getPayments() {
         return paymentService.getAll();
+    }
+
+    @GetMapping("payments")
+    public List<PaymentDto> getUserPayments(@CurrentSecurityContext SecurityContext context) {
+        return paymentService.getUserPayments(context);
     }
 
     @PostMapping("payments")

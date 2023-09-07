@@ -16,6 +16,11 @@ export class PaymentService {
   }
 
   getPayments(): Observable<Payment[]> {
+    return this.http.get<PaymentDto[]>(`${environment.apiUrl}/allPayments`)
+      .pipe(map(paymentDtoList => paymentDtoList.map(paymentDto => this.fromDto(paymentDto))));
+  }
+
+  getUserPayments(): Observable<Payment[]> {
     return this.http.get<PaymentDto[]>(`${environment.apiUrl}/payments`)
       .pipe(map(paymentDtoList => paymentDtoList.map(paymentDto => this.fromDto(paymentDto))));
   }

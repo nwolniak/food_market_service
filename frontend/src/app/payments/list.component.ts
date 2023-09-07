@@ -29,7 +29,7 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.paymentService.getPayments()
+    this.paymentService.getUserPayments()
       .subscribe(payments => this.payments = payments);
   }
 
