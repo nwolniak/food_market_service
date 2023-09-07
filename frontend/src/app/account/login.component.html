@@ -13,7 +13,10 @@
         </div>
         <div class="mb-3">
           <label class="form-label">Password</label>
-          <input type="password" formControlName="password" class="form-control"
+          <button type="button" class="btn mx-1" (click)="changePasswordVisibility()">
+            <fa-icon [icon]="['fas', 'eye']"></fa-icon>
+          </button>
+          <input [type]="passwordVisibility" formControlName="password" class="form-control"
                  [ngClass]="{ 'is-invalid': submitted && controls.password.errors }"/>
           <div *ngIf="submitted && controls.password.errors" class="invalid-feedback">
             <div *ngIf="controls.password.errors.required">Password is required</div>

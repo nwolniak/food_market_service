@@ -8,8 +8,12 @@ import com.foodmarket.model.entity.OrderEntity;
 import com.foodmarket.model.entity.OrderItemEntity;
 import com.foodmarket.model.mapping.OrderMapper;
 import com.foodmarket.repository.OrderRepository;
+import com.foodmarket.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +26,7 @@ import static java.util.stream.Collectors.toSet;
 @RequiredArgsConstructor
 public class OrderService {
 
+    private final UserRepository userRepository;
     private final OrderRepository orderRepository;
     private final CartService cartService;
     private final OrderMapper mapper;
@@ -49,6 +54,16 @@ public class OrderService {
     public OrderEntity getOrderEntity(long orderId) {
         return orderRepository.findById(orderId)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Order with %s id not found in order repository", orderId)));
+    }
+
+    @Transactional
+    public List<OrderResponseDto> getUserOrders(SecurityContext context) {
+        Authentication authentication = context.getAuthentication();
+        return userRepository.findByUsername(authentication.getName())
+                .stream()
+                .flatMap(userEntity -> orderRepository.findByUserEntity_Id(userEntity.getId()))
+                .map(mapper::orderEntityToDto)
+                .toList();
     }
 
     public List<OrderResponseDto> getAllOrders() {

@@ -30,8 +30,22 @@ export class OrderService {
       );
   }
 
-  getAll(): Observable<Order[]> {
+  getUserOrders() {
     return this.http.get<OrderDto[]>(`${environment.apiUrl}/orders`)
+      .pipe(
+        concatMap((orderDtoList: OrderDto[]) => orderDtoList.map(orderDto => this.mapDtoToOrder(orderDto))),
+        concatAll(),
+        toArray(),
+        map(orders => {
+          console.log("Get orders");
+          this.ordersSubject.next(orders);
+          return orders;
+        })
+      );
+  }
+
+  getAll(): Observable<Order[]> {
+    return this.http.get<OrderDto[]>(`${environment.apiUrl}/allOrders`)
       .pipe(
         concatMap((orderDtoList: OrderDto[]) => orderDtoList.map(orderDto => this.mapDtoToOrder(orderDto))),
         concatAll(),

@@ -33,7 +33,7 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = this.auth.userValue?.id;
-    this.orderService.getAll().subscribe();
+    this.orderService.getUserOrders().subscribe();
     this.orderService.orders
       .subscribe(orders => this.orders = orders);
   }

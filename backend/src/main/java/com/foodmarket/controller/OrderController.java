@@ -4,6 +4,8 @@ import com.foodmarket.model.dto.OrderRequestDto;
 import com.foodmarket.model.dto.OrderResponseDto;
 import com.foodmarket.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,9 +23,14 @@ public class OrderController {
         return orderService.getOrder(orderId);
     }
 
-    @GetMapping("orders")
+    @GetMapping("allOrders")
     public List<OrderResponseDto> getOrders() {
         return orderService.getAllOrders();
+    }
+
+    @GetMapping("orders")
+    public List<OrderResponseDto> getUserOrders(@CurrentSecurityContext SecurityContext context) {
+        return orderService.getUserOrders(context);
     }
 
     @PostMapping("/orders")

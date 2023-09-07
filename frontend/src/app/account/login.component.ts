@@ -4,21 +4,24 @@ import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {AlertService, AuthService} from "@app/_services";
 import {first} from "rxjs";
 import {NgClass, NgIf} from "@angular/common";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  imports: [
-    ReactiveFormsModule,
-    NgClass,
-    NgIf,
-    RouterLink
-  ],
+    imports: [
+        ReactiveFormsModule,
+        NgClass,
+        NgIf,
+        RouterLink,
+        FontAwesomeModule
+    ],
   standalone: true
 })
 export class LoginComponent implements OnInit {
   form!: FormGroup;
+  passwordVisibility: string = "password";
   loading: boolean = false;
   submitted: boolean = false;
 
@@ -59,6 +62,14 @@ export class LoginComponent implements OnInit {
           this.loading = false;
         }
       })
+  }
+
+  changePasswordVisibility() {
+    if (this.passwordVisibility === "password") {
+      this.passwordVisibility = "text";
+    } else {
+      this.passwordVisibility = "password";
+    }
   }
 
   get controls() {

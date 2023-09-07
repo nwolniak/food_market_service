@@ -21,7 +21,6 @@ const compare = (v1: any, v2: any) => (v1 < v2 ? -1 : v1 > v2 ? 1 : 0);
   standalone: true
 })
 export class ListComponent implements OnInit {
-  cartId?: string;
   cart?: Cart;
 
   @ViewChildren(SortableHeader)
@@ -36,9 +35,10 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cartId = this.auth.userValue?.id;
     this.cartService.cart
-      .subscribe(cart => this.cart = cart)
+      .subscribe(cart => this.cart = cart);
+    this.cartService.getByUserId(this.auth.userValue!.id!)
+      .subscribe();
   }
 
   onSort({column, direction}: SortEvent) {
