@@ -3,6 +3,9 @@
   <component name="DdlMappings">
     <mapping uuid="6dee3a11-f2a0-4af4-bd7a-98c5de48942b" name="DDL Mapping">
       <data-sources db="4656072a-de9c-4ff3-a26b-af8fc1ab4a34" ddl="3e52a30f-abb2-4cd3-b266-2f9d61406a6b" />
+      <scope>
+        <node kind="schema" qname="food-market" />
+      </scope>
     </mapping>
   </component>
   <component name="SqlDataSourceStorage">

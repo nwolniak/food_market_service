@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="food-market@localhost">
-  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.48">
+  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.51">
     <root id="1">
       <DefaultCasing>exact</DefaultCasing>
       <DefaultEngine>InnoDB</DefaultEngine>
@@ -23,7 +23,7 @@ food-market|schema||sa||SELECT|G
 food-market|schema||sa||SHOW VIEW|G
 food-market|schema||sa||TRIGGER|G
 food-market|schema||sa||UPDATE|G</Grants>
-      <ServerVersion>8.0.33</ServerVersion>
+      <ServerVersion>8.3.0</ServerVersion>
     </root>
     <collation id="2" parent="1" name="armscii8_general_ci">
       <Charset>armscii8</Charset>
@@ -932,6 +932,7 @@ food-market|schema||sa||UPDATE|G</Grants>
     </schema>
     <schema id="290" parent="1" name="food-market">
       <Current>1</Current>
+      <LastIntrospectionLocalTimestamp>2024-02-02.00:25:35</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <user id="291" parent="1" name="sa"/>
@@ -1023,18 +1024,18 @@ food-market|schema||sa||UPDATE|G</Grants>
     <key id="312" parent="292" name="UK_64t7ox312pqal3p7fg9o503c2">
       <UnderlyingIndexName>UK_64t7ox312pqal3p7fg9o503c2</UnderlyingIndexName>
     </key>
-    <column id="313" parent="293" name="cart_id">
-      <DasType>bigint|0s</DasType>
-      <NotNull>1</NotNull>
+    <column id="313" parent="293" name="quantity">
+      <DasType>int|0s</DasType>
       <Position>1</Position>
     </column>
-    <column id="314" parent="293" name="item_id">
+    <column id="314" parent="293" name="cart_id">
       <DasType>bigint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="315" parent="293" name="quantity">
-      <DasType>int|0s</DasType>
+    <column id="315" parent="293" name="item_id">
+      <DasType>bigint|0s</DasType>
+      <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
     <foreign-key id="316" parent="293" name="FKpulqfptcuw8ttvds9pihgai16">
@@ -1199,18 +1200,18 @@ item_id</ColNames>
     <key id="351" parent="297" name="UK_haujdjk1ohmeixjhnhslchrp1">
       <UnderlyingIndexName>UK_haujdjk1ohmeixjhnhslchrp1</UnderlyingIndexName>
     </key>
-    <column id="352" parent="298" name="item_id">
-      <DasType>bigint|0s</DasType>
-      <NotNull>1</NotNull>
+    <column id="352" parent="298" name="quantity">
+      <DasType>int|0s</DasType>
       <Position>1</Position>
     </column>
-    <column id="353" parent="298" name="order_id">
+    <column id="353" parent="298" name="item_id">
       <DasType>bigint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="354" parent="298" name="quantity">
-      <DasType>int|0s</DasType>
+    <column id="354" parent="298" name="order_id">
+      <DasType>bigint|0s</DasType>
+      <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
     <foreign-key id="355" parent="298" name="FKc03a4t5e1xbn9g2qp2k2umr64">

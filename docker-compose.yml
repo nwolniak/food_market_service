@@ -18,6 +18,14 @@ services:
     volumes:
       - ./:/app
 
+  food-market-ui:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    container_name: food-market-ui
+    ports:
+      - "8081:80"
+
   mysql-server:
     image: mysql:latest
     container_name: mysql-server
@@ -40,6 +48,5 @@ networks:
 
 volumes:
   mysql_data:
-    driver: local
   mysql_config:
-    driver: local
+  food-market-ui:
