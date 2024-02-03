@@ -1,4 +1,4 @@
-FROM eclipse-temurin:20-jdk-alpine as base
+FROM eclipse-temurin:21-jdk-jammy as base
 
 WORKDIR /backend
 
